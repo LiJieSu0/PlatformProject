@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://28k7bj0fivfl"]
+
+[ext_resource type="Script" path="res://_Script/Player/HUDManager.cs" id="1_xbb1j"]
+[ext_resource type="Texture2D" uid="uid://c8iftnx5cw0vf" path="res://_Asset/UI/Status/EmptyProgressBar.png" id="2_s34it"]
+[ext_resource type="Texture2D" uid="uid://db6ma4l450won" path="res://_Asset/UI/Status/HpProgressBar.png" id="3_y2roo"]
+[ext_resource type="Texture2D" uid="uid://d37s78m40p4bw" path="res://_Asset/UI/Status/MpProgressBar.png" id="4_gq6d5"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_xbb1j")
+
+[node name="PlayerStatus" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+
+[node name="HpBar" type="TextureProgressBar" parent="PlayerStatus"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 73.0
+offset_bottom = 55.0
+value = 100.0
+texture_under = ExtResource("2_s34it")
+texture_progress = ExtResource("3_y2roo")
+texture_progress_offset = Vector2(1, 1)
+
+[node name="MpBar" type="TextureProgressBar" parent="PlayerStatus"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 24.0
+offset_right = 73.0
+offset_bottom = 64.0
+value = 100.0
+texture_under = ExtResource("2_s34it")
+texture_progress = ExtResource("4_gq6d5")
+texture_progress_offset = Vector2(1, 1)
+
+[node name="SkillSet" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Skill1" type="Button" parent="SkillSet"]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 61.0
+offset_right = 379.0
+offset_bottom = 92.0
+text = "Skill1
+"

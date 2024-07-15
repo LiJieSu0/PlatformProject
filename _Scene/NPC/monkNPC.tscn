@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://2ysqcaigx6d0"]
+
+[ext_resource type="Texture2D" uid="uid://csiuyh642yys6" path="res://_Asset/NPC/monkNPC.png" id="1_xr7ua"]
+[ext_resource type="Script" path="res://_Script/NPC/InteractablNPC.cs" id="2_2t5p3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_frat4"]
+
+[node name="NPC" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xr7ua")
+
+[node name="InteractablNPC" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("2_2t5p3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractablNPC"]
+shape = SubResource("CapsuleShape2D_frat4")
+
+[node name="Control" type="Control" parent="InteractablNPC"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="InteractablNPC/Control"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -37.0
+offset_right = 36.0
+offset_bottom = -14.0
+text = "T"
+
+[connection signal="area_entered" from="InteractablNPC" to="InteractablNPC" method="OnAreaEnter"]
+[connection signal="area_exited" from="InteractablNPC" to="InteractablNPC" method="OnAreaExit"]

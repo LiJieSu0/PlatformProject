@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=3 uid="uid://74s3aisk8oge"]
+
+[ext_resource type="Texture2D" uid="uid://bwxbjq4lyuycq" path="res://_Asset/UI/Menu/MenuBackground.png" id="1_5f1il"]
+[ext_resource type="Script" path="res://_Script/UI/MainMenu/MainMenu.cs" id="1_rdbeu"]
+[ext_resource type="AudioStream" uid="uid://c8thd5wy8ojcu" path="res://_Asset/Audio/MainMenu/mainMenu.wav" id="3_f5g17"]
+[ext_resource type="AudioStream" uid="uid://cufeef0f5dk3f" path="res://_Asset/Audio/MainMenu/BtnSE.wav" id="4_n8rwo"]
+[ext_resource type="PackedScene" uid="uid://b4dvu5wcem4u6" path="res://_Scene/Projectiles/BasicProjectile.tscn" id="5_x32yr"]
+
+[sub_resource type="SystemFont" id="SystemFont_2d0a4"]
+font_names = PackedStringArray("Comic Sans MS")
+font_weight = 600
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rdbeu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5f1il")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 340.0
+offset_top = 118.0
+offset_right = 817.0
+offset_bottom = 201.0
+theme_override_colors/font_color = Color(0, 0.490196, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = SubResource("SystemFont_2d0a4")
+theme_override_font_sizes/font_size = 60
+text = "Platform Project"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -52.0
+offset_right = 59.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="StartBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 1
+text = "Start
+"
+
+[node name="seperation" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ContinueBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 1
+text = "Conitnue
+"
+
+[node name="seperation2" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 1
+text = "Quit
+"
+
+[node name="BGMPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_f5g17")
+autoplay = true
+
+[node name="BtnSE" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_n8rwo")
+volume_db = 5.0
+
+[node name="BasicProjectile" parent="." instance=ExtResource("5_x32yr")]
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/StartBtn" to="." method="OnStartBtnPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitBtn" to="." method="OnQuitBtnPressed"]
+[connection signal="finished" from="BtnSE" to="." method="OnBtnSEFinsihed"]

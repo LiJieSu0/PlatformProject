@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ProjectileRes" load_steps=2 format=3 uid="uid://bodt65fblcwdy"]
+
+[ext_resource type="Script" path="res://_Script/Resource/ProjectileRes.cs" id="1_hy0ox"]
+
+[resource]
+script = ExtResource("1_hy0ox")
+ProjectileName = "Fireball"
+BasicSpeed = 200.0
+BasicDamage = 10.0
