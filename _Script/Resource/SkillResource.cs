@@ -25,16 +25,16 @@ public partial class SkillResource : Resource
     [Export] public SkillType skillType;
     [Export] public RangedShootMode rangedShootMode;
 
-    public void CastMeleeSkil(PackedScene scene){
+    public void CastSkil(PackedScene scene){ //TODO Melee skill
         //TODO design melee skill
     }
 
-    public void CastSelfBuffSkill(PackedScene scene){
+    public void CastSkil(PackedScene scene,float value){ //TODO selfbuff
         //TODO design self buff skill
 
     }
 
-    public async void CastRangedSkill(PackedScene scene, Node2D shooter,int projectileCount=1,float initAngle=0){
+    public async void CastSkil(PackedScene scene, Node2D shooter,int projectileCount=1,float initAngle=0){
         switch (this.rangedShootMode){
             case RangedShootMode.Single:
                 GenerateProjectile(scene,shooter);

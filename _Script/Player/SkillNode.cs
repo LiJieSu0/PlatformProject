@@ -24,7 +24,7 @@ public partial class SkillNode : Node2D,ISkill
 
     public void CastSkill(){
 		if(statusManager.CurrMp>=manaCost&&!isCoolDown){
-			skillResource.CastRangedSkill(skillProjectile,this,3);
+			skillResource.CastSkil(skillProjectile,this,3);
 			statusManager.CurrMp-=manaCost;
 			isCoolDown=true;	
 		}
@@ -45,4 +45,11 @@ public partial class SkillNode : Node2D,ISkill
 		}
 	}
 
+
+	public void ChangeCurrSkill(){
+
+	}
+	public void ChangeCurrProjectile(){
+		
+	}
 }

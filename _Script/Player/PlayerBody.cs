@@ -46,6 +46,7 @@ public partial class PlayerBody : CharacterBody2D
 		RecoverMana((float)delta);
 		TestFunction();
 		InteractWithEnivronment();
+		ChangeCurrSkill();
 	}
 	private void PlayerMovement(float delta){
 		AttackFunction();
@@ -144,6 +145,15 @@ public partial class PlayerBody : CharacterBody2D
 		if(Input.IsActionJustPressed("ui_interact")&&areaInteractableRange!=null){
 			INPC npc=(INPC)areaInteractableRange;
 			npc.InteractReaction();
+		}
+	}
+
+	private void ChangeCurrSkill(){
+		for (int i = 0; i < 3; i++){
+			if (Input.IsActionJustPressed($"ui_skill_{i + 1}")){
+				statusManager.CurrSkillIdx = i;
+				break;
+			}
 		}
 	}
 
