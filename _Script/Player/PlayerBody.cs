@@ -148,7 +148,7 @@ public partial class PlayerBody : CharacterBody2D
 		}
 	}
 
-	private void ChangeCurrSkill(){
+	private void ChangeCurrSkill(){ //TODO use delegate to change skill
 		for (int i = 0; i < 3; i++){
 			if (Input.IsActionJustPressed($"ui_skill_{i + 1}")){
 				statusManager.CurrSkillIdx = i;

@@ -47,9 +47,9 @@ public partial class SkillNode : Node2D,ISkill
 
 
 	public void ChangeCurrSkill(){
-
+		skillResource=statusManager.SkillList[statusManager.CurrSkillIdx];
 	}
 	public void ChangeCurrProjectile(){
-		
+
 	}
 }
