@@ -13,6 +13,7 @@ public partial class SkillNode : Node2D,ISkill
 	private bool isCoolDown=false;
 	private float time;
 	public override void _Ready(){
+		GlobalEventPublisher.Instance.SkillChangeEvent+=ChangeCurrSkill;
 		InitializeFromResource();
 		statusManager=GetParent().GetParent().GetNode<StatusManager>("StatusManager");
 		time=0;
@@ -46,8 +47,9 @@ public partial class SkillNode : Node2D,ISkill
 	}
 
 
-	public void ChangeCurrSkill(){
+	public void ChangeCurrSkill(int idx){
 		skillResource=statusManager.SkillList[statusManager.CurrSkillIdx];
+		InitializeFromResource();
 	}
 	public void ChangeCurrProjectile(){
 

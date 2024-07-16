@@ -12,8 +12,8 @@ public partial class HUDManager : CanvasLayer
 
 	#endregion 
 
-	public override void _Ready()
-	{
+	public override void _Ready(){
+		GlobalEventPublisher.Instance.SkillChangeEvent+=updateSkillActivate;
 		hpBar=GetNode<TextureProgressBar>("PlayerStatus/HpBar");
 		mpBar=GetNode<TextureProgressBar>("PlayerStatus/MpBar");
 		statusManager=GetParent().GetNode<StatusManager>("StatusManager");
@@ -22,16 +22,13 @@ public partial class HUDManager : CanvasLayer
 		for(int i=0;i<GetNode("SkillSet").GetChildCount();i++){
 			skillPanels.Add((Panel)GetNode("SkillSet").GetChild(i).GetNode("Mask"));
 		}
-		for(int i=0;i<skillPanels.Count;i++){
-			GD.Print(skillPanels[i].Name);
-		}
+		updateSkillActivate(statusManager.CurrSkillIdx);
+
 	}
 
 	public override void _Process(double delta)
 	{
 		updateStatus();
-		updateSkillActivate();
-
 	}
 
 	private void updateStatus(){
@@ -39,9 +36,9 @@ public partial class HUDManager : CanvasLayer
 		mpBar.Value=statusManager.CurrMp;
 	}
 
-	private void updateSkillActivate(){
+	private void updateSkillActivate(int idx){
 		for (int i = 0; i < skillPanels.Count; i++){
-			if (i == statusManager.CurrSkillIdx){
+			if (i ==idx){
 				skillPanels[i].Hide();
 			}else{
 				skillPanels[i].Show();

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://dh0y8ehydm16c"]
+
+[ext_resource type="Script" path="res://_Script/Resource/SkillResource.cs" id="1_1kc28"]
+
+[resource]
+script = ExtResource("1_1kc28")
+SkillName = "Sing"
+SkillGenerateRange = Vector2(0, 0)
+ManaCost = 25.0
+SkillCoolDownTime = 5.0
+skillType = 1
+rangedShootMode = 3

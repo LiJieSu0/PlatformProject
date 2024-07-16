@@ -1,7 +1,6 @@
 using Godot;
 using DialogueManagerRuntime;
-public partial class PlayerBody : CharacterBody2D
-{
+public partial class PlayerBody : CharacterBody2D{
 	#region Movement
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
@@ -152,6 +151,7 @@ public partial class PlayerBody : CharacterBody2D
 		for (int i = 0; i < 3; i++){
 			if (Input.IsActionJustPressed($"ui_skill_{i + 1}")){
 				statusManager.CurrSkillIdx = i;
+				GlobalEventPublisher.Instance.SkillChangeTrigger(i);
 				break;
 			}
 		}

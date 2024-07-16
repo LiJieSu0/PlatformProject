@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://bs6r7dllixgt8"]
+
+[ext_resource type="Script" path="res://_Script/TestSaveLoad.cs" id="1_ydj1j"]
+[ext_resource type="Script" path="res://_Script/TestLabel.cs" id="2_85llt"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ydj1j")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 119.0
+offset_right = 706.0
+offset_bottom = 250.0
+text = "Save
+"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 301.0
+offset_right = 707.0
+offset_bottom = 432.0
+text = "Load"
+
+[node name="Label" type="Label" parent="." groups=["Persist"]]
+layout_mode = 0
+offset_right = 304.0
+offset_bottom = 238.0
+text = "TEXT on Persist Label"
+script = ExtResource("2_85llt")
+
+[connection signal="pressed" from="Button" to="." method="OnSaveBtnPressed"]

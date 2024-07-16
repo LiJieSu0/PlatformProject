@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://cohhhw2s82knm"]
+
+[ext_resource type="Script" path="res://_Script/Resource/SkillResource.cs" id="1_r4k8a"]
+
+[resource]
+script = ExtResource("1_r4k8a")
+SkillName = "Burst"
+SkillGenerateRange = Vector2(0, 0)
+ManaCost = 5.0
+SkillCoolDownTime = 1.0
+skillType = 1
+rangedShootMode = 2

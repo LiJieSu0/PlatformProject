@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GlobalPlayerLoadInScene="*res://_Script/Global/GlobalPlayerLoadInScene.cs"
+GlobalEventPublisher="*res://_Script/Global/GlobalEventPublisher.cs"
 
 [dialogue_manager]
 

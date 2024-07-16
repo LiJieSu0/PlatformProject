@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_oe402")
-SkillName = "SingleShot"
+SkillName = "Single"
 SkillGenerateRange = Vector2(0, 0)
 ManaCost = 20.0
 SkillCoolDownTime = 3.0
 skillType = 1
-rangedShootMode = 2
+rangedShootMode = 1
