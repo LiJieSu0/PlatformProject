@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://djhutcvenskq"]
+[gd_scene load_steps=38 format=3 uid="uid://djhutcvenskq"]
 
 [ext_resource type="Script" path="res://_Script/Player/StatusManager.cs" id="1_3b1ie"]
 [ext_resource type="Texture2D" uid="uid://bxpj0osjj0peu" path="res://_Asset/Player/Idle-Sheet.png" id="1_hjll8"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://b2irmralbiluq" path="res://_Asset/Player/Dead-Sheet.png" id="7_l7xva"]
 [ext_resource type="PackedScene" uid="uid://28k7bj0fivfl" path="res://_Scene/Player/HUD.tscn" id="8_kiph8"]
 [ext_resource type="Script" path="res://_Script/Player/SkillNode.cs" id="10_xe5ef"]
-[ext_resource type="Resource" uid="uid://x2mr5ijw5uc2" path="res://_Script/Resource/Skills/Single.tres" id="11_vep3l"]
 [ext_resource type="PackedScene" uid="uid://b4dvu5wcem4u6" path="res://_Scene/Projectiles/BasicProjectile.tscn" id="12_3017u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mmqsd"]
@@ -500,7 +499,6 @@ zoom = Vector2(3, 3)
 [node name="SkillNode" type="Node2D" parent="CharacterBody2D"]
 position = Vector2(28, 0)
 script = ExtResource("10_xe5ef")
-skillResource = ExtResource("11_vep3l")
 skillProjectile = ExtResource("12_3017u")
 
 [node name="HUD" parent="." instance=ExtResource("8_kiph8")]

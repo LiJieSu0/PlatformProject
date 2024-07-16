@@ -14,7 +14,6 @@ public partial class ProjectileRes : Resource
     }
 
     public void HitEffect(){
-        GD.Print("Hit Effect!");
     }
 
     public Vector2 DegreesToVector(float degrees){

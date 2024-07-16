@@ -34,15 +34,17 @@ public partial class SkillResource : Resource
 
     }
 
-    public async void CastSkil(PackedScene scene, Node2D shooter,int projectileCount=1,float initAngle=0){
+    public async void CastSkil(PackedScene scene, Node2D shooter,bool isFaceRight,int projectileCount=1,float initAngle=0){
         switch (this.rangedShootMode){
-            case RangedShootMode.Single:
-                GenerateProjectile(scene,shooter);
+            case RangedShootMode.Single:{
+                var currProjectile=GenerateProjectile(scene,shooter);
+                currProjectile.ChangeVelocity(0,isFaceRight);
                 break;
+                }
             case RangedShootMode.Burst:
                 for(int i=0;i<projectileCount;i++){
-                    GD.Print("projectil generate");
-                    GenerateProjectile(scene,shooter);
+                    var currProjectile=GenerateProjectile(scene, shooter);
+                    currProjectile.ChangeVelocity(0,isFaceRight);
                     await ToSignal(shooter.GetTree().CreateTimer(0.2f),SceneTreeTimer.SignalName.Timeout);
                 }
                 break;
@@ -50,9 +52,8 @@ public partial class SkillResource : Resource
                 for(int i=0;i<projectileCount;i++){
                 var tmpAngle=-30.0f; //TODO calculate the cover angle off the shooting
                     tmpAngle+=i*30;
-                    GD.Print(tmpAngle);
                     var currProjectile=GenerateProjectile(scene,shooter);
-                    currProjectile.ChangeVelocity(tmpAngle);
+                    currProjectile.ChangeVelocity(tmpAngle,isFaceRight);
                 }
                 break;
             default:
