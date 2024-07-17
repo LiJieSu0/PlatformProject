@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhd1o541v0a62"]
 
-[ext_resource type="Script" path="res://_Scene/MenuUI/PauseMenuScript.cs" id="1_k0ft8"]
+[ext_resource type="Script" path="res://_Script/UI/UI_InGame/PauseMenuScript.cs" id="1_5glxo"]
 [ext_resource type="PackedScene" uid="uid://cune28cquvsuk" path="res://_Scene/MenuUI/UI_PauseMenuFrame.tscn" id="2_8i0t0"]
 [ext_resource type="Texture2D" uid="uid://x4qsxree78ds" path="res://_Asset/UI/Skill/Single.png" id="3_q5ryi"]
 
@@ -11,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_k0ft8")
+script = ExtResource("1_5glxo")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0

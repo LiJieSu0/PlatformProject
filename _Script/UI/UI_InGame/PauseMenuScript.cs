@@ -16,6 +16,7 @@ public partial class PauseMenuScript : Control
 		}
 		else{
 			this.Show();
+			GlobalCursorManager.Instance.ChangeCursor();
 		}
 	}
 
