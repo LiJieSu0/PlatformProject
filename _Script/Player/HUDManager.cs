@@ -9,7 +9,6 @@ public partial class HUDManager : CanvasLayer
 	TextureProgressBar mpBar;
 	StatusManager statusManager;
 	List<Panel> skillPanels=new List<Panel>();
-
 	#endregion 
 
 	public override void _Ready(){

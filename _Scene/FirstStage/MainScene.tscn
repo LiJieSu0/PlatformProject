@@ -12,6 +12,20 @@ size = Vector2(40.5, 61.5)
 
 [node name="MainScene" type="Node2D"]
 
+[node name="NPCManager" type="Node2D" parent="."]
+
+[node name="NPC" parent="NPCManager" instance=ExtResource("5_eje8b")]
+position = Vector2(141, 608)
+
+[node name="AudioManager" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AudioManager"]
+
+[node name="MobManager" type="Node2D" parent="."]
+
+[node name="Mob" parent="MobManager" instance=ExtResource("6_ly72a")]
+position = Vector2(211, 609)
+
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2
 position = Vector2(575, 328)
@@ -36,9 +50,3 @@ shape = SubResource("RectangleShape2D_2g30m")
 [node name="Player" parent="." instance=ExtResource("4_4lnse")]
 z_index = 10
 position = Vector2(39, 596)
-
-[node name="NPC" parent="." instance=ExtResource("5_eje8b")]
-position = Vector2(141, 608)
-
-[node name="Mob" parent="." instance=ExtResource("6_ly72a")]
-position = Vector2(211, 609)

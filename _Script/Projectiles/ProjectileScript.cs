@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.ComponentModel;
+using System.Drawing;
 
 public partial class ProjectileScript : Area2D
 {
@@ -16,6 +17,8 @@ public partial class ProjectileScript : Area2D
 
 	public override void _Ready()
 	{
+		sprite=GetNode<Sprite2D>("Sprite2D");
+		sprite.Texture=ResourceLoader.Load<Texture2D>(projectileRes.ProjectileSpritePath);
 		InitializeFromResource();
 	}
 

@@ -21,11 +21,6 @@ public partial class PlayerBody : CharacterBody2D{
 	private Area2D areaInteractableRange=null; //TODO change to list
 	#endregion
     
-	#region TmpVariables
-	private int ConsumeMana=10;
-	private int RecoverManaPerSec=10; //TODO read from status
-	#endregion
-
 	#region Resource
 	[Export] public Resource dialogueResource;
 	#endregion
@@ -41,11 +36,15 @@ public partial class PlayerBody : CharacterBody2D{
 
     public override void _PhysicsProcess(double delta)
 	{
+		PauseFunction();
+		if(Engine.TimeScale==0)
+			return;
 		PlayerMovement((float)delta);
 		RecoverMana((float)delta);
 		TestFunction();
 		InteractWithEnivronment();
 		ChangeCurrSkill();
+
 	}
 	private void PlayerMovement(float delta){
 		AttackFunction();
@@ -121,7 +120,7 @@ public partial class PlayerBody : CharacterBody2D{
 	private void RecoverMana(float time){
 		if(statusManager.CurrMp>statusManager.MaxMp)
 			return;
-		statusManager.CurrMp+=RecoverManaPerSec*time;
+		statusManager.CurrMp+=1*time; //TODO read recover mana per second from status
 	}
 
 	private void OnAttackBody(Node2D node){
@@ -155,6 +154,13 @@ public partial class PlayerBody : CharacterBody2D{
 				break;
 			}
 		}
+	}
+
+	private void PauseFunction(){
+		if(Input.IsActionJustPressed("ui_pause")){
+			GlobalEventPublisher.IsPause=!GlobalEventPublisher.IsPause;
+		}
+		Engine.TimeScale=GlobalEventPublisher.IsPause?0:1;
 	}
 
 }

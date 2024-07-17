@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cune28cquvsuk"]
+
+[ext_resource type="PackedScene" uid="uid://duvcyyth5cty7" path="res://_Scene/MenuUI/UIFrameWithCloseBtn.tscn" id="1_v7a6j"]
+
+[node name="UIFrameWithCloseBtn" instance=ExtResource("1_v7a6j")]
+
+[node name="Label" parent="." index="1"]
+text = "Pause Menu"

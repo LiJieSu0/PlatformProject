@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3 uid="uid://duvcyyth5cty7"]
+
+[ext_resource type="Texture2D" uid="uid://bkpxemywbx4rv" path="res://_Asset/UI/UI_FrameLeft.png" id="1_g7h38"]
+[ext_resource type="Texture2D" uid="uid://cwgajuh0w6483" path="res://_Asset/UI/UI_FrameMid.png" id="2_7uygn"]
+[ext_resource type="Texture2D" uid="uid://0q1gfd6ahgtn" path="res://_Asset/UI/UI_CrossBtn.png" id="3_asmxa"]
+
+[sub_resource type="SystemFont" id="SystemFont_uftqn"]
+
+[node name="UIFrameWithCloseBtn" type="Control"]
+layout_mode = 3
+anchor_right = 0.292
+anchor_bottom = 0.092
+offset_right = 815.616
+offset_bottom = 588.384
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Texture" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Texture"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 41.0
+offset_bottom = 64.0
+texture = ExtResource("1_g7h38")
+
+[node name="TextureRect2" type="TextureRect" parent="Texture"]
+layout_mode = 0
+offset_left = 39.0
+offset_right = 79.0
+offset_bottom = 64.0
+texture = ExtResource("2_7uygn")
+
+[node name="TextureRect3" type="TextureRect" parent="Texture"]
+layout_mode = 0
+offset_left = 79.0
+offset_right = 119.0
+offset_bottom = 64.0
+texture = ExtResource("2_7uygn")
+
+[node name="TextureRect4" type="TextureRect" parent="Texture"]
+layout_mode = 0
+offset_left = 109.0
+offset_right = 149.0
+offset_bottom = 64.0
+texture = ExtResource("2_7uygn")
+
+[node name="TextureRect5" type="TextureRect" parent="Texture"]
+layout_mode = 0
+offset_left = 149.0
+offset_right = 189.0
+offset_bottom = 64.0
+texture = ExtResource("2_7uygn")
+
+[node name="TextureRect6" type="TextureRect" parent="Texture"]
+layout_mode = 0
+offset_left = 189.0
+offset_right = 229.0
+offset_bottom = 64.0
+texture = ExtResource("2_7uygn")
+
+[node name="TextureRect7" type="TextureRect" parent="Texture"]
+layout_mode = 0
+offset_left = 229.0
+offset_right = 269.0
+offset_bottom = 64.0
+texture = ExtResource("2_7uygn")
+
+[node name="TextureRect8" type="TextureRect" parent="Texture"]
+layout_mode = 0
+offset_left = 269.0
+offset_right = 338.0
+offset_bottom = 64.0
+texture = ExtResource("3_asmxa")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 9.0
+offset_right = 278.0
+offset_bottom = 56.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = SubResource("SystemFont_uftqn")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1

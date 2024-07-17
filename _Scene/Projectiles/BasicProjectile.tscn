@@ -1,24 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4dvu5wcem4u6"]
+[gd_scene load_steps=3 format=3 uid="uid://b4dvu5wcem4u6"]
 
-[ext_resource type="Texture2D" uid="uid://fpyyu52gt4ht" path="res://_Asset/Projectile/Fireball1.png" id="1_4uati"]
 [ext_resource type="Script" path="res://_Script/Projectiles/ProjectileScript.cs" id="1_vqmsx"]
-[ext_resource type="Resource" uid="uid://bodt65fblcwdy" path="res://_Script/Resource/Projectiles/Fireball.tres" id="2_odi1b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3nyd"]
 radius = 21.0
 height = 86.0
 
 [node name="BasicProjectile" type="Area2D"]
-position = Vector2(148, 303)
 scale = Vector2(0.2, 0.2)
 collision_layer = 4
 collision_mask = 12
 script = ExtResource("1_vqmsx")
-projectileRes = ExtResource("2_odi1b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -3.14159
-texture = ExtResource("1_4uati")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

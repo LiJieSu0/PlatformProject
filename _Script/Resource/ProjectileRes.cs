@@ -8,6 +8,7 @@ public partial class ProjectileRes : Resource
     [Export] public string ProjectileName="";
     [Export] public float BasicSpeed;
     [Export] public float BasicDamage;
+    [Export] public string ProjectileSpritePath="";
     
     public void ProjectilePath(Vector2 vector){
         vector=vector*BasicSpeed;

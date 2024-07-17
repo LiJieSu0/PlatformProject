@@ -3,7 +3,7 @@ using System;
 
 public partial class SkillNode : Node2D,ISkill
 {
-	[Export] PackedScene skillProjectile;
+	[Export] PackedScene skillProjectile; //TODO load from somewhere else
 
 	SkillResource skillResource;
 	private StatusManager statusManager;

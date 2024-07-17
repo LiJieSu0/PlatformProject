@@ -7,3 +7,4 @@ script = ExtResource("1_hy0ox")
 ProjectileName = "Fireball"
 BasicSpeed = 200.0
 BasicDamage = 10.0
+ProjectileSpritePath = "res://_Asset/Projectile/Fireball1.png"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://28k7bj0fivfl"]
+[gd_scene load_steps=9 format=3 uid="uid://28k7bj0fivfl"]
 
 [ext_resource type="Script" path="res://_Script/Player/HUDManager.cs" id="1_xbb1j"]
 [ext_resource type="Texture2D" uid="uid://c8iftnx5cw0vf" path="res://_Asset/UI/Status/EmptyProgressBar.png" id="2_s34it"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://x4qsxree78ds" path="res://_Asset/UI/Skill/Single.png" id="5_ff5lu"]
 [ext_resource type="Texture2D" uid="uid://dcdkcxt8f3te" path="res://_Asset/UI/Skill/Burst.png" id="6_di8fs"]
 [ext_resource type="Texture2D" uid="uid://cjcobw76ouc3c" path="res://_Asset/UI/Skill/Shot.png" id="7_26vub"]
+[ext_resource type="PackedScene" uid="uid://dhd1o541v0a62" path="res://_Scene/MenuUI/PauseMenu.tscn" id="8_6p6v6"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_xbb1j")
@@ -85,3 +86,6 @@ texture = ExtResource("7_26vub")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="PauseMenu" parent="." instance=ExtResource("8_6p6v6")]
+visible = false

@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b2irmralbiluq" path="res://_Asset/Player/Dead-Sheet.png" id="7_l7xva"]
 [ext_resource type="PackedScene" uid="uid://28k7bj0fivfl" path="res://_Scene/Player/HUD.tscn" id="8_kiph8"]
 [ext_resource type="Script" path="res://_Script/Player/SkillNode.cs" id="10_xe5ef"]
-[ext_resource type="PackedScene" uid="uid://b4dvu5wcem4u6" path="res://_Scene/Projectiles/BasicProjectile.tscn" id="12_3017u"]
+[ext_resource type="PackedScene" uid="uid://tbdkcrm1rh38" path="res://_Scene/Projectiles/Fireball.tscn" id="11_m2wd2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mmqsd"]
 height = 50.0
@@ -499,7 +499,7 @@ zoom = Vector2(3, 3)
 [node name="SkillNode" type="Node2D" parent="CharacterBody2D"]
 position = Vector2(28, 0)
 script = ExtResource("10_xe5ef")
-skillProjectile = ExtResource("12_3017u")
+skillProjectile = ExtResource("11_m2wd2")
 
 [node name="HUD" parent="." instance=ExtResource("8_kiph8")]
 
