@@ -74,7 +74,8 @@ public partial class PlayerBody : CharacterBody2D{
 		}
 
 		Velocity = velocity;
-		if((velocity.X>0&&!isFaceRight)||(velocity.X<0&&isFaceRight)){
+		Vector2 faceDir=(GetGlobalMousePosition()-this.GlobalPosition).Normalized();
+		if((faceDir.X>0&&!isFaceRight)||(faceDir.X<0&&isFaceRight)){ //TODO change face direction with mouse cursor
 			isFaceRight=!isFaceRight;
 			sprite2D.Scale=new Vector2(sprite2D.Scale.X*-1,sprite2D.Scale.Y);
 		}
@@ -146,7 +147,7 @@ public partial class PlayerBody : CharacterBody2D{
 		}
 	}
 
-	private void ChangeCurrSkill(){ //TODO use delegate to change skill
+	private void ChangeCurrSkill(){ 
 		for (int i = 0; i < 3; i++){
 			if (Input.IsActionJustPressed($"ui_skill_{i + 1}")){
 				statusManager.CurrSkillIdx = i;
