@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://0uwqmoyxcw0u"]
+
+[ext_resource type="Texture2D" uid="uid://c8iftnx5cw0vf" path="res://_Asset/UI/Status/EmptyProgressBar.png" id="1_lesim"]
+[ext_resource type="Texture2D" uid="uid://db6ma4l450won" path="res://_Asset/UI/Status/HpProgressBar.png" id="2_aykgv"]
+
+[node name="MobHpBar" type="TextureProgressBar"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+texture_under = ExtResource("1_lesim")
+texture_progress = ExtResource("2_aykgv")
+texture_progress_offset = Vector2(1, 1)

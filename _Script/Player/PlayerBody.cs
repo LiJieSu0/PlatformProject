@@ -46,7 +46,7 @@ public partial class PlayerBody : CharacterBody2D{
 		ChangeCurrSkill();
 
 	}
-	private void PlayerMovement(float delta){
+	private void PlayerMovement(float delta){ //TODO fix attack while running animation bug
 		AttackFunction();
 		Vector2 velocity = Velocity;
 		if (!IsOnFloor()){
@@ -75,7 +75,7 @@ public partial class PlayerBody : CharacterBody2D{
 
 		Velocity = velocity;
 		Vector2 faceDir=(GetGlobalMousePosition()-this.GlobalPosition).Normalized();
-		if((faceDir.X>0&&!isFaceRight)||(faceDir.X<0&&isFaceRight)){ //TODO change face direction with mouse cursor
+		if((faceDir.X>0&&!isFaceRight)||(faceDir.X<0&&isFaceRight)){ 
 			isFaceRight=!isFaceRight;
 			sprite2D.Scale=new Vector2(sprite2D.Scale.X*-1,sprite2D.Scale.Y);
 		}

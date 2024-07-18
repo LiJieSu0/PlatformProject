@@ -23,10 +23,15 @@ public partial class Snail : CharacterBody2D,IEnemy
 
 	#region Variables
 	float time;
+	float hpBarTime;
 	#endregion
 
+	#region Node
+	TextureProgressBar hpBar;
+	#endregion
     public override void _Ready()
     {
+		hpBar=GetNode<TextureProgressBar>("MobHpBar");
 		time=0;
 		InitializeStatus();
     }
@@ -43,10 +48,13 @@ public partial class Snail : CharacterBody2D,IEnemy
 			time=0;
 		}
 		MoveAndSlide();
+		HpBarHidingTime((float)delta);
 	}
 
 
     public void ReceiveDamage(float damage){
+		hpBar.Show();
+		hpBarTime=0;
 		this.CurrHP-=damage;
 		if(CurrHP<=0){
 			QueueFree();
@@ -58,13 +66,25 @@ public partial class Snail : CharacterBody2D,IEnemy
     }
 
 	private void InitializeStatus(){
+		hpBarTime=0;
 		MaxHp=20;
 		CurrHP=this.MaxHp;
 		MaxMp=0;
 		CurrMp=MaxMp;
 		BasicDamage=10;
 		MobName="Snail";
+		hpBar.MaxValue=MaxHp;
+		hpBar.Hide();
 	}
 
+	private void HpBarHidingTime(float delta){
+		hpBar.Value=CurrHP;
+		if(hpBar.Visible){
+			hpBarTime+=delta;
+			if(hpBarTime>=3){
+				hpBar.Hide();
+			}
+		}
 
+	}
 }
