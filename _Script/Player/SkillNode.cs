@@ -28,8 +28,9 @@ public partial class SkillNode : Node2D,ISkill
 	}
 
     public void CastSkill(){
-		if(statusManager.CurrMp>=manaCost&&!isCoolDown){
-			skillResource.CastSkil(skillProjectile,this,isFaceRight,3);
+		if(statusManager.CurrMp>=manaCost&&!isCoolDown||true){ //TODO remove true
+			Vector2 dir=(GetGlobalMousePosition()-this.GlobalPosition).Normalized();
+			skillResource.CastSkil(skillProjectile,this,dir,3);
 			statusManager.CurrMp-=manaCost;
 			isCoolDown=true;	
 		}

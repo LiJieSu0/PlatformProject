@@ -42,15 +42,11 @@ public partial class ProjectileScript : Area2D
 		QueueFree();
 	}
 
-	public void ChangeVelocity(float angle,bool isFaceRight){
-		var newAngle=angle;
-		if(!isFaceRight){
-			newAngle=180-angle;
-		}
-		this.RotationDegrees=newAngle;
-		GD.Print(newAngle);
-		initialVelocity=projectileRes.DegreesToVector(newAngle);
-		GD.Print(initialVelocity);
+	public void ChangeVelocity(Vector2 dir){
+		initialVelocity=dir;
+		float angleRadians=Mathf.Atan2(dir.Y,dir.X);
+		float angleDegree=Mathf.RadToDeg(angleRadians);
+		this.RotationDegrees=angleDegree;
 	}
 
 }

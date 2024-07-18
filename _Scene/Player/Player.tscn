@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://djhutcvenskq"]
+[gd_scene load_steps=40 format=3 uid="uid://djhutcvenskq"]
 
 [ext_resource type="Script" path="res://_Script/Player/StatusManager.cs" id="1_3b1ie"]
 [ext_resource type="Texture2D" uid="uid://bxpj0osjj0peu" path="res://_Asset/Player/Idle-Sheet.png" id="1_hjll8"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://28k7bj0fivfl" path="res://_Scene/Player/HUD.tscn" id="8_kiph8"]
 [ext_resource type="Script" path="res://_Script/Player/SkillNode.cs" id="10_xe5ef"]
 [ext_resource type="PackedScene" uid="uid://tbdkcrm1rh38" path="res://_Scene/Projectiles/Fireball.tscn" id="11_m2wd2"]
+[ext_resource type="Script" path="res://_Script/Player/OrbitNode.cs" id="12_78wl7"]
+[ext_resource type="Texture2D" uid="uid://cn2arbyguns53" path="res://_Asset/UI/ball_only.png" id="13_0y70c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mmqsd"]
 height = 50.0
@@ -500,6 +502,14 @@ zoom = Vector2(3, 3)
 position = Vector2(28, 0)
 script = ExtResource("10_xe5ef")
 skillProjectile = ExtResource("11_m2wd2")
+
+[node name="OrbitNode" type="Node2D" parent="CharacterBody2D/SkillNode"]
+script = ExtResource("12_78wl7")
+orbitDistance = 30.0
+
+[node name="Tmpsprite" type="Sprite2D" parent="CharacterBody2D/SkillNode/OrbitNode"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_0y70c")
 
 [node name="HUD" parent="." instance=ExtResource("8_kiph8")]
 
