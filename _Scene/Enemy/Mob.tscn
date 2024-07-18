@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bl5gq6mbdgmlp"]
+[gd_scene load_steps=16 format=3 uid="uid://bl5gq6mbdgmlp"]
 
 [ext_resource type="Texture2D" uid="uid://bplpu8y8s32bu" path="res://_Asset/World/Legacy-Fantasy - High Forest 2.0/Legacy-Fantasy - High Forest 2.3/Mob/Snail/Hide-Sheet.png" id="1_4xvvi"]
+[ext_resource type="Script" path="res://_Script/Enemy/ItemDropManager.cs" id="1_lyp77"]
 [ext_resource type="Script" path="res://_Script/Enemy/Snail.cs" id="1_souph"]
 [ext_resource type="Texture2D" uid="uid://d2yj64fvy0j1t" path="res://_Asset/World/Legacy-Fantasy - High Forest 2.0/Legacy-Fantasy - High Forest 2.3/Mob/Snail/walk-Sheet.png" id="2_q4xsc"]
 [ext_resource type="PackedScene" uid="uid://0uwqmoyxcw0u" path="res://_Scene/Enemy/MobHpBar.tscn" id="4_aomq1"]
@@ -157,6 +158,11 @@ states/Walk/position = Vector2(343, 172)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_0noi4"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_lj52s")]
 
 [node name="Mob" type="Node2D"]
+
+[node name="ItemDropManager" type="Node2D" parent="."]
+script = ExtResource("1_lyp77")
+MoneyDrop = 10
+ExpDrop = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 8
