@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjk6uebqcutu4"]
+[gd_scene load_steps=8 format=3 uid="uid://bjk6uebqcutu4"]
 
 [ext_resource type="Texture2D" uid="uid://cldug1m4qttkr" path="res://_Asset/World/Background.png" id="1_af7ea"]
 [ext_resource type="PackedScene" uid="uid://bpy55e56klam" path="res://_Scene/FirstStage/World/BasicPlatform.tscn" id="2_oy3k3"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://djhutcvenskq" path="res://_Scene/Player/Player.tscn" id="4_4lnse"]
 [ext_resource type="PackedScene" uid="uid://2ysqcaigx6d0" path="res://_Scene/NPC/monkNPC.tscn" id="5_eje8b"]
 [ext_resource type="PackedScene" uid="uid://bl5gq6mbdgmlp" path="res://_Scene/Enemy/Mob.tscn" id="6_ly72a"]
-[ext_resource type="PackedScene" uid="uid://bhfu7d5soyfhm" path="res://_Scene/Item/BasicItem.tscn" id="7_hk2ma"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2g30m"]
 size = Vector2(40.5, 61.5)
@@ -47,9 +46,6 @@ layer_0/tile_data = PackedInt32Array(2424838, 1048577, 15, 2490374, 1048577, 16,
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BasicPlatform/Decoration/NextStageArea"]
 position = Vector2(1088.75, 591.75)
 shape = SubResource("RectangleShape2D_2g30m")
-
-[node name="BasicItem" parent="." instance=ExtResource("7_hk2ma")]
-position = Vector2(130, 572)
 
 [node name="Player" parent="." instance=ExtResource("4_4lnse")]
 z_index = 10

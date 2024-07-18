@@ -58,14 +58,14 @@ public partial class PlayerBody : CharacterBody2D{
 			velocity.Y = JumpVelocity;
 			stateMachine.Travel("JumpStart");
 		}
-		if(Input.IsActionPressed("ui_left")||Input.IsActionPressed("ui_right")){
+		if(Input.IsActionPressed("move_left")||Input.IsActionPressed("move_right")){
 			stateMachine.Travel("Run");
 		}
-		if(Input.IsActionJustReleased("ui_left")||Input.IsActionJustReleased("ui_right")&&IsOnFloor()){
+		if(Input.IsActionJustReleased("move_left")||Input.IsActionJustReleased("move_right")&&IsOnFloor()){
 			stateMachine.Travel("Idle");
 		}
 
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+		Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 		if (direction != Vector2.Zero){
 			velocity.X = direction.X * Speed;
 		}

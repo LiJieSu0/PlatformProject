@@ -28,10 +28,12 @@ public partial class Snail : CharacterBody2D,IEnemy
 
 	#region Node
 	TextureProgressBar hpBar;
+	ItemDropManager itemDropManager;
 	#endregion
     public override void _Ready()
     {
 		hpBar=GetNode<TextureProgressBar>("MobHpBar");
+		itemDropManager=GetNode<ItemDropManager>("ItemDropManager");
 		time=0;
 		InitializeStatus();
     }
@@ -57,6 +59,8 @@ public partial class Snail : CharacterBody2D,IEnemy
 		hpBarTime=0;
 		this.CurrHP-=damage;
 		if(CurrHP<=0){
+			itemDropManager.CallDeferred("ItemDropInstantiate");
+			//TODO death animation and drop animation
 			QueueFree();
 		}
     }
