@@ -30,6 +30,7 @@ offset_right = 93.0
 offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
+script = null
 
 [node name="Button" type="Button" parent="Panel/UIFrameWithCloseBtn"]
 modulate = Color(1, 1, 1, 0)
