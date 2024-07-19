@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjk6uebqcutu4"]
+[gd_scene load_steps=9 format=3 uid="uid://bjk6uebqcutu4"]
 
 [ext_resource type="Texture2D" uid="uid://cldug1m4qttkr" path="res://_Asset/World/Background.png" id="1_af7ea"]
 [ext_resource type="PackedScene" uid="uid://bpy55e56klam" path="res://_Scene/FirstStage/World/BasicPlatform.tscn" id="2_oy3k3"]
+[ext_resource type="AudioStream" uid="uid://dykxtn38sbgcb" path="res://_Asset/Audio/SceneBgm/battleBGM.mp3" id="2_v53qj"]
 [ext_resource type="TileSet" uid="uid://ctchfh820hjut" path="res://_Asset/World/PremadeTileset/BasicTileset.tres" id="3_6lo2c"]
 [ext_resource type="PackedScene" uid="uid://djhutcvenskq" path="res://_Scene/Player/Player.tscn" id="4_4lnse"]
 [ext_resource type="PackedScene" uid="uid://2ysqcaigx6d0" path="res://_Scene/NPC/monkNPC.tscn" id="5_eje8b"]
@@ -19,12 +20,29 @@ position = Vector2(141, 608)
 
 [node name="AudioManager" type="Node2D" parent="."]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AudioManager"]
+[node name="BGM" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("2_v53qj")
+autoplay = true
 
 [node name="MobManager" type="Node2D" parent="."]
 
 [node name="Mob" parent="MobManager" instance=ExtResource("6_ly72a")]
 position = Vector2(211, 609)
+
+[node name="Mob2" parent="MobManager" instance=ExtResource("6_ly72a")]
+position = Vector2(154, 609)
+
+[node name="Mob3" parent="MobManager" instance=ExtResource("6_ly72a")]
+position = Vector2(282, 609)
+
+[node name="Mob4" parent="MobManager" instance=ExtResource("6_ly72a")]
+position = Vector2(211, 609)
+
+[node name="Mob5" parent="MobManager" instance=ExtResource("6_ly72a")]
+position = Vector2(181, 608)
+
+[node name="Mob6" parent="MobManager" instance=ExtResource("6_ly72a")]
+position = Vector2(245, 609)
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2

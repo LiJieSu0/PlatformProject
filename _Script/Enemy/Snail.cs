@@ -82,6 +82,7 @@ public partial class Snail : CharacterBody2D,IEnemy
 	}
 
 	private void HpBarHidingTime(float delta){
+
 		hpBar.Value=CurrHP;
 		if(hpBar.Visible){
 			hpBarTime+=delta;

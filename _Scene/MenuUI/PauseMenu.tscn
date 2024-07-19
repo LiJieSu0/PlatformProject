@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhd1o541v0a62"]
 
 [ext_resource type="Script" path="res://_Script/UI/UI_InGame/PauseMenuScript.cs" id="1_5glxo"]
-[ext_resource type="PackedScene" uid="uid://cune28cquvsuk" path="res://_Scene/MenuUI/UI_PauseMenuFrame.tscn" id="2_8i0t0"]
+[ext_resource type="PackedScene" uid="uid://duvcyyth5cty7" path="res://_Scene/MenuUI/UIFrameWithCloseBtn.tscn" id="2_edahe"]
 [ext_resource type="Texture2D" uid="uid://x4qsxree78ds" path="res://_Asset/UI/Skill/Single.png" id="3_q5ryi"]
 
 [node name="PauseMenu" type="Control"]
@@ -20,25 +20,13 @@ offset_top = 64.0
 offset_right = 821.0
 offset_bottom = 544.0
 
-[node name="UIFrameWithCloseBtn" parent="Panel" instance=ExtResource("2_8i0t0")]
+[node name="UIFrameWithCloseBtn" parent="Panel" instance=ExtResource("2_edahe")]
 layout_mode = 1
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 93.0
-offset_right = 93.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-script = null
-
-[node name="Button" type="Button" parent="Panel/UIFrameWithCloseBtn"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 285.0
-offset_top = 1.0
-offset_right = 337.0
-offset_bottom = 65.0
+offset_left = 83.0
+offset_top = 9.0
+offset_right = 84.616
+offset_bottom = 13.384
+MenuTitle = "PauseMenu"
 
 [node name="Button" type="Button" parent="Panel"]
 layout_mode = 0
@@ -50,4 +38,4 @@ icon = ExtResource("3_q5ryi")
 icon_alignment = 1
 expand_icon = true
 
-[connection signal="pressed" from="Panel/UIFrameWithCloseBtn/Button" to="." method="OnCloseBtnPressed"]
+[connection signal="CloseButtonPressed" from="Panel/UIFrameWithCloseBtn" to="." method="OnCloseBtnPressed"]

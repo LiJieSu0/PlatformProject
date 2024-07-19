@@ -16,7 +16,6 @@ public partial class UIFrameWithCloseBtn : Control
 		
 	}
     private void OnCloseBtnPressed(){
-		GD.Print("pressed");
         EmitSignal(SignalName.CloseButtonPressed);
     }
 }

@@ -3,6 +3,7 @@ using System;
 
 public partial class InventoryMenu : Control
 {
+	//TODO inventory function
 	public override void _Ready()
 	{
 	}
@@ -11,7 +12,6 @@ public partial class InventoryMenu : Control
 	{
 	}
 	private void OnCloseBtnPressed(){
-		GD.Print("pressed");
 		this.Hide();
 	}
 }

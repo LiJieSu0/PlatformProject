@@ -42,6 +42,7 @@ offset_left = 25.0
 offset_top = 77.0
 offset_right = 479.0
 offset_bottom = 487.0
+theme_override_constants/separation = 10
 
 [node name="Row_1" type="HBoxContainer" parent="Panel/InventorySlots"]
 layout_mode = 2
