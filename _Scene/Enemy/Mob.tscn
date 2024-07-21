@@ -161,7 +161,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [node name="Mob" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Enemy"]]
 collision_layer = 8
 collision_mask = 21
 script = ExtResource("1_souph")

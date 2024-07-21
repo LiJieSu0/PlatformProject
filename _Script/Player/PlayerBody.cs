@@ -125,6 +125,9 @@ public partial class PlayerBody : CharacterBody2D{
 	}
 
 	private void OnAttackBody(Node2D node){
+		if(node.IsInGroup("Enemy")){
+			GD.Print("Playerbody onattackbody Enemy group");
+		}
 		if(node is IEnemy e){
 			e.ReceiveDamage((int)statusManager.AttackPower);
 		}else{

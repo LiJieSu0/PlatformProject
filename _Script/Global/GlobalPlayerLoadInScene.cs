@@ -3,10 +3,14 @@ using Godot.Collections;
 using System;
 using System.Runtime.CompilerServices;
 
-public partial class GlobalPlayerLoadInScene : Node
-{
+public partial class GlobalPlayerLoadInScene : Node{
 	public static GlobalPlayerLoadInScene Instance;
-  public int State=2;
+
+  public int PlayerLevel;
+  public int PlayerStrength;
+  public int PlayerVitality;
+  public int PlayerIntelligence;
+  public int PlayerDexterity;
     public override void _Ready(){
 		  Instance=this;
     }
@@ -16,7 +20,6 @@ public partial class GlobalPlayerLoadInScene : Node
           return;
       }
       using var saveGame = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Read);
-      
     }
 
 }

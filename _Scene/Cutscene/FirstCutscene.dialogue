@@ -2,8 +2,6 @@
 
 Haruka: This is first dialogue created.
 Mutsuki: That's right!.
-if GlobalPlayerLoadInScene.State==2
-	do Dosomething()
 - First one
 	Haruka: You picked the first one.
 - Second one
