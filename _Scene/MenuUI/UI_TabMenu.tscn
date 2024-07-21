@@ -1,0 +1,333 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuimjj1sf7jpp"]
+
+[ext_resource type="PackedScene" uid="uid://duvcyyth5cty7" path="res://_Scene/MenuUI/UIFrameWithCloseBtn.tscn" id="1_o1jk8"]
+[ext_resource type="Texture2D" uid="uid://ccvmioggb27ta" path="res://_Asset/UI/Stand-removebg-preview.png" id="2_m6q1b"]
+[ext_resource type="Texture2D" uid="uid://bulike7wfiry4" path="res://_Asset/UI/InventorySlot.png" id="3_espps"]
+
+[sub_resource type="Theme" id="Theme_481jp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i4d5m"]
+
+[node name="UI_InGameMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -387.0
+offset_top = -274.0
+offset_right = 388.0
+offset_bottom = 289.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIFrameWithCloseBtn" parent="Panel" instance=ExtResource("1_o1jk8")]
+layout_mode = 1
+offset_left = 234.0
+offset_top = 7.0
+offset_right = 235.616
+offset_bottom = 11.384
+MenuTitle = "Menu"
+
+[node name="TabContainer" type="TabContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -373.5
+offset_top = -204.5
+offset_right = 372.5
+offset_bottom = 267.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Items" type="TabBar" parent="Panel/TabContainer"]
+layout_mode = 2
+
+[node name="EquipSlots" type="TextureRect" parent="Panel/TabContainer/Items"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 8.0
+offset_right = 396.0
+offset_bottom = 722.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_m6q1b")
+
+[node name="HeadEquipSlot" type="TextureRect" parent="Panel/TabContainer/Items/EquipSlots"]
+layout_mode = 0
+offset_left = 153.333
+offset_top = 6.66666
+offset_right = 193.333
+offset_bottom = 46.6667
+scale = Vector2(1.55, 1.55)
+texture = ExtResource("3_espps")
+
+[node name="BodyEquipSlot" type="TextureRect" parent="Panel/TabContainer/Items/EquipSlots"]
+layout_mode = 0
+offset_left = 151.667
+offset_top = 166.667
+offset_right = 191.667
+offset_bottom = 206.667
+scale = Vector2(1.55, 1.55)
+texture = ExtResource("3_espps")
+
+[node name="LegEquipSlot" type="TextureRect" parent="Panel/TabContainer/Items/EquipSlots"]
+layout_mode = 0
+offset_left = 151.667
+offset_top = 320.0
+offset_right = 191.667
+offset_bottom = 360.0
+scale = Vector2(1.55, 1.55)
+texture = ExtResource("3_espps")
+
+[node name="HandEquipSlot" type="TextureRect" parent="Panel/TabContainer/Items/EquipSlots"]
+layout_mode = 0
+offset_left = 263.333
+offset_top = 320.0
+offset_right = 303.333
+offset_bottom = 360.0
+scale = Vector2(1.55, 1.55)
+texture = ExtResource("3_espps")
+
+[node name="FeetEquipSlot" type="TextureRect" parent="Panel/TabContainer/Items/EquipSlots"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 596.667
+offset_right = 195.0
+offset_bottom = 636.667
+scale = Vector2(1.55, 1.55)
+texture = ExtResource("3_espps")
+
+[node name="WeaponEquipSlot1" type="TextureRect" parent="Panel/TabContainer/Items/EquipSlots"]
+layout_mode = 0
+offset_left = -16.6667
+offset_top = 181.667
+offset_right = 23.3333
+offset_bottom = 221.667
+scale = Vector2(1.55, 1.55)
+texture = ExtResource("3_espps")
+
+[node name="WeaponEquipSlot2" type="TextureRect" parent="Panel/TabContainer/Items/EquipSlots"]
+layout_mode = 0
+offset_left = 313.333
+offset_top = 181.667
+offset_right = 353.333
+offset_bottom = 221.667
+scale = Vector2(1.55, 1.55)
+texture = ExtResource("3_espps")
+
+[node name="Inventory" type="Label" parent="Panel/TabContainer/Items"]
+layout_mode = 2
+offset_left = 503.0
+offset_top = 15.0
+offset_right = 578.0
+offset_bottom = 38.0
+text = "Inventory
+"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/TabContainer/Items/Inventory"]
+layout_mode = 0
+offset_left = -100.0
+offset_top = 23.0
+offset_right = 182.0
+offset_bottom = 372.0
+theme = SubResource("Theme_481jp")
+theme_override_styles/panel = SubResource("StyleBoxTexture_i4d5m")
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/Items/Inventory/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 5
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect2" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect3" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect4" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect5" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect6" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect7" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect8" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect9" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect10" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect11" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect12" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect13" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect14" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect15" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect16" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect17" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect18" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect19" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect20" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect21" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect22" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect23" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect24" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect25" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect26" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect27" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect28" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect29" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect30" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect31" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect32" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect33" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect34" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect35" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect36" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect37" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect38" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect39" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect40" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect41" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="TextureRect42" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_espps")
+
+[node name="Stats" type="TabBar" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Skills" type="TabBar" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Quest" type="TabBar" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2

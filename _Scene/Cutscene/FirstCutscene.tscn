@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://idamr4siwd57"]
+
+[ext_resource type="Script" path="res://_Script/Cutscene/FirstCutscene.cs" id="1_8pxxc"]
+[ext_resource type="Texture2D" uid="uid://b7rocsdtt74h" path="res://_Asset/NPC/Haruka.png" id="1_yc7lc"]
+[ext_resource type="Resource" uid="uid://qo83qka7wtwo" path="res://_Scene/Cutscene/FirstCutscene.dialogue" id="2_rwap1"]
+[ext_resource type="Texture2D" uid="uid://c65ynevi7tt7p" path="res://_Asset/NPC/Mutsuki.png" id="2_w3ue3"]
+
+[sub_resource type="Animation" id="Animation_fjxwh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(80, 287)]
+}
+
+[sub_resource type="Animation" id="Animation_ijhif"]
+resource_name = "cutscene"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.2, 1.7, 2.2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(80, 287), Vector2(217, 283), Vector2(451, 283), Vector2(451, 283)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"StartNextDialogue"
+}, {
+"args": [],
+"method": &"StartNextDialogue"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4pra5"]
+_data = {
+"RESET": SubResource("Animation_fjxwh"),
+"cutscene": SubResource("Animation_ijhif")
+}
+
+[node name="FirstCutscene" type="Node2D"]
+position = Vector2(4, -4)
+script = ExtResource("1_8pxxc")
+dialogueTitleArr = PackedStringArray("START", "Next")
+dialogueRes = ExtResource("2_rwap1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4pra5")
+}
+autoplay = "cutscene"
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimationPlayer"]
+position = Vector2(80, 287)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_yc7lc")
+
+[node name="Sprite2D2" type="Sprite2D" parent="AnimationPlayer"]
+position = Vector2(920, 263)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_w3ue3")

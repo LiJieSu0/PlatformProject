@@ -1,0 +1,20 @@
+~ START
+
+Haruka: This is first dialogue created.
+Mutsuki: That's right!.
+if GlobalPlayerLoadInScene.State==2
+	do Dosomething()
+- First one
+	Haruka: You picked the first one.
+- Second one
+	Haruka: You picked the second one.
+- Start again => START
+- End the conversation 
+Mutsuki: For more information see the online documentation.
+do StartAnimation()
+=> END!
+
+~ Next
+Mutsuki: More conversation here.
+
+=> END
