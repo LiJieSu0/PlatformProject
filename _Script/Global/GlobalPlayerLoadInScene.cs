@@ -15,11 +15,13 @@ public partial class GlobalPlayerLoadInScene : Node{
 		  Instance=this;
       LoadSavedStatus();
       GD.Print("Loaded: "+PlayerDexterity);
+      PlayerDexterity=100;
+      SaveGame();
     }
 
     private void LoadSavedStatus(){
       if (!FileAccess.FileExists("user://savegame.save")){
-        //No save exist create new save
+        //No save exist, create new save
         using var newSaveWriter = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Write);
         var newSave=new Dictionary<string, Variant>(){
         {"PlayerLevel",1},
@@ -29,6 +31,7 @@ public partial class GlobalPlayerLoadInScene : Node{
         {"PlayerDexterity",10},
         };
         newSaveWriter.StoreLine(Json.Stringify(newSave));
+        newSaveWriter.Close();
       }
       using var saveGame = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Read);
       var jsonString = saveGame.GetLine();
@@ -36,11 +39,12 @@ public partial class GlobalPlayerLoadInScene : Node{
       var parseResult = json.Parse(jsonString);
       var data = new Dictionary<string, Variant>((Dictionary)json.Data);
       FromDict(data);
+      GD.Print("After loaded: "+PlayerIntelligence);
     }
     public void SaveGame(){
       using var saveGame = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Write);
 
-      var saveNodes = GetTree().GetNodesInGroup("Persist");
+      // var saveNodes = GetTree().GetNodesInGroup("Persist");
       // foreach (Node saveNode in saveNodes){
       //   if (string.IsNullOrEmpty(saveNode.SceneFilePath)){
       //     GD.Print($"persistent node '{saveNode.Name}' is not an instanced scene, skipped");
@@ -63,7 +67,8 @@ public partial class GlobalPlayerLoadInScene : Node{
         {"PlayerIntelligence",PlayerIntelligence},
         {"PlayerDexterity",PlayerDexterity},
       };
-
+      var jsonString = Json.Stringify(data);
+      saveGame.StoreLine(jsonString);
 	}
 
     public void FromDict(Dictionary<string, Variant> data){
