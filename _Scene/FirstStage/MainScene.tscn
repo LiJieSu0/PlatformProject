@@ -13,16 +13,16 @@ size = Vector2(40.5, 61.5)
 
 [node name="MainScene" type="Node2D"]
 
-[node name="NPCManager" type="Node2D" parent="."]
-
-[node name="NPC" parent="NPCManager" instance=ExtResource("5_eje8b")]
-position = Vector2(141, 608)
-
 [node name="AudioManager" type="Node2D" parent="."]
 
 [node name="BGM" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = ExtResource("2_v53qj")
 autoplay = true
+
+[node name="NPCManager" type="Node2D" parent="."]
+
+[node name="NPC" parent="NPCManager" instance=ExtResource("5_eje8b")]
+position = Vector2(141, 608)
 
 [node name="MobManager" type="Node2D" parent="."]
 

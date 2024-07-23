@@ -22,16 +22,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
       GlobalSaveManager.Instance.LoadSave();
     }
 
-    public void FromDict(Dictionary<string, Variant> data){
-        PlayerLevel = (int)data["PlayerLevel"];
-        PlayerStrength = (int)data["PlayerStrength"];
-        PlayerVitality = (int)data["PlayerVitality"];
-        PlayerIntelligence = (int)data["PlayerIntelligence"];
-        PlayerDexterity=(int)data["PlayerDexterity"];
-        PlayerExp=(int)data["PlayerExp"];
-        PlayerMoney=(int)data["PlayerMoney"];
 
-    }
 
     public string Save(){
       var saveData=new Dictionary<string, Variant>(){
@@ -53,7 +44,15 @@ public partial class GlobalPlayerStats : Node,ISaveable
       var data=new Dictionary<string, Variant>((Dictionary)variant);
       FromDict(data);
     }
-
+    public void FromDict(Dictionary<string, Variant> data){
+        PlayerLevel = (int)data["PlayerLevel"];
+        PlayerStrength = (int)data["PlayerStrength"];
+        PlayerVitality = (int)data["PlayerVitality"];
+        PlayerIntelligence = (int)data["PlayerIntelligence"];
+        PlayerDexterity=(int)data["PlayerDexterity"];
+        PlayerExp=(int)data["PlayerExp"];
+        PlayerMoney=(int)data["PlayerMoney"];
+    }
     public string NewSave()
     {
       var newSave=new Dictionary<string, Variant>(){
@@ -69,4 +68,6 @@ public partial class GlobalPlayerStats : Node,ISaveable
         {this.Name,newSave}
       });
     }
+
+
 }
