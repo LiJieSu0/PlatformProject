@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://74s3aisk8oge"]
+[gd_scene load_steps=6 format=3 uid="uid://74s3aisk8oge"]
 
 [ext_resource type="Texture2D" uid="uid://bwxbjq4lyuycq" path="res://_Asset/UI/Menu/MenuBackground.png" id="1_5f1il"]
 [ext_resource type="Script" path="res://_Script/UI/MainMenu/MainMenu.cs" id="1_rdbeu"]
 [ext_resource type="AudioStream" uid="uid://c8thd5wy8ojcu" path="res://_Asset/Audio/MainMenu/mainMenu.wav" id="3_f5g17"]
 [ext_resource type="AudioStream" uid="uid://cufeef0f5dk3f" path="res://_Asset/Audio/MainMenu/BtnSE.wav" id="4_n8rwo"]
-[ext_resource type="PackedScene" uid="uid://b4dvu5wcem4u6" path="res://_Scene/Projectiles/BasicProjectile.tscn" id="5_x32yr"]
 
 [sub_resource type="SystemFont" id="SystemFont_2d0a4"]
 font_names = PackedStringArray("Comic Sans MS")
@@ -94,8 +93,6 @@ autoplay = true
 [node name="BtnSE" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_n8rwo")
 volume_db = 5.0
-
-[node name="BasicProjectile" parent="." instance=ExtResource("5_x32yr")]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartBtn" to="." method="OnStartBtnPressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/QuitBtn" to="." method="OnQuitBtnPressed"]

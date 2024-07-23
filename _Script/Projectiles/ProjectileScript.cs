@@ -20,6 +20,7 @@ public partial class ProjectileScript : Area2D
 		sprite=GetNode<Sprite2D>("Sprite2D");
 		sprite.Texture=ResourceLoader.Load<Texture2D>(projectileRes.ProjectileSpritePath);
 		InitializeFromResource();
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

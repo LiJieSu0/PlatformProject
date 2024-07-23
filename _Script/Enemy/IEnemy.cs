@@ -9,5 +9,4 @@ public interface IEnemy{
 
     void ReceiveDamage(float damage);
     void DealDamage(float damage);
-
 }

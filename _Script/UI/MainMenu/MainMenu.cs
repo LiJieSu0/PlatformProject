@@ -7,11 +7,10 @@ public partial class MainMenu : Control
 	public override void _Ready()
 	{
 		btnSEPlayer=GetNode<AudioStreamPlayer2D>("BtnSE");
-		GD.Print(btnSEPlayer==null);
 	}
 
-	public override void _Process(double delta)
-	{
+	public override void _Process(double delta){
+		
 	}
 	private void OnStartBtnPressed(){
 		btnSEPlayer.Play();
@@ -22,4 +21,6 @@ public partial class MainMenu : Control
 	private void OnBtnSEFinsihed(){
 		GlobalSceneManager.Instance.ChangeScene("res://_Scene/FirstStage/MainScene.tscn");
 	}
+
+
 }

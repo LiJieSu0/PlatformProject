@@ -1,9 +1,11 @@
 using Godot;
+using Godot.Collections;
 using System;
 
-public partial class GlobalSceneManager : Node
+public partial class GlobalSceneManager : Node,ISaveable
 {
 	public static GlobalSceneManager Instance { get; private set;}
+	public PackedScene _currScene;
 	public override void _Ready()
 	{
 		Instance=this;
@@ -20,5 +22,36 @@ public partial class GlobalSceneManager : Node
 		GetTree().ChangeSceneToPacked(packedScene);
 	}
 
+    public string Save()
+    {
+		string currentScene=GetTree().CurrentScene.Name;
+		var data=new Dictionary<string,string>(){
+			{this.Name,currentScene}
+		};
+		string jsonString = Json.Stringify(data);
+		return jsonString;
+    }
+
+    public void Load(Variant variant){
+		//TODO error handle
+		string scenePath=ScenePathDict.SCENE_DICT[(string)variant];
+		//TODO change to correct scene path;
+		GD.Print(scenePath);
+		// PackedScene packedScene = (PackedScene)ResourceLoader.Load(scenePath);
+        // if (packedScene != null){
+        //     ChangeScene(packedScene);
+        //     GD.Print("Scene loaded successfully: " + scenePath);
+        // }else{
+        //     GD.PrintErr("Error loading scene: " + scenePath);
+        // }
+    }
+
+	public string NewSave(){
+		var data=new Dictionary<string,string>(){
+			{this.Name,"firstScene"} //TODO change to real first scene;
+		};
+		string jsonString = Json.Stringify(data);
+		return jsonString;
+	}
 
 }
