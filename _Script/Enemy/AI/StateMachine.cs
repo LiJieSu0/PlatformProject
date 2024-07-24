@@ -1,12 +1,11 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class StateMachine : Node
 {
 	[Export] public NodePath initialState;
-	private Dictionary<string,StateNode> _stateDict;
-	private StateNode _currState;
+	public Dictionary<string,StateNode> _stateDict;
+	public StateNode _currState;
 	public override void _Ready()
 	{
 		_stateDict=new Dictionary<string,StateNode>();
@@ -23,10 +22,7 @@ public partial class StateMachine : Node
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		_currState.Update((float)delta);
-	}
+
 
 	public void TransitionTo(string key){
 		if(!_stateDict.ContainsKey(key)||_currState==_stateDict[key])
@@ -34,6 +30,7 @@ public partial class StateMachine : Node
 		_currState.Exit();
 		_currState=_stateDict[key];
 		_currState.Enter();
-
 	}
+
+	
 }

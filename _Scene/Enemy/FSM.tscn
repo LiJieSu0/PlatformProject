@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg2drmaludqpp"]
+
+[ext_resource type="Script" path="res://_Script/Enemy/AI/StateMachine.cs" id="1_cw1hr"]
+
+[node name="FSM" type="Node"]
+script = ExtResource("1_cw1hr")

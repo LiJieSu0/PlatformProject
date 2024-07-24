@@ -8,5 +8,4 @@ public static class ScenePathDict{
         {"firstScene", "test"},
 
     };
-
 }

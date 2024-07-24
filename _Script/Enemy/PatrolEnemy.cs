@@ -12,6 +12,5 @@ public partial class PatrolEnemy : PathFollow2D
 	public override void _Process(double delta)
 	{
 		this.ProgressRatio+=(float)delta*0.01f;
-		
 	}
 }

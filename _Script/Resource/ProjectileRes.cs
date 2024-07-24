@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Reflection.Metadata.Ecma335;
 
 [GlobalClass]
 public partial class ProjectileRes : Resource

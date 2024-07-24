@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://x4d8vxtg0jrj"]
+
+[ext_resource type="Script" path="res://_Script/Enemy/AI/FSM_FollowModeMove.cs" id="1_j1pe4"]
+
+[node name="FSM_FollowModeMove" type="Node"]
+script = ExtResource("1_j1pe4")

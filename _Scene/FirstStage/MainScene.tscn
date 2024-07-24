@@ -27,22 +27,7 @@ position = Vector2(141, 608)
 [node name="MobManager" type="Node2D" parent="."]
 
 [node name="Mob" parent="MobManager" instance=ExtResource("6_ly72a")]
-position = Vector2(211, 609)
-
-[node name="Mob2" parent="MobManager" instance=ExtResource("6_ly72a")]
-position = Vector2(154, 609)
-
-[node name="Mob3" parent="MobManager" instance=ExtResource("6_ly72a")]
-position = Vector2(282, 609)
-
-[node name="Mob4" parent="MobManager" instance=ExtResource("6_ly72a")]
-position = Vector2(211, 609)
-
-[node name="Mob5" parent="MobManager" instance=ExtResource("6_ly72a")]
-position = Vector2(181, 608)
-
-[node name="Mob6" parent="MobManager" instance=ExtResource("6_ly72a")]
-position = Vector2(245, 609)
+position = Vector2(374, 610)
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2

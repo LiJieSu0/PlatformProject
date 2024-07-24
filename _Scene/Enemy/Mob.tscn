@@ -1,15 +1,19 @@
-[gd_scene load_steps=18 format=3 uid="uid://bl5gq6mbdgmlp"]
+[gd_scene load_steps=24 format=3 uid="uid://bl5gq6mbdgmlp"]
 
 [ext_resource type="Texture2D" uid="uid://bplpu8y8s32bu" path="res://_Asset/World/Legacy-Fantasy - High Forest 2.0/Legacy-Fantasy - High Forest 2.3/Mob/Snail/Hide-Sheet.png" id="1_4xvvi"]
 [ext_resource type="Script" path="res://_Script/Enemy/ItemDropManager.cs" id="1_lyp77"]
 [ext_resource type="Script" path="res://_Script/Enemy/Snail.cs" id="1_souph"]
 [ext_resource type="PackedScene" uid="uid://bhfu7d5soyfhm" path="res://_Scene/Item/BasicItem.tscn" id="2_21wkl"]
+[ext_resource type="Resource" uid="uid://iql35rult8as" path="res://_Script/Resource/Enemies/Snail.tres" id="2_k3obn"]
 [ext_resource type="Texture2D" uid="uid://d2yj64fvy0j1t" path="res://_Asset/World/Legacy-Fantasy - High Forest 2.0/Legacy-Fantasy - High Forest 2.3/Mob/Snail/walk-Sheet.png" id="2_q4xsc"]
 [ext_resource type="PackedScene" uid="uid://0uwqmoyxcw0u" path="res://_Scene/Enemy/MobHpBar.tscn" id="4_aomq1"]
 [ext_resource type="AudioStream" uid="uid://c5c1ek4t88kkp" path="res://_Asset/Audio/SoundEffect/Slash.mp3" id="7_p40ow"]
+[ext_resource type="PackedScene" uid="uid://bg2drmaludqpp" path="res://_Scene/Enemy/FSM.tscn" id="8_2hw3o"]
+[ext_resource type="PackedScene" uid="uid://c42tvt2prrd0y" path="res://_Scene/Enemy/FSM_Patrol.tscn" id="9_13nff"]
+[ext_resource type="PackedScene" uid="uid://x4d8vxtg0jrj" path="res://_Scene/Enemy/FSM_FollowModeMove.tscn" id="10_gsm40"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bsagg"]
-radius = 17.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4jvl7"]
+size = Vector2(18, 16)
 
 [sub_resource type="Animation" id="Animation_krpcp"]
 resource_name = "Idle"
@@ -159,16 +163,24 @@ states/Walk/node = SubResource("AnimationNodeAnimation_5jvo1")
 states/Walk/position = Vector2(343, 172)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_0noi4"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_lj52s")]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mrxwr"]
+radius = 19.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20g0c"]
+size = Vector2(218, 75)
+
 [node name="Mob" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Enemy"]]
 collision_layer = 8
 collision_mask = 21
 script = ExtResource("1_souph")
+enemyRes = ExtResource("2_k3obn")
 Speed = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("CircleShape2D_bsagg")
+position = Vector2(-1, 8)
+shape = SubResource("RectangleShape2D_4jvl7")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 texture = ExtResource("1_4xvvi")
@@ -206,4 +218,29 @@ ItemResArr = Array[PackedScene]([ExtResource("2_21wkl")])
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
 stream = ExtResource("7_p40ow")
 
+[node name="Hitbox" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Hitbox"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_mrxwr")
+
+[node name="DetectArea" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/DetectArea"]
+position = Vector2(0, -21.5)
+shape = SubResource("RectangleShape2D_20g0c")
+
+[node name="FSM" parent="CharacterBody2D" instance=ExtResource("8_2hw3o")]
+initialState = NodePath("FSM_Patrol")
+
+[node name="FSM_Patrol" parent="CharacterBody2D/FSM" instance=ExtResource("9_13nff")]
+
+[node name="FSM_FollowModeMove" parent="CharacterBody2D/FSM" instance=ExtResource("10_gsm40")]
+
 [connection signal="changed" from="CharacterBody2D/MobHpBar" to="CharacterBody2D" method="OnMobHpChange"]
+[connection signal="body_entered" from="CharacterBody2D/DetectArea" to="CharacterBody2D" method="OnPlayerDetect"]
+[connection signal="body_exited" from="CharacterBody2D/DetectArea" to="CharacterBody2D" method="OnPlayerExit"]

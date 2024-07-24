@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c42tvt2prrd0y"]
+
+[ext_resource type="Script" path="res://_Script/Enemy/AI/FSM_Patrol.cs" id="1_x0amv"]
+
+[node name="FSM_Patrol" type="Node"]
+script = ExtResource("1_x0amv")
