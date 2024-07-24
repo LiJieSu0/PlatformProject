@@ -187,6 +187,10 @@ texture = ExtResource("1_4xvvi")
 hframes = 8
 frame = 5
 
+[node name="LeftRayCast" type="RayCast2D" parent="CharacterBody2D/Sprite2D"]
+position = Vector2(-16, 0)
+target_position = Vector2(0, 28)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 root_node = NodePath("../AnimationTree")
 libraries = {
@@ -219,6 +223,7 @@ ItemResArr = Array[PackedScene]([ExtResource("2_21wkl")])
 stream = ExtResource("7_p40ow")
 
 [node name="Hitbox" type="Area2D" parent="CharacterBody2D"]
+visible = false
 collision_layer = 0
 collision_mask = 16
 
@@ -227,6 +232,7 @@ position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_mrxwr")
 
 [node name="DetectArea" type="Area2D" parent="CharacterBody2D"]
+visible = false
 collision_layer = 0
 collision_mask = 16
 

@@ -18,6 +18,13 @@ public partial class BasicEnemy :CharacterBody2D{
     public TextureProgressBar _hpBar;
 	public ItemDropManager _itemDropManager;
     public StateMachine _fsm;
+    public Sprite2D _sprite;
+    public RayCast2D _leftRayCast;
+    #endregion
+
+    #region Variables
+    public bool isFaceLeft=true;
+    public Vector2 _moveSpeed;
     #endregion
 
     public virtual void PatrolMove(float delta){}
@@ -29,6 +36,8 @@ public partial class BasicEnemy :CharacterBody2D{
         _hpBar=GetNode<TextureProgressBar>("MobHpBar");
 		_itemDropManager=GetNode<ItemDropManager>("ItemDropManager");
         _fsm=GetNode<StateMachine>("FSM");
+        _sprite=GetNode<Sprite2D>("Sprite2D");
+        _leftRayCast=GetNode<RayCast2D>("Sprite2D/LeftRayCast");
     }
 
     public void InitializeStatus(){
@@ -39,6 +48,7 @@ public partial class BasicEnemy :CharacterBody2D{
         _hpBar.MaxValue=MaxHp;
         _hpBar.Value=CurrHp;
         _hpBar.Hide();
+        _moveSpeed=new Vector2(-Speed,0);
     }
     public void ReceiveDamage(int damage){
 		_hpBar.Show();
@@ -49,4 +59,18 @@ public partial class BasicEnemy :CharacterBody2D{
 		}
     }
 
+    public void Move(){
+		if(isFaceLeft){
+            Velocity=_moveSpeed;
+        }else{
+            Velocity=new Vector2(-1*_moveSpeed.X,0);
+        }
+        if(!_leftRayCast.IsColliding()){
+            Flip();
+        }
+	}
+    public void Flip(){
+        this._sprite.Scale=new Vector2(_sprite.Scale.X*-1,_sprite.Scale.Y);
+        isFaceLeft=!isFaceLeft;
+    }
 }

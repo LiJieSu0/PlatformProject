@@ -27,7 +27,7 @@ position = Vector2(141, 608)
 [node name="MobManager" type="Node2D" parent="."]
 
 [node name="Mob" parent="MobManager" instance=ExtResource("6_ly72a")]
-position = Vector2(374, 610)
+position = Vector2(280, 557)
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2

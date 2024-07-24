@@ -20,15 +20,17 @@ public partial class Snail : BasicEnemy
 	private void FSM_Action(){
 		switch(_fsm._currState.Name){
 			case FSMStates.PATROL_MODE:
-				GD.Print("PatrolMoving");
+				base.Move();
 				break;
 			case FSMStates.FOLLOW_MODE:
-				GD.Print("FollowMoving");
+
 				break;
 			default:
 				break;
 		}
 	}
+
+
 
 	private void OnPlayerDetect(Node2D body){
 		_fsm.TransitionTo(FSMStates.FOLLOW_MODE);
@@ -36,4 +38,6 @@ public partial class Snail : BasicEnemy
 	private void OnPlayerExit(Node2D body){
 		_fsm.TransitionTo(FSMStates.PATROL_MODE);
 	}
+
+
 }
