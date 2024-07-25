@@ -22,6 +22,9 @@ public partial class BasicEnemy :CharacterBody2D{
     public Sprite2D _sprite;
     public RayCast2D _leftRayCast;
     public Node2D _target;
+
+    public Area2D _hitBox;
+    public Area2D _detectArea;
     #endregion
 
     #region Variables
@@ -36,11 +39,21 @@ public partial class BasicEnemy :CharacterBody2D{
     public virtual void CollisionDamage(){}
 
     public void InitializeNode(){
-        _hpBar=GetNode<TextureProgressBar>("MobHpBar");
 		_itemDropManager=GetNode<ItemDropManager>("ItemDropManager");
         _fsm=GetNode<StateMachine>("FSM");
         _sprite=GetNode<Sprite2D>("Sprite2D");
         _leftRayCast=GetNode<RayCast2D>("Sprite2D/LeftRayCast");
+        _hpBar=GetNode<TextureProgressBar>("MobHpBar");
+        _detectArea=GetNode<Area2D>("DetectArea");
+        _hitBox=GetNode<Area2D>("Hitbox");
+        _hpBar.MaxValue=MaxHp;
+        _hpBar.Value=CurrHp;
+    }
+
+    public void InitialSignal(){
+        _detectArea.BodyEntered+=OnPlayerDetect;
+        _detectArea.BodyExited+=OnPlayerExit;
+        _hitBox.BodyEntered+=OnPlayerCollide;
     }
 
     public void InitializeStatus(){
@@ -58,6 +71,7 @@ public partial class BasicEnemy :CharacterBody2D{
     public void ReceiveDamage(int damage){
 		_hpBar.Show();
 		this.CurrHp-=damage;
+        _hpBar.Value=CurrHp;
 		if(CurrHp<=0){
 			_itemDropManager.CallDeferred("ItemDropInstantiate");
 			QueueFree();
@@ -99,5 +113,18 @@ public partial class BasicEnemy :CharacterBody2D{
         Move();
     }
 
+	private void OnPlayerDetect(Node2D body){
+        _target=body;
+		_fsm.TransitionTo(FSMStates.FOLLOW_MODE);
+	}
 
+    private void OnPlayerExit(Node2D body){
+		_target=null;
+		_fsm.TransitionTo(FSMStates.PATROL_MODE);
+	}
+    private void OnPlayerCollide(Node2D body){
+		if(body is PlayerBody player){
+			player.ReceiveDamage(this.BasicDamage);
+		}
+	}
 }

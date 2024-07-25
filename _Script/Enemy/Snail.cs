@@ -9,6 +9,7 @@ public partial class Snail : BasicEnemy
     {
 		base.InitializeNode();
 		base.InitializeStatus();
+		base.InitialSignal();
 		base.RngMove();
     }
 
@@ -31,20 +32,4 @@ public partial class Snail : BasicEnemy
 		}
 	}
 
-
-
-	private void OnPlayerDetect(Node2D body){
-        _target=body;
-		_fsm.TransitionTo(FSMStates.FOLLOW_MODE);
-	}
-	private void OnPlayerExit(Node2D body){
-		_target=null;
-		_fsm.TransitionTo(FSMStates.PATROL_MODE);
-	}
-
-	private void OnPlayerCollide(Node2D body){
-		if(body is PlayerBody player){
-			player.ReceiveDamage(this.BasicDamage);
-		}
-	}
 }

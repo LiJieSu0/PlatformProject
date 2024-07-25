@@ -111,7 +111,6 @@ public partial class PlayerBody : CharacterBody2D{
 			skillNode.CastSkill();
 		}
 		if(Input.IsActionJustPressed("ui_attack")&&IsOnFloor()&&statusManager.CurrMp>=10&&!isAttack){
-			//TODO attack animation will cause isAttack cannot transback to true statement, bug need to be fixed
 			isAttack=true;
 			statusManager.CurrMp-=10;
 			stateMachine.Travel("Attack");
@@ -124,17 +123,15 @@ public partial class PlayerBody : CharacterBody2D{
 	private void RecoverMana(float time){
 		if(statusManager.CurrMp>statusManager.MaxMp)
 			return;
-		statusManager.CurrMp+=1*time; //TODO read recover mana per second from status
+		statusManager.CurrMp+=100*time; //TODO read recover mana per second from status
 	}
 
 	private void OnAttackBody(Node2D node){
-		if(node.IsInGroup("Enemy")){
-			GD.Print("Playerbody onattackbody Enemy group");
-		}
-		if(node is IEnemy e){
+		if(node is BasicEnemy e){
 			e.ReceiveDamage((int)statusManager.AttackPower);
-		}else{
-			GD.Print(node.Name+" is not an enemy");
+		}
+		else{
+			GD.Print("Attack function attack on not enemy");
 		}
 	}
 	public void TestFunction(){
