@@ -1,4 +1,5 @@
 
+using System.Runtime;
 using Godot;
 
 public partial class BasicEnemy :CharacterBody2D{
@@ -20,11 +21,13 @@ public partial class BasicEnemy :CharacterBody2D{
     public StateMachine _fsm;
     public Sprite2D _sprite;
     public RayCast2D _leftRayCast;
+    public Node2D _target;
     #endregion
 
     #region Variables
     public bool isFaceLeft=true;
     public Vector2 _moveSpeed;
+    RandomNumberGenerator rng;
     #endregion
 
     public virtual void PatrolMove(float delta){}
@@ -49,6 +52,8 @@ public partial class BasicEnemy :CharacterBody2D{
         _hpBar.Value=CurrHp;
         _hpBar.Hide();
         _moveSpeed=new Vector2(-Speed,0);
+        rng=new RandomNumberGenerator();
+        rng.Randomize();
     }
     public void ReceiveDamage(int damage){
 		_hpBar.Show();
@@ -57,6 +62,16 @@ public partial class BasicEnemy :CharacterBody2D{
 			_itemDropManager.CallDeferred("ItemDropInstantiate");
 			QueueFree();
 		}
+    }
+
+    public void RngMove(){
+        int rngValue=rng.RandiRange(1,100);
+        if(rngValue>51){
+            return;
+        }
+        else{
+            Flip();
+        }
     }
 
     public void Move(){
@@ -72,5 +87,15 @@ public partial class BasicEnemy :CharacterBody2D{
     public void Flip(){
         this._sprite.Scale=new Vector2(_sprite.Scale.X*-1,_sprite.Scale.Y);
         isFaceLeft=!isFaceLeft;
+    }
+
+    public void FollowMove(){
+        if(_target==null)
+            return;
+        float dir=(_target.GlobalPosition-this.GlobalPosition).Normalized().X;
+        if((dir<0 && !isFaceLeft)||(dir>0&&isFaceLeft)){ //player is on the left
+            Flip();
+        }
+        Move();
     }
 }
