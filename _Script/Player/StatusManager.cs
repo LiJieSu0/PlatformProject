@@ -38,8 +38,7 @@ public partial class StatusManager : Node2D
 	private void InitializeStatus(){
 		MaxHp=100;
 		MaxMp=100;
-		CurrHp=MaxHp;
-		CurrMp=MaxMp;
+
 		AttackPower=10;
 	}
 

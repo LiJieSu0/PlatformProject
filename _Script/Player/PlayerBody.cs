@@ -98,6 +98,9 @@ public partial class PlayerBody : CharacterBody2D{
 
 	public void ReceiveDamage(int damage){
 		statusManager.CurrHp-=damage;
+		if(statusManager.CurrHp<=0){
+			PlayerDead();
+		}
 	}
 	public void DecreaseMana(int mana){
 		statusManager.CurrMp-=mana;
@@ -165,6 +168,12 @@ public partial class PlayerBody : CharacterBody2D{
 			GlobalEventPublisher.IsPause=!GlobalEventPublisher.IsPause;
 		}
 		Engine.TimeScale=GlobalEventPublisher.IsPause?0:1;
+	}
+
+	private void PlayerDead(){
+		GD.Print("Play dead animation");
+		GlobalEventPublisher.IsPause=true;
+		GD.Print("Play dead UI and reload");
 	}
 
 }

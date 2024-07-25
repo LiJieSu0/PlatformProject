@@ -42,5 +42,9 @@ public partial class Snail : BasicEnemy
 		_fsm.TransitionTo(FSMStates.PATROL_MODE);
 	}
 
-
+	private void OnPlayerCollide(Node2D body){
+		if(body is PlayerBody player){
+			player.ReceiveDamage(this.BasicDamage);
+		}
+	}
 }

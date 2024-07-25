@@ -33,7 +33,7 @@ public partial class BasicEnemy :CharacterBody2D{
     public virtual void PatrolMove(float delta){}
     public virtual void FollowModeMove(float delta){}
     public virtual void Attack(){}
-    public virtual void DealDamage(){}
+    public virtual void CollisionDamage(){}
 
     public void InitializeNode(){
         _hpBar=GetNode<TextureProgressBar>("MobHpBar");
@@ -98,4 +98,6 @@ public partial class BasicEnemy :CharacterBody2D{
         }
         Move();
     }
+
+
 }

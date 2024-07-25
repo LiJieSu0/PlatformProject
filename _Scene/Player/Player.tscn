@@ -445,6 +445,7 @@ graph_offset = Vector2(38, 13)
 
 [node name="StatusManager" type="Node2D" parent="."]
 script = ExtResource("1_3b1ie")
+CurrHp = 10.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 16

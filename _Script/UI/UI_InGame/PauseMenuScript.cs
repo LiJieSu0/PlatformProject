@@ -14,7 +14,7 @@ public partial class PauseMenuScript : Control
 		if(GlobalEventPublisher.IsPause==false){
 			this.Hide();
 		}
-		else{
+		else{ //TODO change to ui_pause pressed
 			this.Show();
 			GlobalCursorManager.Instance.ChangeCursor();
 		}
