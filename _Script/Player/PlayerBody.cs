@@ -34,8 +34,7 @@ public partial class PlayerBody : CharacterBody2D{
 		skillNode=GetNode<SkillNode	>("SkillNode");
     }
 
-    public override void _PhysicsProcess(double delta)
-	{
+    public override void _PhysicsProcess(double delta){
 		PauseFunction();
 		if(Engine.TimeScale==0)
 			return;
@@ -44,9 +43,8 @@ public partial class PlayerBody : CharacterBody2D{
 		TestFunction();
 		InteractWithEnivronment();
 		ChangeCurrSkill();
-
 	}
-	private void PlayerMovement(float delta){ //TODO fix attack while running animation bug
+	private void PlayerMovement(float delta){ //TODO fix attack while running animation bug when running and press attack cannot attack anymore
 		AttackFunction();
 		Vector2 velocity = Velocity;
 		if (!IsOnFloor()){

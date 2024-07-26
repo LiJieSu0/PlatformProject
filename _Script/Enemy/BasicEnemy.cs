@@ -1,6 +1,6 @@
 
-using System.Runtime;
 using Godot;
+using System;
 
 public partial class BasicEnemy :CharacterBody2D{
     public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -25,6 +25,8 @@ public partial class BasicEnemy :CharacterBody2D{
 
     public Area2D _hitBox;
     public Area2D _detectArea;
+    private AnimationTree _animationTree;
+    private AnimationNodeStateMachinePlayback _animationState;
     #endregion
 
     #region Variables
@@ -39,6 +41,8 @@ public partial class BasicEnemy :CharacterBody2D{
     public virtual void CollisionDamage(){}
 
     public void InitializeNode(){
+        _animationTree = GetNode<AnimationTree>("AnimationTree");
+        _animationState = (AnimationNodeStateMachinePlayback)_animationTree.Get("parameters/playback");
 		_itemDropManager=GetNode<ItemDropManager>("ItemDropManager");
         _fsm=GetNode<StateMachine>("FSM");
         _sprite=GetNode<Sprite2D>("Sprite2D");
@@ -107,24 +111,27 @@ public partial class BasicEnemy :CharacterBody2D{
         if(_target==null)
             return;
         float dir=(_target.GlobalPosition-this.GlobalPosition).Normalized().X;
-        if((dir<0 && !isFaceLeft)||(dir>0&&isFaceLeft)){ //player is on the left
+        if((dir<0 && !isFaceLeft)||(dir>0&&isFaceLeft)&&_leftRayCast.IsColliding()){ 
             Flip();
         }
         Move();
+
     }
-
-	private void OnPlayerDetect(Node2D body){
-        _target=body;
-		_fsm.TransitionTo(FSMStates.FOLLOW_MODE);
-	}
-
-    private void OnPlayerExit(Node2D body){
-		_target=null;
-		_fsm.TransitionTo(FSMStates.PATROL_MODE);
-	}
     private void OnPlayerCollide(Node2D body){
 		if(body is PlayerBody player){
 			player.ReceiveDamage(this.BasicDamage);
 		}
 	}
+
+	private void OnPlayerDetect(Node2D body){
+            _target = body;
+            _fsm.TransitionTo(FSMStates.FOLLOW_MODE);
+	}
+
+    private void OnPlayerExit(Node2D body){
+            _target = null;
+            _fsm.TransitionTo(FSMStates.PATROL_MODE);
+	}
+
+
 }

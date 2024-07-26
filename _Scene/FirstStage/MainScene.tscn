@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjk6uebqcutu4"]
+[gd_scene load_steps=10 format=3 uid="uid://bjk6uebqcutu4"]
 
 [ext_resource type="Texture2D" uid="uid://cldug1m4qttkr" path="res://_Asset/World/Background.png" id="1_af7ea"]
 [ext_resource type="PackedScene" uid="uid://bpy55e56klam" path="res://_Scene/FirstStage/World/BasicPlatform.tscn" id="2_oy3k3"]
 [ext_resource type="AudioStream" uid="uid://dykxtn38sbgcb" path="res://_Asset/Audio/SceneBgm/battleBGM.mp3" id="2_v53qj"]
 [ext_resource type="TileSet" uid="uid://ctchfh820hjut" path="res://_Asset/World/PremadeTileset/BasicTileset.tres" id="3_6lo2c"]
 [ext_resource type="PackedScene" uid="uid://djhutcvenskq" path="res://_Scene/Player/Player.tscn" id="4_4lnse"]
+[ext_resource type="PackedScene" uid="uid://ds567o72hasq4" path="res://_Scene/Enemy/Knight.tscn" id="4_o3a25"]
 [ext_resource type="PackedScene" uid="uid://2ysqcaigx6d0" path="res://_Scene/NPC/monkNPC.tscn" id="5_eje8b"]
-[ext_resource type="PackedScene" uid="uid://bl5gq6mbdgmlp" path="res://_Scene/Enemy/Mob.tscn" id="6_ly72a"]
+[ext_resource type="PackedScene" uid="uid://bl5gq6mbdgmlp" path="res://_Scene/Enemy/Snail.tscn" id="6_ly72a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2g30m"]
 size = Vector2(40.5, 61.5)
@@ -29,9 +30,12 @@ position = Vector2(141, 608)
 [node name="Mob" parent="MobManager" instance=ExtResource("6_ly72a")]
 position = Vector2(280, 557)
 
+[node name="Knight" parent="MobManager" instance=ExtResource("4_o3a25")]
+position = Vector2(513, 606)
+
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2
-position = Vector2(575, 328)
+position = Vector2(593, 328)
 scale = Vector2(2.39792, 2.36765)
 texture = ExtResource("1_af7ea")
 

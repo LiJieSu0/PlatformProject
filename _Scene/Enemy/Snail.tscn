@@ -169,7 +169,7 @@ radius = 19.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20g0c"]
 size = Vector2(218, 75)
 
-[node name="Mob" type="Node2D"]
+[node name="Snail" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 8
