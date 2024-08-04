@@ -25,8 +25,8 @@ public partial class BasicEnemy :CharacterBody2D{
 
     public Area2D _hitBox;
     public Area2D _detectArea;
-    private AnimationTree _animationTree;
-    private AnimationNodeStateMachinePlayback _animationState;
+    public AnimationTree _animationTree;
+    public AnimationNodeStateMachinePlayback _animationState;
     #endregion
 
     #region Variables
@@ -36,7 +36,6 @@ public partial class BasicEnemy :CharacterBody2D{
     #endregion
 
     public virtual void PatrolMove(float delta){}
-    public virtual void FollowModeMove(float delta){}
     public virtual void Attack(){}
     public virtual void CollisionDamage(){}
 

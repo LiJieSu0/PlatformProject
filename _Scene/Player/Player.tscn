@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://djhutcvenskq"]
+[gd_scene load_steps=41 format=3 uid="uid://djhutcvenskq"]
 
 [ext_resource type="Script" path="res://_Script/Player/StatusManager.cs" id="1_3b1ie"]
 [ext_resource type="Texture2D" uid="uid://bxpj0osjj0peu" path="res://_Asset/Player/Idle-Sheet.png" id="1_hjll8"]
@@ -422,6 +422,9 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v1qpa"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xfl61"]
 states/Attack/node = SubResource("AnimationNodeAnimation_06mph")
 states/Attack/position = Vector2(755, 151)
@@ -438,7 +441,7 @@ states/JumpStart/position = Vector2(686, 52)
 states/Run/node = SubResource("AnimationNodeAnimation_p56eg")
 states/Run/position = Vector2(353, 235)
 states/Start/position = Vector2(191, 117)
-transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_t8ffm"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_08uuw"), "JumpStart", "JumpFall", SubResource("AnimationNodeStateMachineTransition_0tsqc"), "JumpFall", "JumpEnd", SubResource("AnimationNodeStateMachineTransition_85834"), "JumpEnd", "Idle", SubResource("AnimationNodeStateMachineTransition_luwi8")]
+transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_t8ffm"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_08uuw"), "JumpStart", "JumpFall", SubResource("AnimationNodeStateMachineTransition_0tsqc"), "JumpFall", "JumpEnd", SubResource("AnimationNodeStateMachineTransition_85834"), "JumpEnd", "Idle", SubResource("AnimationNodeStateMachineTransition_luwi8"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_v1qpa")]
 graph_offset = Vector2(38, 13)
 
 [node name="Player" type="Node2D"]

@@ -9,8 +9,8 @@ public partial class PlayerBody : CharacterBody2D{
 
 	#region Nodes
 	private StatusManager statusManager;
-	private AnimationTree animationTree;
-	private AnimationNodeStateMachinePlayback stateMachine;
+	private AnimationTree _animationTree;
+	private AnimationNodeStateMachinePlayback _animationState;
 	private Sprite2D sprite2D;
 	private SkillNode skillNode;
 	#endregion
@@ -29,8 +29,8 @@ public partial class PlayerBody : CharacterBody2D{
     {
 		sprite2D=GetNode<Sprite2D>("Sprite2D");
 		statusManager=GetParent().GetNode<StatusManager>("StatusManager");
-		animationTree=GetNode<AnimationTree>("AnimationTree");
-		stateMachine = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
+		_animationTree=GetNode<AnimationTree>("AnimationTree");
+		_animationState = (AnimationNodeStateMachinePlayback)_animationTree.Get("parameters/playback");
 		skillNode=GetNode<SkillNode	>("SkillNode");
     }
 
@@ -49,18 +49,18 @@ public partial class PlayerBody : CharacterBody2D{
 		Vector2 velocity = Velocity;
 		if (!IsOnFloor()){
 			velocity.Y += gravity * delta;
-			stateMachine.Travel("JumpFall");
+			_animationState.Travel("JumpFall");
 		}
 
 		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor()){
 			velocity.Y = JumpVelocity;
-			stateMachine.Travel("JumpStart");
+			_animationState.Travel("JumpStart");
 		}
 		if(Input.IsActionPressed("move_left")||Input.IsActionPressed("move_right")){
-			stateMachine.Travel("Run");
+			_animationState.Travel("Run");
 		}
 		if(Input.IsActionJustReleased("move_left")||Input.IsActionJustReleased("move_right")&&IsOnFloor()){
-			stateMachine.Travel("Idle");
+			_animationState.Travel("Idle");
 		}
 
 		Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
@@ -82,7 +82,7 @@ public partial class PlayerBody : CharacterBody2D{
 	private void OnAnimationFinsihed(string animName){
 		if(animName=="Attack"){
 			isAttack=false;
-			stateMachine.Travel("Idle");
+			_animationState.Travel("Idle");
 		}
 	}
 
@@ -111,7 +111,7 @@ public partial class PlayerBody : CharacterBody2D{
 		if(Input.IsActionJustPressed("ui_attack")&&IsOnFloor()&&statusManager.CurrMp>=10&&!isAttack){
 			isAttack=true;
 			statusManager.CurrMp-=10;
-			stateMachine.Travel("Attack");
+			_animationState.Travel("Attack");
 		}
 		if(isAttack){
 			return;
