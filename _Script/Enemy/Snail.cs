@@ -32,4 +32,6 @@ public partial class Snail : BasicEnemy
 		}
 	}
 
+	
+
 }

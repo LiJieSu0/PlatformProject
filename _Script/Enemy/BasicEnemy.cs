@@ -23,15 +23,21 @@ public partial class BasicEnemy :CharacterBody2D{
     public RayCast2D _leftRayCast;
     public Node2D _target;
 
-    public Area2D _hitBox;
+    public Area2D _damageArea;
     public Area2D _detectArea;
+    public Area2D _attackRangeArea;
     public AnimationTree _animationTree;
     public AnimationNodeStateMachinePlayback _animationState;
+    public Timer _attackTimer;
+
     #endregion
 
     #region Variables
     public bool isFaceLeft=true;
+    public bool isAttackCD=false;
     public Vector2 _moveSpeed;
+
+    public float _attackCDTime=2.0f;
     RandomNumberGenerator rng;
     #endregion
 
@@ -48,16 +54,35 @@ public partial class BasicEnemy :CharacterBody2D{
         _leftRayCast=GetNode<RayCast2D>("Sprite2D/LeftRayCast");
         _hpBar=GetNode<TextureProgressBar>("MobHpBar");
         _detectArea=GetNode<Area2D>("DetectArea");
-        _hitBox=GetNode<Area2D>("Hitbox");
+        _damageArea=GetNode<Area2D>("DamageArea");
         _hpBar.MaxValue=MaxHp;
         _hpBar.Value=CurrHp;
+        try{
+            _attackRangeArea=GetNode<Area2D>("Sprite2D/AttackRange");
+            _attackTimer=GetNode<Timer>("AttackTimer");
+        }catch(Exception){
+            _attackRangeArea=null;
+            _attackTimer=null;
+        }   
     }
 
     public void InitialSignal(){
         _detectArea.BodyEntered+=OnPlayerDetect;
         _detectArea.BodyExited+=OnPlayerExit;
-        _hitBox.BodyEntered+=OnPlayerCollide;
+        _damageArea.BodyEntered+=OnPlayerDamaged;
+        _animationTree.AnimationFinished+=OnAnimationFinished;
+        if(_attackRangeArea!=null){
+            _attackRangeArea.BodyEntered+=OnPlayerInAttackRange;
+            _attackRangeArea.BodyExited+=OnPlayerLeaveAttackRange;
+        }
+        if(_attackTimer!=null){
+            _attackTimer.WaitTime=_attackCDTime;
+            _attackTimer.Timeout+=OnAttackCDTimeout;
+        }
+
     }
+
+
 
     public void InitializeStatus(){
         this.EnemyName=enemyRes.EnemyName;
@@ -116,21 +141,36 @@ public partial class BasicEnemy :CharacterBody2D{
         Move();
 
     }
-    private void OnPlayerCollide(Node2D body){
+    public virtual void OnPlayerDamaged(Node2D body){
 		if(body is PlayerBody player){
 			player.ReceiveDamage(this.BasicDamage);
 		}
 	}
 
-	private void OnPlayerDetect(Node2D body){
+	public void OnPlayerDetect(Node2D body){
             _target = body;
             _fsm.TransitionTo(FSMStates.FOLLOW_MODE);
 	}
 
-    private void OnPlayerExit(Node2D body){
+    public void OnPlayerExit(Node2D body){
             _target = null;
             _fsm.TransitionTo(FSMStates.PATROL_MODE);
 	}
 
+    public virtual void OnPlayerInAttackRange(Node2D body){
+        GD.Print("in attack range Attack mode");
+        _fsm.TransitionTo(FSMStates.ATTACK_MODE);
+    }
 
+    public virtual void OnPlayerLeaveAttackRange(Node2D body)
+    {
+        _fsm.TransitionTo(FSMStates.PATROL_MODE);
+    }
+
+    public virtual void OnAttackCDTimeout(){
+        isAttackCD=false;
+    }
+    public virtual void OnAnimationFinished(StringName animName){
+        return;
+    }
 }
