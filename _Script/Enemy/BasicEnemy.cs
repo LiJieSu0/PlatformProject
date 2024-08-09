@@ -18,7 +18,6 @@ public partial class BasicEnemy :CharacterBody2D{
     #region Node
     public TextureProgressBar _hpBar;
 	public ItemDropManager _itemDropManager;
-    public StateMachine _fsm;
     public Sprite2D _sprite;
     public RayCast2D _leftRayCast;
     public Node2D _target;
@@ -33,6 +32,7 @@ public partial class BasicEnemy :CharacterBody2D{
     #endregion
 
     #region Variables
+    public FSMStates _currFSMState;
     public bool isFaceLeft=true;
     public bool isAttackCD=false;
     public Vector2 _moveSpeed;
@@ -49,14 +49,11 @@ public partial class BasicEnemy :CharacterBody2D{
         _animationTree = GetNode<AnimationTree>("AnimationTree");
         _animationState = (AnimationNodeStateMachinePlayback)_animationTree.Get("parameters/playback");
 		_itemDropManager=GetNode<ItemDropManager>("ItemDropManager");
-        _fsm=GetNode<StateMachine>("FSM");
         _sprite=GetNode<Sprite2D>("Sprite2D");
         _leftRayCast=GetNode<RayCast2D>("Sprite2D/LeftRayCast");
         _hpBar=GetNode<TextureProgressBar>("MobHpBar");
         _detectArea=GetNode<Area2D>("DetectArea");
-        _damageArea=GetNode<Area2D>("DamageArea");
-        _hpBar.MaxValue=MaxHp;
-        _hpBar.Value=CurrHp;
+        _damageArea=GetNode<Area2D>("Sprite2D/DamageArea");
         try{
             _attackRangeArea=GetNode<Area2D>("Sprite2D/AttackRange");
             _attackTimer=GetNode<Timer>("AttackTimer");
@@ -81,9 +78,6 @@ public partial class BasicEnemy :CharacterBody2D{
         }
 
     }
-
-
-
     public void InitializeStatus(){
         this.EnemyName=enemyRes.EnemyName;
         this.BasicDamage=enemyRes.BasicDamage;
@@ -95,6 +89,7 @@ public partial class BasicEnemy :CharacterBody2D{
         _moveSpeed=new Vector2(-Speed,0);
         rng=new RandomNumberGenerator();
         rng.Randomize();
+        _currFSMState=FSMStates.Idle;
     }
     public void ReceiveDamage(int damage){
 		_hpBar.Show();
@@ -106,6 +101,9 @@ public partial class BasicEnemy :CharacterBody2D{
 		}
     }
 
+
+
+    #region MovingMethods
     public void RngMove(){
         int rngValue=rng.RandiRange(1,100);
         if(rngValue>51){
@@ -126,12 +124,15 @@ public partial class BasicEnemy :CharacterBody2D{
             Flip();
         }
 	}
+
+    public void StopMoving(){
+        Velocity=new Vector2(0,0);
+    }
     public void Flip(){
         this._sprite.Scale=new Vector2(_sprite.Scale.X*-1,_sprite.Scale.Y);
         isFaceLeft=!isFaceLeft;
     }
-
-    public void FollowMove(){
+    public void ChaseMove(){
         if(_target==null)
             return;
         float dir=(_target.GlobalPosition-this.GlobalPosition).Normalized().X;
@@ -141,6 +142,9 @@ public partial class BasicEnemy :CharacterBody2D{
         Move();
 
     }
+    #endregion
+
+    #region SignalMethods
     public virtual void OnPlayerDamaged(Node2D body){
 		if(body is PlayerBody player){
 			player.ReceiveDamage(this.BasicDamage);
@@ -149,22 +153,21 @@ public partial class BasicEnemy :CharacterBody2D{
 
 	public void OnPlayerDetect(Node2D body){
             _target = body;
-            _fsm.TransitionTo(FSMStates.FOLLOW_MODE);
+            _currFSMState=FSMStates.Chase;
 	}
 
     public void OnPlayerExit(Node2D body){
             _target = null;
-            _fsm.TransitionTo(FSMStates.PATROL_MODE);
+            _currFSMState=FSMStates.Patrol;
 	}
 
     public virtual void OnPlayerInAttackRange(Node2D body){
         GD.Print("in attack range Attack mode");
-        _fsm.TransitionTo(FSMStates.ATTACK_MODE);
+        _currFSMState=FSMStates.Attack;
     }
 
-    public virtual void OnPlayerLeaveAttackRange(Node2D body)
-    {
-        _fsm.TransitionTo(FSMStates.PATROL_MODE);
+    public virtual void OnPlayerLeaveAttackRange(Node2D body){
+        _currFSMState=FSMStates.Patrol;
     }
 
     public virtual void OnAttackCDTimeout(){
@@ -173,4 +176,8 @@ public partial class BasicEnemy :CharacterBody2D{
     public virtual void OnAnimationFinished(StringName animName){
         return;
     }
+    #endregion
+
+
+
 }

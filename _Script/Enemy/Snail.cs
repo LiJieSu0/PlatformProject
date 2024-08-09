@@ -20,12 +20,12 @@ public partial class Snail : BasicEnemy
 	}
 
 	private void FSM_Action(){
-		switch(_fsm._currState.Name){
-			case FSMStates.PATROL_MODE:
+		switch(_currFSMState){
+			case FSMStates.Patrol:
 				base.Move();
 				break;
-			case FSMStates.FOLLOW_MODE:
-				base.FollowMove();
+			case FSMStates.Chase:
+				base.ChaseMove();
 				break;
 			default:
 				break;

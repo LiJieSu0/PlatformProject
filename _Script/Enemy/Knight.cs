@@ -17,48 +17,37 @@ public partial class Knight : BasicEnemy
 	{
 		FSM_Action();
 		MoveAndSlide();
-		AnimationState();
+		GD.Print(CurrHp);
 	}
 
 
     private void FSM_Action(){
-		switch(_fsm._currState.Name){
+		switch(_currFSMState){
 			//TODO refactor FSM state
-			case FSMStates.PATROL_MODE:
+			case FSMStates.Idle:
+				_animationState.Travel("Idle");
+				break;
+			case FSMStates.Patrol:
 				base.Move();
-
-				break;
-			case FSMStates.FOLLOW_MODE:
-				base.FollowMove();
-				break;
-			case FSMStates.ATTACK_MODE:
-				//TODO add stop velocity
-				break;
-			default:
-				break;
-		}
-	}
-    public void AnimationState(){
-        switch(_fsm._currState.Name){
-			case FSMStates.FOLLOW_MODE:
 		        _animationState.Travel("Run");
 				break;
-            case FSMStates.PATROL_MODE:
+			case FSMStates.Chase:
+				base.ChaseMove();
                 _animationState.Travel("Run");
-                break;
-			case FSMStates.ATTACK_MODE:
+				break;
+			case FSMStates.Attack:
+				base.StopMoving();
 				if(!isAttackCD){
 					_animationState.Travel("Attack");
 				}
 				else{
 					_animationState.Travel("Idle");
 				}
-
 				break;
-            default:
-                break;
-        }
-    }
+			default:
+				break;
+		}
+	}
 
 	public override void OnAnimationFinished(StringName aniName){
 		if(aniName=="Attack"){

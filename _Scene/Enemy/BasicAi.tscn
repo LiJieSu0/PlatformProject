@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnsgt20n0fube"]
 
-[ext_resource type="Script" path="res://_Script/Enemy/AI/StateMachine.cs" id="1_3pcs5"]
+[ext_resource type="Script" path="res://_Script/Enemy/StateMachineNode(dep)/StateMachine.cs" id="1_3pcs5"]
 [ext_resource type="Script" path="res://_Script/Enemy/AI/Red.cs" id="2_lu6rq"]
 [ext_resource type="Script" path="res://_Script/Enemy/AI/Green.cs" id="3_7ann7"]
 
