@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemRes" load_steps=2 format=3 uid="uid://im04rceyxnt"]
+
+[ext_resource type="Script" path="res://_Script/Resource/ItemRes.cs" id="1_sdlpn"]
+
+[resource]
+script = ExtResource("1_sdlpn")
+ItemName = "RedPotion"
+ItemSpritePath = "res://_Asset/Item/potions/pt1.png"
+ItemNo = 1

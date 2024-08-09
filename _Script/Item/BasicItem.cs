@@ -7,6 +7,10 @@ public partial class BasicItem : RigidBody2D
 
 	#region Variables
 	public const float disappearTime=10f;
+	public int _itemNo;
+	public string _itemName;
+	public bool isPlayerInPickUpArea=false;
+	private Vector2 _itemSpriteSize=new Vector2(10,10); //Fixed Item size 
 	#endregion
 
 
@@ -17,11 +21,15 @@ public partial class BasicItem : RigidBody2D
 	#endregion
 
 	public override void _Ready(){
+		InitializeNode();
+		InitializeVariables();
+		InitialSignal();
 	}
 
-	public override void _Process(double delta)
-	{
+	public override void _Process(double delta){
+		GD.Print("is Player in pick up area"+isPlayerInPickUpArea);
 	}
+	
 
 	public void InitializeNode(){
 		sprite2D=GetNode<Sprite2D>("Sprite2D");
@@ -30,11 +38,24 @@ public partial class BasicItem : RigidBody2D
 	}
 
 	public void InitializeVariables(){
+		_itemNo=itemRes.ItemNo;
+		_itemName=itemRes.ItemName;
 		disappearTimer.WaitTime=disappearTime;
+		sprite2D.Texture=(Texture2D)ResourceLoader.Load<Texture2D>(itemRes.ItemSpritePath);
+		sprite2D.Scale=UtilsFunc.DesiredSpriteScale(sprite2D.Texture.GetSize(),_itemSpriteSize);
 	}
 
 	public void InitialSignal(){
-		
+		pickUpArea.BodyEntered+=OnPlayerInPickUpArea;
+		pickUpArea.BodyExited+=OnPlayerExitPickUpArea;
 	}
+
+    private void OnPlayerInPickUpArea(Node2D body){
+		isPlayerInPickUpArea=true;
+    }
+	private void OnPlayerExitPickUpArea(Node2D body){
+		isPlayerInPickUpArea=false;
+	}
+
 
 }
