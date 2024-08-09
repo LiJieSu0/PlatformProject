@@ -94,7 +94,7 @@ public partial class PlayerBody : CharacterBody2D{
 		areaInteractableRange=null;
 	}
 
-	public void ReceiveDamage(int damage){
+	public void ReceiveDamage(float damage){
 		statusManager.CurrHp-=damage;
 		if(statusManager.CurrHp<=0){
 			PlayerDead();

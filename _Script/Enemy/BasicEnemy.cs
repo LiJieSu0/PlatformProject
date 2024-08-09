@@ -1,18 +1,30 @@
 
 using Godot;
 using System;
+using System.Reflection.Metadata.Ecma335;
 
-public partial class BasicEnemy :CharacterBody2D{
+public partial class BasicEnemy :CharacterBody2D,IEnemy{
     public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
     [Export] EnemyRes enemyRes;
 	[Export]public float Speed = 100.0f;
 
-
+    
     #region Status
     public string EnemyName;
-    public int MaxHp;
-    public int CurrHp;
-    public int BasicDamage;
+    private float _maxHp;
+
+    private float _maxMp;
+    private float _currHp;
+    private float _currMp;
+    private string _mobName;
+    private float _basicDamage;
+    public float MaxHp { get =>_maxHp; set => _maxHp=value;  }
+    public float MaxMp { get =>_maxMp; set => _maxHp=value;  }
+    
+    public float CurrHp { get => _currHp; set => _currHp = value; }
+    public float CurrMp { get => _currMp; set =>_currMp = value; }
+    public string MobName { get =>_mobName; set =>_mobName=value;  }
+    public float BasicDamage { get =>_basicDamage;  set =>_basicDamage = value; }
     #endregion
 	
     #region Node
@@ -39,7 +51,11 @@ public partial class BasicEnemy :CharacterBody2D{
 
     public float _attackCDTime=2.0f;
     RandomNumberGenerator rng;
+
     #endregion
+
+
+
 
     public virtual void PatrolMove(float delta){}
     public virtual void Attack(){}
@@ -175,6 +191,16 @@ public partial class BasicEnemy :CharacterBody2D{
     }
     public virtual void OnAnimationFinished(StringName animName){
         return;
+    }
+
+    public void ReceiveDamage(float damage)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DealDamage(float damage)
+    {
+        throw new NotImplementedException();
     }
     #endregion
 
