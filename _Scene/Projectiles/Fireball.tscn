@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://tbdkcrm1rh38"]
 
 [ext_resource type="PackedScene" uid="uid://b4dvu5wcem4u6" path="res://_Scene/Projectiles/BasicProjectile.tscn" id="1_vfxng"]
-[ext_resource type="Resource" uid="uid://bodt65fblcwdy" path="res://_Script/Resource/Projectiles/Fireball.tres" id="2_s38wx"]
+[ext_resource type="Resource" uid="uid://bodt65fblcwdy" path="res://_Resource/Projectiles/Fireball.tres" id="2_s38wx"]
 
 [node name="BasicProjectile" instance=ExtResource("1_vfxng")]
 projectileRes = ExtResource("2_s38wx")

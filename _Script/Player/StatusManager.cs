@@ -24,9 +24,10 @@ public partial class StatusManager : Node2D
 	{
 		InitializeStatus();
 		//TODO Load skill from list 
-		SkillList.Add((SkillResource)ResourceLoader.Load("res://_Script/Resource/Skills/Single.tres"));
-		SkillList.Add((SkillResource)ResourceLoader.Load("res://_Script/Resource/Skills/Burst.tres"));
-		SkillList.Add((SkillResource)ResourceLoader.Load("res://_Script/Resource/Skills/Shot.tres"));
+		//TODO Load skill dynamically
+		SkillList.Add((SkillResource)ResourceLoader.Load("res://_Resource/Skills/Single.tres"));
+		SkillList.Add((SkillResource)ResourceLoader.Load("res://_Resource/Skills/Burst.tres"));
+		SkillList.Add((SkillResource)ResourceLoader.Load("res://_Resource/Skills/Shot.tres"));
 		ProjectileList.Add((PackedScene)ResourceLoader.Load("res://_Scene/Projectiles/BasicProjectile.tscn"));
 		CurrSkillIdx=0;
 		CurrProjectileIdx=0;

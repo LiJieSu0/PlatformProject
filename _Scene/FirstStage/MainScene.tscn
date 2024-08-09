@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjk6uebqcutu4"]
+[gd_scene load_steps=10 format=3 uid="uid://bjk6uebqcutu4"]
 
 [ext_resource type="Texture2D" uid="uid://cldug1m4qttkr" path="res://_Asset/World/Background.png" id="1_af7ea"]
 [ext_resource type="PackedScene" uid="uid://bpy55e56klam" path="res://_Scene/FirstStage/World/BasicPlatform.tscn" id="2_oy3k3"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://djhutcvenskq" path="res://_Scene/Player/Player.tscn" id="4_4lnse"]
 [ext_resource type="PackedScene" uid="uid://ds567o72hasq4" path="res://_Scene/Enemy/Knight.tscn" id="4_o3a25"]
 [ext_resource type="PackedScene" uid="uid://2ysqcaigx6d0" path="res://_Scene/NPC/monkNPC.tscn" id="5_eje8b"]
+[ext_resource type="PackedScene" uid="uid://gg4j0c4tev4g" path="res://_Scene/Item/RedPostion.tscn" id="8_cc2j6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2g30m"]
 size = Vector2(40.5, 61.5)
@@ -53,3 +54,6 @@ shape = SubResource("RectangleShape2D_2g30m")
 [node name="Player" parent="." instance=ExtResource("4_4lnse")]
 z_index = 10
 position = Vector2(39, 596)
+
+[node name="BasicItem" parent="." instance=ExtResource("8_cc2j6")]
+position = Vector2(114, 548)
