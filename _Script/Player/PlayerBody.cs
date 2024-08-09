@@ -1,6 +1,7 @@
 using Godot;
 using DialogueManagerRuntime;
 public partial class PlayerBody : CharacterBody2D{
+
 	#region Movement
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
@@ -167,8 +168,12 @@ public partial class PlayerBody : CharacterBody2D{
 
 	private void PlayerDead(){
 		GD.Print("Play dead animation");
-		GlobalEventPublisher.IsPause=true;
+		GlobalEventPublisher.IsPause=true;// TODO change to disable all player controller
 		GD.Print("Play dead UI and reload");
+	}
+
+	public void GetExpAndMoney(int exp,int money){
+
 	}
 
 }

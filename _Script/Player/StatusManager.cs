@@ -12,6 +12,8 @@ public partial class StatusManager : Node2D
 	[Export]public float AttackPower;
 	public int CurrSkillIdx;
 	public int CurrProjectileIdx;
+	public int CurrExp;
+	public int CurrMoney;
 
 	#endregion
 
@@ -31,6 +33,9 @@ public partial class StatusManager : Node2D
 		ProjectileList.Add((PackedScene)ResourceLoader.Load("res://_Scene/Projectiles/BasicProjectile.tscn"));
 		CurrSkillIdx=0;
 		CurrProjectileIdx=0;
+		CurrExp=0;//TODO Load exp and moeny from save
+		CurrMoney=0;
+		GlobalEventPublisher.Instance.EnemyDeadEvent+=UpdateExpAndMoney;
 	}
 
 	public override void _Process(double delta)
@@ -41,6 +46,10 @@ public partial class StatusManager : Node2D
 		MaxMp=100;
 
 		AttackPower=10;
+	}
+	private void UpdateExpAndMoney(string enemyName){
+		//TODO load enemy exp sheet through enemy name
+
 	}
 
 }

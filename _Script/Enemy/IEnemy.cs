@@ -4,8 +4,9 @@ public interface IEnemy{
     float MaxMp{ get; set; }
     float CurrHp{ get; set; }
     float CurrMp{ get; set; }
-    string MobName{get; set;}
+    string EnemyName{get; set;}
     float BasicDamage{ get; set; }
 
     void ReceiveDamage(float damage);
+    
 }

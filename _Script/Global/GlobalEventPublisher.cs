@@ -7,6 +7,9 @@ public partial class GlobalEventPublisher:Node{
     public static bool IsPause=false;
     public delegate void SkillChange(int idx);
     public event SkillChange SkillChangeEvent;
+
+    public delegate void EnemyDead(string enemyName);
+    public event EnemyDead EnemyDeadEvent;
     public override void _Ready(){
 		Instance=this;
     }
@@ -14,4 +17,9 @@ public partial class GlobalEventPublisher:Node{
     public void SkillChangeTrigger(int idx){
         SkillChangeEvent?.Invoke(idx);
     }
+
+    public void EnemyDeadTrigger(string enemyName){
+        EnemyDeadEvent?.Invoke(enemyName);
+    }
+
 }

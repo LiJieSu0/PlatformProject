@@ -10,20 +10,19 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
 
     
     #region Status
-    public string EnemyName;
     private float _maxHp;
 
     private float _maxMp;
     private float _currHp;
     private float _currMp;
-    private string _mobName;
+    private string _enemyName;
     private float _basicDamage;
     public float MaxHp { get =>_maxHp; set => _maxHp=value;  }
     public float MaxMp { get =>_maxMp; set => _maxHp=value;  }
     
     public float CurrHp { get => _currHp; set => _currHp = value; }
     public float CurrMp { get => _currMp; set =>_currMp = value; }
-    public string MobName { get =>_mobName; set =>_mobName=value;  }
+    public string EnemyName { get =>_enemyName; set =>_enemyName=value;  }
     public float BasicDamage { get =>_basicDamage;  set =>_basicDamage = value; }
     #endregion
 	
@@ -48,7 +47,6 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
     public bool isFaceLeft=true;
     public bool isAttackCD=false;
     public Vector2 _moveSpeed;
-
     public float _attackCDTime=2.0f;
     RandomNumberGenerator rng;
 
@@ -186,15 +184,12 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
 		_hpBar.Show();
 		this.CurrHp-=damage;
         _hpBar.Value=CurrHp;
-		if(CurrHp<=0){
-			_itemDropManager.CallDeferred("ItemDropInstantiate");
+		if(CurrHp<=0){ //Eenemy dead
+            GlobalEventPublisher.Instance.EnemyDeadTrigger(this.EnemyName); //Through this event Player should gain exp and moeny, ItemDropManager should drop items
 			QueueFree();
 		}
     }
-
-
     #endregion
-
 
 
 }
