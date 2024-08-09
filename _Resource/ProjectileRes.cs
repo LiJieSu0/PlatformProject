@@ -13,6 +13,7 @@ public partial class ProjectileRes : Resource
     }
 
     public void HitEffect(){
+        //TODO play hiteffect and sound
     }
 
     public Vector2 DegreesToVector(float degrees){

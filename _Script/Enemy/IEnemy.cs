@@ -8,5 +8,4 @@ public interface IEnemy{
     float BasicDamage{ get; set; }
 
     void ReceiveDamage(float damage);
-    void DealDamage(float damage);
 }

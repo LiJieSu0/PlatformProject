@@ -107,17 +107,6 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
         rng.Randomize();
         _currFSMState=FSMStates.Idle;
     }
-    public void ReceiveDamage(int damage){
-		_hpBar.Show();
-		this.CurrHp-=damage;
-        _hpBar.Value=CurrHp;
-		if(CurrHp<=0){
-			_itemDropManager.CallDeferred("ItemDropInstantiate");
-			QueueFree();
-		}
-    }
-
-
 
     #region MovingMethods
     public void RngMove(){
@@ -193,15 +182,17 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
         return;
     }
 
-    public void ReceiveDamage(float damage)
-    {
-        throw new NotImplementedException();
+    public void ReceiveDamage(float damage){
+		_hpBar.Show();
+		this.CurrHp-=damage;
+        _hpBar.Value=CurrHp;
+		if(CurrHp<=0){
+			_itemDropManager.CallDeferred("ItemDropInstantiate");
+			QueueFree();
+		}
     }
 
-    public void DealDamage(float damage)
-    {
-        throw new NotImplementedException();
-    }
+
     #endregion
 
 
