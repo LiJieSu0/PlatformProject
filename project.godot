@@ -21,6 +21,7 @@ GlobalPlayerStats="*res://_Script/Global/GlobalPlayerStats.cs"
 GlobalSceneManager="*res://_Script/Global/GlobalSceneManager.cs"
 GlobalCursorManager="*res://_Script/Global/GlobalCursorManager.cs"
 GlobalEventPublisher="*res://_Script/Global/GlobalEventPublisher.cs"
+GlobalDatabaseManager="*res://_Script/Global/GlobalDatabaseManager.cs"
 
 [dialogue_manager]
 

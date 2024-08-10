@@ -16,7 +16,7 @@ public partial class ItemDropManager : Node2D{
 			// PackedScene itemScene = (PackedScene)ResourceLoader.Load(itemPath);
 			PackedScene itemScene=ItemResArr[i];
 			Node2D item=(Node2D)itemScene.Instantiate();
-			GetTree().CurrentScene.AddChild(item);
+			GetTree().CurrentScene.CallDeferred("add_child",item);
 			item.GlobalPosition=this.GlobalPosition;
 		}
 	}

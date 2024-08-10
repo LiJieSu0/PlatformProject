@@ -1,0 +1,14 @@
+{
+"ItemList":[
+ {
+  "ItemNo": 1,
+  "ItemName": "RedPotion",
+  "Odds": 0.2
+ },
+ {
+  "ItemNo": 2,
+  "ItemName": "BluePotion",
+  "Odds": 0.2
+ }
+]
+}

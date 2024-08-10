@@ -27,7 +27,6 @@ public partial class BasicItem : RigidBody2D
 	}
 
 	public override void _Process(double delta){
-		GD.Print("is Player in pick up area"+isPlayerInPickUpArea);
 	}
 	
 

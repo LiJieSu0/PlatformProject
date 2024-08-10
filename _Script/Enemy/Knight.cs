@@ -17,7 +17,6 @@ public partial class Knight : BasicEnemy
 	{
 		FSM_Action();
 		MoveAndSlide();
-		GD.Print("Knight curr HP"+CurrHp);
 	}
 
 
