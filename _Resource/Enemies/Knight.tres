@@ -7,3 +7,4 @@ script = ExtResource("1_80vj6")
 EnemyName = "Knight"
 MaxHp = 100
 BasicDamage = 10
+Drops = PackedInt32Array(1, 2)

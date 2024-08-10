@@ -15,7 +15,7 @@ config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 
 [autoload]
 
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+DialogueManager="res://addons/dialogue_manager/dialogue_manager.gd"
 GlobalSaveManager="*res://_Script/Global/GlobalSaveManager.cs"
 GlobalPlayerStats="*res://_Script/Global/GlobalPlayerStats.cs"
 GlobalSceneManager="*res://_Script/Global/GlobalSceneManager.cs"

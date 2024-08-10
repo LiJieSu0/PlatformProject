@@ -5,7 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 
 public partial class BasicEnemy :CharacterBody2D,IEnemy{
     public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-    [Export] EnemyRes enemyRes;
+    [Export] public EnemyRes enemyRes;
 	[Export]public float Speed = 100.0f;
 
     
@@ -49,7 +49,6 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
     public Vector2 _moveSpeed;
     public float _attackCDTime=2.0f;
     RandomNumberGenerator rng;
-
     #endregion
 
 
@@ -104,6 +103,7 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
         rng=new RandomNumberGenerator();
         rng.Randomize();
         _currFSMState=FSMStates.Idle;
+        _itemDropManager._drops=enemyRes.Drops;
     }
 
     #region MovingMethods

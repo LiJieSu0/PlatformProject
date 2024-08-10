@@ -4,11 +4,12 @@ using System.Collections.Generic;
 
 public partial class ItemDropManager : Node2D{
 	[Export] public PackedScene[] ItemResArr; //TODO change to string path
+	public int[] _drops;
 	public override void _Ready(){
 		GlobalEventPublisher.Instance.EnemyDeadEvent+=ItemDropInstantiate;
 	}
 
-	public void ItemDropInstantiate(string enemyName){ 
+    public void ItemDropInstantiate(string enemyName){ 
 		//TODO load drop item list through sheet
 		GD.Print("Enemy name drop :"+enemyName);
 		for(int i = 0;i<ItemResArr.Length;i++){

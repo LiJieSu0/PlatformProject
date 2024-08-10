@@ -7,3 +7,4 @@ script = ExtResource("1_62ng0")
 EnemyName = "Snail"
 MaxHp = 30
 BasicDamage = 5
+Drops = PackedInt32Array(1)
