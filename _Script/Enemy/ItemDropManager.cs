@@ -10,7 +10,7 @@ public partial class ItemDropManager : Node2D{
 
 	public void ItemDropInstantiate(string enemyName){ 
 		//TODO load drop item list through sheet
-
+		GD.Print("Enemy name drop :"+enemyName);
 		for(int i = 0;i<ItemResArr.Length;i++){
 			// string itemPath=ItemResArr[i].PackedItemScenePath;
 			// PackedScene itemScene = (PackedScene)ResourceLoader.Load(itemPath);

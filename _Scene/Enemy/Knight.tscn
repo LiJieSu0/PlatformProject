@@ -365,8 +365,6 @@ offset_bottom = -20.0
 [node name="ItemDropManager" type="Node2D" parent="CharacterBody2D"]
 position = Vector2(0, -38)
 script = ExtResource("5_iprd0")
-MoneyDrop = 10
-ExpDrop = 1
 ItemResArr = Array[PackedScene]([ExtResource("9_8a7ko")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
