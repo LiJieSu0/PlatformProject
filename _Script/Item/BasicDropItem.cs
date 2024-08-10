@@ -18,9 +18,7 @@ public partial class BasicDropItem : RigidBody2D{
 	#endregion
 
 	public override void _Ready(){
-		InitializeNode();
-		InitializeVariables();
-		InitialSignal();
+
 	}
 
 	public override void _Process(double delta){
@@ -43,6 +41,9 @@ public partial class BasicDropItem : RigidBody2D{
 	}
 
 	public void LoadDropItemTexture(string texturePath){
+		InitializeNode();
+		InitializeVariables();
+		InitialSignal();
 		sprite2D.Texture=(Texture2D)ResourceLoader.Load<Texture2D>(texturePath);
 		sprite2D.Scale=UtilsFunc.DesiredSpriteScale(sprite2D.Texture.GetSize(),_itemSpriteSize);
 	}

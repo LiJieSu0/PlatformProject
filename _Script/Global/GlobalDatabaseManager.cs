@@ -28,7 +28,6 @@ public partial class GlobalDatabaseManager:Node{
                                                     (string)tmp["ItemTexturePath"]);
             ItemListDB[(int)tmp["ItemNo"]]=tmpItemModel;
             ItemModel tmpModel=(ItemModel)ItemListDB[(int)tmp["ItemNo"]];
-            GD.Print("path "+tmpModel.ItemTexturePath);
         }
         
     }

@@ -46,6 +46,7 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
     public FSMStates _currFSMState;
     public bool isFaceLeft=true;
     public bool isAttackCD=false;
+    public bool isDead=false;
     public Vector2 _moveSpeed;
     public float _attackCDTime=2.0f;
     RandomNumberGenerator rng;
@@ -181,13 +182,16 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
     }
 
     public void ReceiveDamage(float damage){
-		_hpBar.Show();
-		this.CurrHp-=damage;
-        _hpBar.Value=CurrHp;
-		if(CurrHp<=0){ //Eenemy dead
-            GlobalEventPublisher.Instance.EnemyDeadTrigger(this.EnemyName); //Through this event Player should gain exp and moeny, ItemDropManager should drop items
-			QueueFree();
-		}
+        if(!isDead){
+            _hpBar.Show();
+            this.CurrHp-=damage;
+            _hpBar.Value=CurrHp;
+            if(CurrHp<=0){ 
+                isDead=true;
+                GlobalEventPublisher.Instance.EnemyDeadTrigger(this.EnemyName); //Through this event Player should gain exp and moeny, ItemDropManager should drop items
+                GetParent().QueueFree();
+            }
+        }
     }
     #endregion
 

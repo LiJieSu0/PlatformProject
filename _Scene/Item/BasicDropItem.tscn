@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhfu7d5soyfhm"]
+[gd_scene load_steps=6 format=3 uid="uid://bhfu7d5soyfhm"]
 
 [ext_resource type="Script" path="res://_Script/Item/BasicDropItem.cs" id="1_xq16s"]
+[ext_resource type="Texture2D" uid="uid://b40mlst36vfkn" path="res://_Asset/Item/waterElem.png" id="2_8q5dr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a4juj"]
 radius = 5.09902
@@ -30,6 +31,7 @@ shape = SubResource("CircleShape2D_a4juj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_8q5dr")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 visible = false

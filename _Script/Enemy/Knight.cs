@@ -11,7 +11,6 @@ public partial class Knight : BasicEnemy
 		base.InitializeStatus();
 		base.InitialSignal();
 		base.RngMove();
-		GD.Print("KnightLoad finished");
     }
 
     public override void _PhysicsProcess(double delta)

@@ -36,7 +36,6 @@ public partial class GlobalSceneManager : Node,ISaveable
 		//TODO error handle
 		string scenePath=ScenePathDict.SCENE_DICT[(string)variant];
 		//TODO change to correct scene path;
-		GD.Print(scenePath);
 		// PackedScene packedScene = (PackedScene)ResourceLoader.Load(scenePath);
         // if (packedScene != null){
         //     ChangeScene(packedScene);
