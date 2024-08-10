@@ -3,12 +3,14 @@
  {
   "ItemNo": 1,
   "ItemName": "RedPotion",
-  "Odds": 0.2
+  "Odds": 0.2,
+  "ItemTexturePath": "res:\/\/_Asset\/Item\/potions\/pt1.png"
  },
  {
   "ItemNo": 2,
   "ItemName": "BluePotion",
-  "Odds": 0.2
+  "Odds": 0.2,
+  "ItemTexturePath": "res:\/\/_Asset\/Item\/potions\/pt2.png"
  }
 ]
 }

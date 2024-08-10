@@ -1,8 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhfu7d5soyfhm"]
+[gd_scene load_steps=5 format=3 uid="uid://bhfu7d5soyfhm"]
 
-[ext_resource type="Script" path="res://_Script/Item/BasicItem.cs" id="1_obcg2"]
-[ext_resource type="Resource" uid="uid://im04rceyxnt" path="res://_Resource/Items/RedPotionRes.tres" id="2_gee2d"]
-[ext_resource type="Texture2D" uid="uid://bh602hplp1k6u" path="res://_Asset/Item/iceElem.png" id="3_y8y8m"]
+[ext_resource type="Script" path="res://_Script/Item/BasicDropItem.cs" id="1_xq16s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a4juj"]
 radius = 5.09902
@@ -24,8 +22,7 @@ radius = 15.0333
 [node name="BasicDropItem" type="RigidBody2D"]
 collision_layer = 32
 collision_mask = 33
-script = ExtResource("1_obcg2")
-itemRes = ExtResource("2_gee2d")
+script = ExtResource("1_xq16s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -33,9 +30,9 @@ shape = SubResource("CircleShape2D_a4juj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.02, 0.02)
-texture = ExtResource("3_y8y8m")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+visible = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_onmi3")
 

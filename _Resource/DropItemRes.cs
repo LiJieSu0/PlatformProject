@@ -2,8 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class ItemRes : Resource{
+public partial class DropItemRes : Resource{
     [Export] public string ItemName="";
     [Export] public string ItemSpritePath="";
-    [Export] public int ItemNo=0;
 }

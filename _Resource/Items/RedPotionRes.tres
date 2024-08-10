@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemRes" load_steps=2 format=3 uid="uid://im04rceyxnt"]
 
-[ext_resource type="Script" path="res://_Resource/ItemRes.cs" id="1_sdlpn"]
+[ext_resource type="Script" path="res://_Resource/DropItemRes.cs" id="1_sdlpn"]
 
 [resource]
 script = ExtResource("1_sdlpn")

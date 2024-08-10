@@ -24,8 +24,11 @@ public partial class GlobalDatabaseManager:Node{
             var tmp=new Dictionary<string, Variant>((Dictionary)item);
             ItemModel tmpItemModel=new ItemModel((int)tmp["ItemNo"],
                                                     (string)tmp["ItemName"],
-                                                    (float)tmp["Odds"]);
+                                                    (float)tmp["Odds"],
+                                                    (string)tmp["ItemTexturePath"]);
             ItemListDB[(int)tmp["ItemNo"]]=tmpItemModel;
+            ItemModel tmpModel=(ItemModel)ItemListDB[(int)tmp["ItemNo"]];
+            GD.Print("path "+tmpModel.ItemTexturePath);
         }
         
     }

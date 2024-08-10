@@ -1,10 +1,7 @@
 using Godot;
 using System;
 
-public partial class BasicItem : RigidBody2D
-{
-	[Export] ItemRes itemRes;
-
+public partial class BasicDropItem : RigidBody2D{
 	#region Variables
 	public const float disappearTime=10f;
 	public int _itemNo;
@@ -37,16 +34,17 @@ public partial class BasicItem : RigidBody2D
 	}
 
 	public void InitializeVariables(){
-		_itemNo=itemRes.ItemNo;
-		_itemName=itemRes.ItemName;
 		disappearTimer.WaitTime=disappearTime;
-		sprite2D.Texture=(Texture2D)ResourceLoader.Load<Texture2D>(itemRes.ItemSpritePath);
-		sprite2D.Scale=UtilsFunc.DesiredSpriteScale(sprite2D.Texture.GetSize(),_itemSpriteSize);
 	}
 
 	public void InitialSignal(){
 		pickUpArea.BodyEntered+=OnPlayerInPickUpArea;
 		pickUpArea.BodyExited+=OnPlayerExitPickUpArea;
+	}
+
+	public void LoadDropItemTexture(string texturePath){
+		sprite2D.Texture=(Texture2D)ResourceLoader.Load<Texture2D>(texturePath);
+		sprite2D.Scale=UtilsFunc.DesiredSpriteScale(sprite2D.Texture.GetSize(),_itemSpriteSize);
 	}
 
     private void OnPlayerInPickUpArea(Node2D body){

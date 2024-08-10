@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ds567o72hasq4"]
+[gd_scene load_steps=26 format=3 uid="uid://ds567o72hasq4"]
 
 [ext_resource type="Script" path="res://_Script/Enemy/Knight.cs" id="1_4gky3"]
 [ext_resource type="Resource" uid="uid://blelmlxfeqqae" path="res://_Resource/Enemies/Knight.tres" id="2_qsqvd"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://bobf57qt4fxrr" path="res://_Asset/Enemy/FreeKnight_v1 (1)/120x80_PNGSheets/_Death.png" id="5_qi6ya"]
 [ext_resource type="Texture2D" uid="uid://dmdkuok513ihr" path="res://_Asset/Enemy/FreeKnight_v1 (1)/120x80_PNGSheets/_Run.png" id="6_f7aae"]
 [ext_resource type="AudioStream" uid="uid://c5c1ek4t88kkp" path="res://_Asset/Audio/SoundEffect/Slash.mp3" id="7_6v1oc"]
-[ext_resource type="PackedScene" uid="uid://bhfu7d5soyfhm" path="res://_Scene/Item/BasicDropItem.tscn" id="9_8a7ko"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t0cyg"]
 size = Vector2(20, 38)
@@ -365,7 +364,6 @@ offset_bottom = -20.0
 [node name="ItemDropManager" type="Node2D" parent="CharacterBody2D"]
 position = Vector2(0, -38)
 script = ExtResource("5_iprd0")
-ItemResArr = Array[PackedScene]([ExtResource("9_8a7ko")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
 stream = ExtResource("7_6v1oc")
