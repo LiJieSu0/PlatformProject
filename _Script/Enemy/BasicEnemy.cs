@@ -3,7 +3,7 @@ using Godot;
 using System;
 using System.Reflection.Metadata.Ecma335;
 
-public partial class BasicEnemy :CharacterBody2D,IEnemy{
+public partial class BasicEnemy :CharacterBody2D{
     public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
     [Export] public EnemyRes enemyRes;
 	[Export]public float Speed = 100.0f;
@@ -17,13 +17,6 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
     private float _currMp;
     private string _enemyName;
     private float _basicDamage;
-    public float MaxHp { get =>_maxHp; set => _maxHp=value;  }
-    public float MaxMp { get =>_maxMp; set => _maxHp=value;  }
-    
-    public float CurrHp { get => _currHp; set => _currHp = value; }
-    public float CurrMp { get => _currMp; set =>_currMp = value; }
-    public string EnemyName { get =>_enemyName; set =>_enemyName=value;  }
-    public float BasicDamage { get =>_basicDamage;  set =>_basicDamage = value; }
     #endregion
 	
     #region Node
@@ -93,12 +86,12 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
 
     }
     public void InitializeStatus(){
-        this.EnemyName=enemyRes.EnemyName;
-        this.BasicDamage=enemyRes.BasicDamage;
-        this.MaxHp=enemyRes.MaxHp;
-        CurrHp=MaxHp;
-        _hpBar.MaxValue=MaxHp;
-        _hpBar.Value=CurrHp;
+        this._enemyName=enemyRes.EnemyName;
+        this._basicDamage=enemyRes.BasicDamage;
+        this._maxHp=enemyRes.MaxHp;
+        _currHp=_maxHp;
+        _hpBar.MaxValue=_maxHp;
+        _hpBar.Value=_currHp;
         _hpBar.Hide();
         _moveSpeed=new Vector2(-Speed,0);
         rng=new RandomNumberGenerator();
@@ -151,7 +144,7 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
     #region SignalMethods
     public virtual void OnPlayerDamaged(Node2D body){
 		if(body is PlayerBody player){
-			player.ReceiveDamage(this.BasicDamage);
+			player.ReceiveDamage(this._basicDamage);
 		}
 	}
 
@@ -184,11 +177,11 @@ public partial class BasicEnemy :CharacterBody2D,IEnemy{
     public void ReceiveDamage(float damage){
         if(!isDead){
             _hpBar.Show();
-            this.CurrHp-=damage;
-            _hpBar.Value=CurrHp;
-            if(CurrHp<=0){ 
+            this._currHp-=damage;
+            _hpBar.Value=_currHp;
+            if(_currHp<=0){ 
                 isDead=true;
-                GlobalEventPublisher.Instance.EnemyDeadTrigger(this.EnemyName); //Through this event Player should gain exp and moeny, ItemDropManager should drop items
+                GlobalEventPublisher.Instance.EnemyDeadTrigger(this._enemyName); //Through this event Player should gain exp and moeny, ItemDropManager should drop items
                 GetParent().QueueFree();
             }
         }

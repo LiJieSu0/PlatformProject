@@ -37,9 +37,10 @@ public partial class ProjectileScript : Area2D
 
 	private void OnProjectileHit(Node node){
 		projectileRes.HitEffect();
-		if(node is IEnemy enemy){
+		if(node is BasicEnemy enemy){
 			enemy.ReceiveDamage(this.basicDamage);
 		}
+		//TODO set a effected range
 		QueueFree();
 	}
 

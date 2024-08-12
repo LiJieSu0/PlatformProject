@@ -4,13 +4,22 @@
   "ItemNo": 1,
   "ItemName": "RedPotion",
   "Odds": 0.2,
-  "ItemTexturePath": "res:\/\/_Asset\/Item\/potions\/pt1.png"
+  "ItemTexturePath": "res:\/\/_Asset\/Item\/potions\/pt1.png",
+  "BasicPrice": 10
  },
  {
   "ItemNo": 2,
   "ItemName": "BluePotion",
   "Odds": 0.2,
-  "ItemTexturePath": "res:\/\/_Asset\/Item\/potions\/pt2.png"
+  "ItemTexturePath": "res:\/\/_Asset\/Item\/potions\/pt2.png",
+  "BasicPrice": 10
+ }
+],
+"EnemyList":[
+ {
+  "EnemyNo": 1,
+  "EnemyName": "Knight",
+  "Exp": 2
  }
 ]
 }
