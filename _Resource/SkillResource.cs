@@ -50,10 +50,14 @@ public partial class SkillResource : Resource
                 break;
             case RangedShootMode.Shot:
                 for(int i=0;i<projectileCount;i++){
-                var tmpAngle=-30.0f; //TODO calculate the cover angle off the shooting
+                    var tmpAngle=-30.0f;
                     tmpAngle+=i*30;
+                    float angleReductionRadians = Mathf.DegToRad(tmpAngle);
+                    float currentAngleRadians = dir.Angle();
+                    float newAngleRadians = currentAngleRadians + angleReductionRadians;
+                    Vector2 newVector = new Vector2(Mathf.Cos(newAngleRadians), Mathf.Sin(newAngleRadians));
                     var currProjectile=GenerateProjectile(scene,shooter);
-                    currProjectile.ChangeVelocity(dir);
+                    currProjectile.ChangeVelocity(newVector);
                 }
                 break;
             default:
