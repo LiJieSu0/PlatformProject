@@ -13,13 +13,14 @@ size = Vector2(40.5, 61.5)
 
 [node name="MainScene" type="Node2D"]
 
-[node name="ItemManager" type="Node2D" parent="."]
-
 [node name="AudioManager" type="Node2D" parent="."]
 
 [node name="BGM" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = ExtResource("2_v53qj")
 autoplay = true
+max_distance = 9.22337e+18
+
+[node name="ItemManager" type="Node2D" parent="."]
 
 [node name="NPCManager" type="Node2D" parent="."]
 

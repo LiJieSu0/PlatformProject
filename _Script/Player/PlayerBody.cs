@@ -1,5 +1,4 @@
 using Godot;
-using DialogueManagerRuntime;
 public partial class PlayerBody : CharacterBody2D{
 
 	#region Movement
@@ -23,7 +22,6 @@ public partial class PlayerBody : CharacterBody2D{
 	#endregion
     
 	#region Resource
-	[Export] public Resource dialogueResource;
 	#endregion
 
 	public override void _Ready()
@@ -45,8 +43,11 @@ public partial class PlayerBody : CharacterBody2D{
 		InteractWithEnivronment();
 		ChangeCurrSkill();
 	}
-	private void PlayerMovement(float delta){ //TODO fix attack while running animation bug when running and press attack cannot attack anymore
+	private void PlayerMovement(float delta){ 
 		AttackFunction();
+		//TODO add cast animation
+		if(isAttack)
+			return;
 		Vector2 velocity = Velocity;
 		if (!IsOnFloor()){
 			velocity.Y += gravity * delta;

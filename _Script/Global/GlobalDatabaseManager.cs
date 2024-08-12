@@ -36,7 +36,7 @@ public partial class GlobalDatabaseManager:Node{
                                                     (float)tmp["Odds"],
                                                     (string)tmp["ItemTexturePath"],
                                                     (int)tmp["BasicPrice"]);
-                                                    
+
             ItemListDB[(int)tmp["ItemNo"]]=tmpItemModel;
             ItemModel tmpModel=(ItemModel)ItemListDB[(int)tmp["ItemNo"]];
         }
@@ -45,6 +45,7 @@ public partial class GlobalDatabaseManager:Node{
     private void LoadEnemyList(Godot.Collections.Array enemyList){
         foreach(var enemy in enemyList){
             var tmp=new Dictionary<string, Variant>((Dictionary)enemy);
+            GD.Print(tmp);
             //TODO create enemy model
         }
     }

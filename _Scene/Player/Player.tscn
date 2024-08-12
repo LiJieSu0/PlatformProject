@@ -1,10 +1,9 @@
-[gd_scene load_steps=41 format=3 uid="uid://djhutcvenskq"]
+[gd_scene load_steps=40 format=3 uid="uid://djhutcvenskq"]
 
 [ext_resource type="Script" path="res://_Script/Player/StatusManager.cs" id="1_3b1ie"]
 [ext_resource type="Texture2D" uid="uid://bxpj0osjj0peu" path="res://_Asset/Player/Idle-Sheet.png" id="1_hjll8"]
 [ext_resource type="Script" path="res://_Script/Player/PlayerBody.cs" id="1_thw5p"]
 [ext_resource type="Texture2D" uid="uid://c7vdpo5bm5qnk" path="res://_Asset/Player/Run-Sheet.png" id="1_w7w2m"]
-[ext_resource type="Resource" uid="uid://dk2ss8j8oj6mt" path="res://Dialogue/main.dialogue" id="3_phsdg"]
 [ext_resource type="Texture2D" uid="uid://rw5qm151fr0o" path="res://_Asset/Player/Jump-Start-Sheet.png" id="4_cu7w2"]
 [ext_resource type="Texture2D" uid="uid://dho18lkgfpbsv" path="res://_Asset/Player/Jump-End-Sheet.png" id="5_m8rwf"]
 [ext_resource type="Texture2D" uid="uid://ia6i6v1lqve1" path="res://_Asset/Player/Attack-01-Sheet.png" id="6_iqr56"]
@@ -455,7 +454,6 @@ CurrHp = 100.0
 collision_layer = 16
 collision_mask = 13
 script = ExtResource("1_thw5p")
-dialogueResource = ExtResource("3_phsdg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 visible = false
