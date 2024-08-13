@@ -10,6 +10,9 @@ public partial class UI_TabStatsMenu : TabBar{
 	private	Label _intLabel;
 	private Label _dexLabel;
 
+	private Label _upgradePtsLabel;
+	private Label _currUpgradePtsLabel;
+
 	private Button _strIncreaseBtn;
 	private Button _strDecreaseBtn;
 	private Button _vitIncreaseBtn;
@@ -34,10 +37,10 @@ public partial class UI_TabStatsMenu : TabBar{
 	#endregion
 	public override void _Ready(){
 		_globalPlayerStats=GlobalPlayerStats.Instance;
-		InitializeVariables();
 		InitializeNode();
+		InitializeVariables();
 		InitializeSignal();
-		
+
 		UpdateLabel();
 		CheckIsAssignable();
 
@@ -50,6 +53,8 @@ public partial class UI_TabStatsMenu : TabBar{
 		_vitLabel=GetNode<Label>("MarginContainer/VBoxContainer/Vitality/CurrVit");
 		_intLabel=GetNode<Label>("MarginContainer/VBoxContainer/Intelligence/CurrInt");
 		_dexLabel=GetNode<Label>("MarginContainer/VBoxContainer/Dexterity/CurrDex");
+		_upgradePtsLabel=GetNode<Label>("MarginContainer/VBoxContainer/Level/UpgradePtsLabel");
+		_currUpgradePtsLabel=GetNode<Label>("MarginContainer/VBoxContainer/Level/CurrUpgradePtsLabel");
 		#endregion
 
 		#region StatsButtonNode
@@ -69,13 +74,7 @@ public partial class UI_TabStatsMenu : TabBar{
 		_assignConfirmedBtn=GetNode<Button>("MarginContainer/VBoxContainer/AssignConfirmedBtn");
 	}
 
-	private void UpdateLabel(){
-		_levelLabel.Text=_currLevel.ToString();
-		_strLabel.Text=_currStr.ToString();
-		_vitLabel.Text=_currVit.ToString();
-		_intLabel.Text=_currInt.ToString();
-		_dexLabel.Text=_currDex.ToString();
-	}
+
 
 	private void InitializeVariables(){
 		_currLevel=_globalPlayerStats.PlayerLevel;
@@ -117,6 +116,14 @@ public partial class UI_TabStatsMenu : TabBar{
 		_currUpgradePoints -= adjustment;
 		UpdateLabel();
 	}
+	private void UpdateLabel(){
+		_levelLabel.Text=_currLevel.ToString();
+		_strLabel.Text=_currStr.ToString();
+		_vitLabel.Text=_currVit.ToString();
+		_intLabel.Text=_currInt.ToString();
+		_dexLabel.Text=_currDex.ToString();
+		_currUpgradePtsLabel.Text=_currUpgradePoints.ToString();
+	}
 
 	private void OnAssignConfirmedBtnPressed(){
 		_globalPlayerStats.PlayerStrength=_currStr;
@@ -132,11 +139,16 @@ public partial class UI_TabStatsMenu : TabBar{
 			isAssignable=true;
 			ShowAssignBtn();
 			_assignConfirmedBtn.Show();
+			_upgradePtsLabel.Show();
+			_currUpgradePtsLabel.Show();
+			_currUpgradePtsLabel.Text=_currUpgradePoints.ToString();
 		}
 		else{
 			isAssignable=false;
 			HideAssignBtn();
 			_assignConfirmedBtn.Hide();
+			_upgradePtsLabel.Hide();
+			_currUpgradePtsLabel.Hide();
 		}
 	}
 
