@@ -13,6 +13,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
   public int PlayerDexterity;
   public int PlayerExp;
   public int PlayerMoney;
+  public int PlayerUpgradePoints;
 
   //TODO load player save scene
   //TODO load player stats from global
@@ -33,6 +34,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
         {"PlayerDexterity",PlayerDexterity},
         {"PlayerExp",PlayerExp},
         {"PlayerMoney",PlayerMoney},
+        {"PlayerUpgradePoints",PlayerUpgradePoints}
       };
 
       return Json.Stringify(new Dictionary<string, Variant>(){
@@ -52,6 +54,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
         PlayerDexterity=(int)data["PlayerDexterity"];
         PlayerExp=(int)data["PlayerExp"];
         PlayerMoney=(int)data["PlayerMoney"];
+        PlayerUpgradePoints=(int)data["PlayerUpgradePoints"];
     }
     public string NewSave()
     {
@@ -63,6 +66,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
         {"PlayerDexterity",10},
         {"PlayerExp",0},
         {"PlayerMoney",0},
+        {"PlayerUpgradePoints",0}
       };
       return Json.Stringify(new Dictionary<string, Variant>(){
         {this.Name,newSave}

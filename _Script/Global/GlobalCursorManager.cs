@@ -1,10 +1,14 @@
 using Godot;
 using System;
 
-public partial class GlobalCursorManager : Node
-{
-
+public partial class GlobalCursorManager : Node{
+	public enum CursorType{
+		Crosshair,
+		Normal,
+		CastSkil, //cast range skill
+	}
 	public static GlobalCursorManager Instance { get; private set; }
+	public CursorType currCursorType { get; set;}
 	private Texture2D  CrossHairCursor = (Texture2D)GD.Load("res://_Asset/UI/crosshair.png");
 	private Texture2D  MenuCursor = (Texture2D)GD.Load("res://_Asset/UI/menuCursor.png");
 
