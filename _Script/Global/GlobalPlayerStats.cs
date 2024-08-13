@@ -66,7 +66,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
         {"PlayerDexterity",10},
         {"PlayerExp",0},
         {"PlayerMoney",0},
-        {"PlayerUpgradePoints",0}
+        {"PlayerUpgradePoints",5}
       };
       return Json.Stringify(new Dictionary<string, Variant>(){
         {this.Name,newSave}

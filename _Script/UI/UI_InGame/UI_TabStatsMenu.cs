@@ -9,6 +9,17 @@ public partial class UI_TabStatsMenu : TabBar{
 	private Label _vitLabel;
 	private	Label _intLabel;
 	private Label _dexLabel;
+
+	private Button _strIncreaseBtn;
+	private Button _strDecreaseBtn;
+	private Button _vitIncreaseBtn;
+	private Button _vitDecreaseBtn;
+	private Button _intIncreaseBtn;
+	private Button _intDecreaseBtn;
+	private Button _dexIncreaseBtn;
+	private Button _dexDecreaseBtn;
+	
+	private Button _assignConfirmedBtn;
 	#endregion	
 	
 	#region Variables
@@ -19,26 +30,51 @@ public partial class UI_TabStatsMenu : TabBar{
 	public int _currInt;
 	public int _currDex;
 	public int _currUpgradePoints;
+	private bool isAssignable=false;
 	#endregion
 	public override void _Ready(){
 		_globalPlayerStats=GlobalPlayerStats.Instance;
 		InitializeVariables();
 		InitializeNode();
+		InitializeSignal();
+		
+		UpdateLabel();
+		CheckIsAssignable();
+
 	}
 
 	private void InitializeNode(){
+		#region LabelNode
 		_levelLabel=GetNode<Label>("MarginContainer/VBoxContainer/Level/CurrLevel");
 		_strLabel=GetNode<Label>("MarginContainer/VBoxContainer/Strength/CurrStr");
 		_vitLabel=GetNode<Label>("MarginContainer/VBoxContainer/Vitality/CurrVit");
 		_intLabel=GetNode<Label>("MarginContainer/VBoxContainer/Intelligence/CurrInt");
 		_dexLabel=GetNode<Label>("MarginContainer/VBoxContainer/Dexterity/CurrDex");
+		#endregion
 
+		#region StatsButtonNode
+		_strIncreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Strength/IncreaseBtn");
+		_strDecreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Strength/DecreaseBtn");
+
+		_vitIncreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Vitality/IncreaseBtn");
+		_vitDecreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Vitality/DecreaseBtn");
+
+		_intIncreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Intelligence/IncreaseBtn");
+		_intDecreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Intelligence/DecreaseBtn");
+
+		_dexIncreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Dexterity/IncreaseBtn");
+		_dexDecreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Dexterity/DecreaseBtn");
+		#endregion
+		
+		_assignConfirmedBtn=GetNode<Button>("MarginContainer/VBoxContainer/AssignConfirmedBtn");
+	}
+
+	private void UpdateLabel(){
 		_levelLabel.Text=_currLevel.ToString();
 		_strLabel.Text=_currStr.ToString();
 		_vitLabel.Text=_currVit.ToString();
 		_intLabel.Text=_currInt.ToString();
 		_dexLabel.Text=_currDex.ToString();
-
 	}
 
 	private void InitializeVariables(){
@@ -49,5 +85,87 @@ public partial class UI_TabStatsMenu : TabBar{
 		_currDex=_globalPlayerStats.PlayerDexterity;
 		_currUpgradePoints=_globalPlayerStats.PlayerUpgradePoints;
 	}
+
+
+	private void InitializeSignal(){
+		_strIncreaseBtn.Pressed += () => AdjustStat(ref _currStr, _globalPlayerStats.PlayerStrength, 1);
+		_strDecreaseBtn.Pressed += () => AdjustStat(ref _currStr, _globalPlayerStats.PlayerStrength, -1);
+
+		_vitIncreaseBtn.Pressed += () => AdjustStat(ref _currVit, _globalPlayerStats.PlayerVitality, 1);
+		_vitDecreaseBtn.Pressed += () => AdjustStat(ref _currVit, _globalPlayerStats.PlayerVitality, -1);
+
+		_intIncreaseBtn.Pressed += () => AdjustStat(ref _currInt, _globalPlayerStats.PlayerIntelligence, 1);
+		_intDecreaseBtn.Pressed += () => AdjustStat(ref _currInt, _globalPlayerStats.PlayerIntelligence, -1);
+
+		_dexIncreaseBtn.Pressed += () => AdjustStat(ref _currDex, _globalPlayerStats.PlayerDexterity, 1);
+		_dexDecreaseBtn.Pressed += () => AdjustStat(ref _currDex, _globalPlayerStats.PlayerDexterity, -1);
+		_assignConfirmedBtn.Pressed+=OnAssignConfirmedBtnPressed;
+	}
+
+	private void OnstrBtn(){
+		GD.Print("in");
+	}
+
+	private void AdjustStat(ref int stat, int baseStat, int adjustment){
+		GD.Print("In adjust "+_currUpgradePoints);
+		if (adjustment > 0 && _currUpgradePoints <= 0)
+			return;
+		if (adjustment < 0 && stat == baseStat)
+			return;
+
+		stat += adjustment;
+		_currUpgradePoints -= adjustment;
+		UpdateLabel();
+	}
+
+	private void OnAssignConfirmedBtnPressed(){
+		_globalPlayerStats.PlayerStrength=_currStr;
+		_globalPlayerStats.PlayerVitality=_currVit;
+		_globalPlayerStats.PlayerIntelligence=_currInt;
+		_globalPlayerStats.PlayerDexterity=_currDex;
+		_globalPlayerStats.PlayerUpgradePoints=_currUpgradePoints;
+		CheckIsAssignable();
+	}
+
+	private void CheckIsAssignable(){
+		if(_globalPlayerStats.PlayerUpgradePoints>0){
+			isAssignable=true;
+			ShowAssignBtn();
+			_assignConfirmedBtn.Show();
+		}
+		else{
+			isAssignable=false;
+			HideAssignBtn();
+			_assignConfirmedBtn.Hide();
+		}
+	}
+
+	private void HideAssignBtn(){
+		_strIncreaseBtn.Hide();
+		_strDecreaseBtn.Hide();
+
+		_vitIncreaseBtn.Hide();
+		_vitDecreaseBtn.Hide();
+
+		_intIncreaseBtn.Hide();
+		_intDecreaseBtn.Hide();
+
+		_dexIncreaseBtn.Hide();
+		_dexDecreaseBtn.Hide();
+	}
+	private void ShowAssignBtn(){
+		_strIncreaseBtn.Show();
+		_strDecreaseBtn.Show();
+
+		_vitIncreaseBtn.Show();
+		_vitDecreaseBtn.Show();
+
+		_intIncreaseBtn.Show();
+		_intDecreaseBtn.Show();
+
+		_dexIncreaseBtn.Show();
+		_dexDecreaseBtn.Show();
+	}
+
 
 }

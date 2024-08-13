@@ -435,6 +435,10 @@ text = "+"
 layout_mode = 2
 text = "-"
 
+[node name="AssignConfirmedBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Confirmed"
+
 [node name="Skills" type="TabBar" parent="Panel/TabContainer"]
 visible = false
 layout_mode = 2
