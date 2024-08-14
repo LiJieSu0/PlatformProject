@@ -14,6 +14,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
   public int PlayerExp;
   public int PlayerMoney;
   public int PlayerUpgradePoints;
+  //TODO add luck
 
   //TODO load player save scene
   //TODO load player stats from global

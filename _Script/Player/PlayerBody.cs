@@ -1,7 +1,8 @@
+using System;
 using Godot;
 public partial class PlayerBody : CharacterBody2D{
 
-	#region Movement
+	#region MovementVairables
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -11,8 +12,11 @@ public partial class PlayerBody : CharacterBody2D{
 	private StatusManager statusManager;
 	private AnimationTree _animationTree;
 	private AnimationNodeStateMachinePlayback _animationState;
-	private Sprite2D sprite2D;
-	private SkillNode skillNode;
+	private Sprite2D _sprite2D;
+	private SkillNode _skillNode;
+	private Area2D _attackArea;
+	private Area2D _interactableArea;
+
 	#endregion
 
 	#region Variables
@@ -24,13 +28,9 @@ public partial class PlayerBody : CharacterBody2D{
 	#region Resource
 	#endregion
 
-	public override void _Ready()
-    {
-		sprite2D=GetNode<Sprite2D>("Sprite2D");
-		statusManager=GetParent().GetNode<StatusManager>("StatusManager");
-		_animationTree=GetNode<AnimationTree>("AnimationTree");
-		_animationState = (AnimationNodeStateMachinePlayback)_animationTree.Get("parameters/playback");
-		skillNode=GetNode<SkillNode	>("SkillNode");
+	public override void _Ready(){
+		InitializeNode();
+		InitializeSignal();
     }
 
     public override void _PhysicsProcess(double delta){
@@ -77,24 +77,11 @@ public partial class PlayerBody : CharacterBody2D{
 		Vector2 faceDir=(GetGlobalMousePosition()-this.GlobalPosition).Normalized();
 		if((faceDir.X>0&&!isFaceRight)||(faceDir.X<0&&isFaceRight)){ 
 			isFaceRight=!isFaceRight;
-			sprite2D.Scale=new Vector2(sprite2D.Scale.X*-1,sprite2D.Scale.Y);
+			_sprite2D.Scale=new Vector2(_sprite2D.Scale.X*-1,_sprite2D.Scale.Y);
 		}
 		MoveAndSlide();
 	}
-	private void OnAnimationFinsihed(string animName){
-		if(animName=="Attack"){
-			isAttack=false;
-			_animationState.Travel("Idle");
-		}
-	}
 
-	private void OnInteractableAreaEnter(Area2D area){
-		if(area is INPC)
-		areaInteractableRange=area;
-	}
-	private void OnInteractableAreaExit(Area2D area){
-		areaInteractableRange=null;
-	}
 
 	public void ReceiveDamage(float damage){
 		statusManager.CurrHp-=damage;
@@ -108,7 +95,7 @@ public partial class PlayerBody : CharacterBody2D{
 
 	private void AttackFunction(){
 		if(Input.IsActionJustPressed("ui_cast")){
-			skillNode.CastSkill();
+			_skillNode.CastSkill();
 		}
 		if(Input.IsActionJustPressed("ui_attack")&&IsOnFloor()&&statusManager.CurrMp>=10&&!isAttack){
 			isAttack=true;
@@ -126,14 +113,53 @@ public partial class PlayerBody : CharacterBody2D{
 		statusManager.CurrMp+=100*time; //TODO read recover mana per second from status
 	}
 
-	private void OnAttackBody(Node2D node){
-		if(node is BasicEnemy e){
+	private void InitializeNode(){
+		_sprite2D=GetNode<Sprite2D>("Sprite2D");
+		_animationTree=GetNode<AnimationTree>("AnimationTree");
+		_animationState = (AnimationNodeStateMachinePlayback)_animationTree.Get("parameters/playback");
+		_skillNode=GetNode<SkillNode>("SkillNode");
+		_attackArea=GetNode<Area2D>("Sprite2D/AttackArea");
+		_interactableArea=GetNode<Area2D>("Sprite2D/InteractableArea");
+		statusManager=GetParent().GetNode<StatusManager>("StatusManager");
+	}
+
+	private void InitializeSignal(){
+		_animationTree.AnimationFinished+=OnAnimationFinsihed;
+		_attackArea.BodyEntered+=OnAttackHit;
+		_interactableArea.AreaEntered+=OnInteractableAreaEnter;
+		_interactableArea.AreaExited+=OnInteractableAreaExit;
+	}
+
+
+
+	#region SignalFuncs
+    private void OnAttackHit(Node2D body){
+        if(body is BasicEnemy e){
 			e.ReceiveDamage((int)statusManager.AttackPower);
 		}
 		else{
 			GD.Print("Attack function attack on not enemy");
 		}
+    }
+
+
+    private void OnAnimationFinsihed(StringName animName){
+    if(animName=="Attack"){
+			isAttack=false;
+			_animationState.Travel("Idle");
+		}
+    }
+
+	
+	private void OnInteractableAreaEnter(Area2D area){
+		if(area is INPC)
+		areaInteractableRange=area;
 	}
+	private void OnInteractableAreaExit(Area2D area){
+		areaInteractableRange=null;
+	}
+	#endregion
+
 	public void TestFunction(){
 		if(Input.IsActionJustPressed("receiveDamage")){
 			ReceiveDamage(10);

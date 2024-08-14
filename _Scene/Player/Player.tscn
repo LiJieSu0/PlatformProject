@@ -473,11 +473,11 @@ position = Vector2(24, -1)
 shape = SubResource("RectangleShape2D_2t02n")
 disabled = true
 
-[node name="InteractablePlayer" type="Area2D" parent="CharacterBody2D/Sprite2D"]
+[node name="InteractableArea" type="Area2D" parent="CharacterBody2D/Sprite2D"]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Sprite2D/InteractablePlayer"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Sprite2D/InteractableArea"]
 visible = false
 position = Vector2(34.5, 0.25)
 shape = SubResource("RectangleShape2D_26oai")
@@ -515,8 +515,3 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("13_0y70c")
 
 [node name="HUD" parent="." instance=ExtResource("8_kiph8")]
-
-[connection signal="body_entered" from="CharacterBody2D/Sprite2D/AttackArea" to="CharacterBody2D" method="OnAttackBody"]
-[connection signal="area_entered" from="CharacterBody2D/Sprite2D/InteractablePlayer" to="CharacterBody2D" method="OnInteractableAreaEnter"]
-[connection signal="area_exited" from="CharacterBody2D/Sprite2D/InteractablePlayer" to="CharacterBody2D" method="OnInteractableAreaExit"]
-[connection signal="animation_finished" from="CharacterBody2D/AnimationTree" to="CharacterBody2D" method="OnAnimationFinsihed"]
