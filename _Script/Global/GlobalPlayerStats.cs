@@ -11,6 +11,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
   public int PlayerVitality;
   public int PlayerIntelligence;
   public int PlayerDexterity;
+  public int PlayerLuck;
   public int PlayerCurrAccumExp;
   public int PlayerMoney;
   public int PlayerUpgradePoints;
@@ -38,6 +39,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
         {"PlayerVitality", PlayerVitality},
         {"PlayerIntelligence", PlayerIntelligence},
         {"PlayerDexterity",PlayerDexterity},
+        {"PlayerLuck",PlayerLuck},
         {"PlayerCurrAccumExp",PlayerCurrAccumExp},
         {"PlayerMoney",PlayerMoney},
         {"PlayerUpgradePoints",PlayerUpgradePoints},
@@ -62,6 +64,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
         PlayerVitality = (int)data["PlayerVitality"];
         PlayerIntelligence = (int)data["PlayerIntelligence"];
         PlayerDexterity=(int)data["PlayerDexterity"];
+        PlayerLuck=(int)data["PlayerLuck"];
         PlayerCurrAccumExp=(int)data["PlayerCurrAccumExp"];
         PlayerMoney=(int)data["PlayerMoney"];
         PlayerUpgradePoints=(int)data["PlayerUpgradePoints"];
@@ -78,6 +81,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
         {"PlayerVitality",10},
         {"PlayerIntelligence",10},
         {"PlayerDexterity",10},
+        {"PlayerLuck",10},
         {"PlayerCurrAccumExp",0},
         {"PlayerMoney",0},
         {"PlayerUpgradePoints",5},

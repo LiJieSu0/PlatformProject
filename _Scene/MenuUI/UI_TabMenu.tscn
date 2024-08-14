@@ -59,6 +59,7 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="Items" type="TabBar" parent="Panel/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="EquipSlots" type="TextureRect" parent="Panel/TabContainer/Items"]
@@ -327,7 +328,6 @@ layout_mode = 2
 texture = ExtResource("3_espps")
 
 [node name="Stats" type="TabBar" parent="Panel/TabContainer"]
-visible = false
 layout_mode = 2
 script = ExtResource("5_xfwvp")
 
@@ -439,6 +439,25 @@ layout_mode = 2
 text = "+"
 
 [node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Dexterity"]
+layout_mode = 2
+text = "-"
+
+[node name="Luck" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Luck Label" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Luck"]
+layout_mode = 2
+text = "Luck :"
+
+[node name="CurrLuk" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Luck"]
+layout_mode = 2
+text = "99"
+
+[node name="IncreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Luck"]
+layout_mode = 2
+text = "+"
+
+[node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Luck"]
 layout_mode = 2
 text = "-"
 
