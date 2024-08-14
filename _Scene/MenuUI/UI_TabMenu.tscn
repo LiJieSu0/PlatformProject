@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://duvcyyth5cty7" path="res://_Scene/MenuUI/UIFrameWithCloseBtn.tscn" id="1_o1jk8"]
 [ext_resource type="Texture2D" uid="uid://ccvmioggb27ta" path="res://_Asset/UI/Stand-removebg-preview.png" id="2_m6q1b"]
 [ext_resource type="Texture2D" uid="uid://bulike7wfiry4" path="res://_Asset/UI/InventorySlot.png" id="3_espps"]
-[ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabStat.cs" id="5_xfwvp"]
+[ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabStats.cs" id="5_6fqij"]
 [ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabInfos.cs" id="6_iwlat"]
 
 [sub_resource type="Theme" id="Theme_481jp"]
@@ -60,7 +60,6 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="Items" type="TabBar" parent="Panel/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="EquipSlots" type="TextureRect" parent="Panel/TabContainer/Items"]
@@ -329,6 +328,7 @@ layout_mode = 2
 texture = ExtResource("3_espps")
 
 [node name="Stats" type="TabBar" parent="Panel/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/Stats"]
@@ -347,7 +347,7 @@ layout_mode = 2
 
 [node name="StatsContainer" type="VBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer"]
 layout_mode = 2
-script = ExtResource("5_xfwvp")
+script = ExtResource("5_6fqij")
 
 [node name="Level" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer"]
 layout_mode = 2

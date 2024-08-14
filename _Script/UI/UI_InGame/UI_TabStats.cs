@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class UI_TabStatsMenu : Control{
+public partial class UI_TabStats : Control{
 
 	#region Node
 	private Label _levelLabel;

@@ -5,6 +5,9 @@ using Godot;
 public partial class GlobalEventPublisher:Node{
     public static GlobalEventPublisher Instance { get; private set; }
     public static bool IsPause=false;
+    public bool isShowMenu=false;
+    public delegate void ShowTabMenu();
+    public event ShowTabMenu ShowTabMenuEvent;
     public delegate void SkillChange(int idx);
     public event SkillChange SkillChangeEvent;
 
@@ -20,6 +23,10 @@ public partial class GlobalEventPublisher:Node{
 
     public void EnemyDeadTrigger(string enemyName){
         EnemyDeadEvent?.Invoke(enemyName);
+    }
+
+    public void ShowTabMenuTrigger(){
+        ShowTabMenuEvent?.Invoke();
     }
 
 }

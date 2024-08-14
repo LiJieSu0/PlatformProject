@@ -195,6 +195,7 @@ public partial class PlayerBody : CharacterBody2D{
 	private void PauseFunction(){
 		if(Input.IsActionJustPressed("ui_pause")){
 			GlobalEventPublisher.IsPause=!GlobalEventPublisher.IsPause;
+			GlobalEventPublisher.Instance.ShowTabMenuTrigger();
 		}
 		Engine.TimeScale=GlobalEventPublisher.IsPause?0:1;
 	}
