@@ -27,7 +27,7 @@ public partial class PlayerBody : CharacterBody2D{
     
 	#region Resource
 	#endregion
-
+	//TODO add effect from the stats
 	public override void _Ready(){
 		InitializeNode();
 		InitializeSignal();

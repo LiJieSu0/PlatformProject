@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class UI_TabStatsMenu : TabBar{
+public partial class UI_TabStatsMenu : Control{
 
 	#region Node
 	private Label _levelLabel;
@@ -53,34 +53,34 @@ public partial class UI_TabStatsMenu : TabBar{
 
 	private void InitializeNode(){
 		#region LabelNode
-		_levelLabel=GetNode<Label>("MarginContainer/VBoxContainer/Level/CurrLevel");
-		_strLabel=GetNode<Label>("MarginContainer/VBoxContainer/Strength/CurrStr");
-		_vitLabel=GetNode<Label>("MarginContainer/VBoxContainer/Vitality/CurrVit");
-		_intLabel=GetNode<Label>("MarginContainer/VBoxContainer/Intelligence/CurrInt");
-		_dexLabel=GetNode<Label>("MarginContainer/VBoxContainer/Dexterity/CurrDex");
-		_lukLabel=GetNode<Label>("MarginContainer/VBoxContainer/Luck/CurrLuk");
-		_upgradePtsLabel=GetNode<Label>("MarginContainer/VBoxContainer/Level/UpgradePtsLabel");
-		_currUpgradePtsLabel=GetNode<Label>("MarginContainer/VBoxContainer/Level/CurrUpgradePtsLabel");
+		_levelLabel=GetNode<Label>("Level/CurrLevel");
+		_strLabel=GetNode<Label>("Strength/CurrStr");
+		_vitLabel=GetNode<Label>("Vitality/CurrVit");
+		_intLabel=GetNode<Label>("Intelligence/CurrInt");
+		_dexLabel=GetNode<Label>("Dexterity/CurrDex");
+		_lukLabel=GetNode<Label>("Luck/CurrLuk");
+		_upgradePtsLabel=GetNode<Label>("Level/UpgradePtsLabel");
+		_currUpgradePtsLabel=GetNode<Label>("Level/CurrUpgradePtsLabel");
 		#endregion
 
 		#region StatsButtonNode
-		_strIncreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Strength/IncreaseBtn");
-		_strDecreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Strength/DecreaseBtn");
+		_strIncreaseBtn=GetNode<Button>("Strength/IncreaseBtn");
+		_strDecreaseBtn=GetNode<Button>("Strength/DecreaseBtn");
 
-		_vitIncreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Vitality/IncreaseBtn");
-		_vitDecreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Vitality/DecreaseBtn");
+		_vitIncreaseBtn=GetNode<Button>("Vitality/IncreaseBtn");
+		_vitDecreaseBtn=GetNode<Button>("Vitality/DecreaseBtn");
 
-		_intIncreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Intelligence/IncreaseBtn");
-		_intDecreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Intelligence/DecreaseBtn");
+		_intIncreaseBtn=GetNode<Button>("Intelligence/IncreaseBtn");
+		_intDecreaseBtn=GetNode<Button>("Intelligence/DecreaseBtn");
 
-		_dexIncreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Dexterity/IncreaseBtn");
-		_dexDecreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Dexterity/DecreaseBtn");
+		_dexIncreaseBtn=GetNode<Button>("Dexterity/IncreaseBtn");
+		_dexDecreaseBtn=GetNode<Button>("Dexterity/DecreaseBtn");
 
-		_lukIncreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Luck/IncreaseBtn");
-		_lukDecreaseBtn=GetNode<Button>("MarginContainer/VBoxContainer/Luck/DecreaseBtn");
+		_lukIncreaseBtn=GetNode<Button>("Luck/IncreaseBtn");
+		_lukDecreaseBtn=GetNode<Button>("Luck/DecreaseBtn");
 		#endregion
 		
-		_assignConfirmedBtn=GetNode<Button>("MarginContainer/VBoxContainer/AssignConfirmedBtn");
+		_assignConfirmedBtn=GetNode<Button>("AssignConfirmedBtn");
 	}
 
 

@@ -1,16 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://cuimjj1sf7jpp"]
+[gd_scene load_steps=9 format=3 uid="uid://cuimjj1sf7jpp"]
 
 [ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabMenu.cs" id="1_3cdsm"]
 [ext_resource type="PackedScene" uid="uid://duvcyyth5cty7" path="res://_Scene/MenuUI/UIFrameWithCloseBtn.tscn" id="1_o1jk8"]
 [ext_resource type="Texture2D" uid="uid://ccvmioggb27ta" path="res://_Asset/UI/Stand-removebg-preview.png" id="2_m6q1b"]
 [ext_resource type="Texture2D" uid="uid://bulike7wfiry4" path="res://_Asset/UI/InventorySlot.png" id="3_espps"]
-[ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabStatsMenu.cs" id="5_xfwvp"]
+[ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabStat.cs" id="5_xfwvp"]
+[ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabInfos.cs" id="6_iwlat"]
 
 [sub_resource type="Theme" id="Theme_481jp"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i4d5m"]
 
-[node name="UI_InGameMenu" type="Control"]
+[node name="UI_TabMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -329,141 +330,168 @@ texture = ExtResource("3_espps")
 
 [node name="Stats" type="TabBar" parent="Panel/TabContainer"]
 layout_mode = 2
-script = ExtResource("5_xfwvp")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/Stats"]
 layout_mode = 0
 offset_left = 14.0
 offset_top = 45.0
-offset_right = 193.0
+offset_right = 731.0
 offset_bottom = 462.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer"]
 layout_mode = 2
 
-[node name="Level" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer"]
+[node name="StatsContainer" type="VBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("5_xfwvp")
+
+[node name="Level" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer"]
 layout_mode = 2
 
-[node name="LevelLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Level"]
+[node name="LevelLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Level"]
 layout_mode = 2
 text = "Level: 
 "
 
-[node name="CurrLevel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Level"]
+[node name="CurrLevel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Level"]
 layout_mode = 2
 text = "99"
 
-[node name="UpgradePtsLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Level"]
+[node name="UpgradePtsLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Level"]
 layout_mode = 2
 text = "Upgrade Points: "
 
-[node name="CurrUpgradePtsLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Level"]
+[node name="CurrUpgradePtsLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Level"]
 layout_mode = 2
 
-[node name="Strength" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer"]
+[node name="Strength" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer"]
 layout_mode = 2
 
-[node name="StrengthLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Strength"]
+[node name="StrengthLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Strength"]
 layout_mode = 2
 text = "Strength: 
 "
 
-[node name="CurrStr" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Strength"]
+[node name="CurrStr" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Strength"]
 layout_mode = 2
 text = "99"
 
-[node name="IncreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Strength"]
+[node name="IncreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Strength"]
 layout_mode = 2
 text = "+"
 
-[node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Strength"]
+[node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Strength"]
 layout_mode = 2
 text = "-"
 
-[node name="Vitality" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer"]
+[node name="Vitality" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer"]
 layout_mode = 2
 
-[node name="VitalityLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Vitality"]
+[node name="VitalityLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Vitality"]
 layout_mode = 2
 text = "Vitality: 
 "
 
-[node name="CurrVit" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Vitality"]
+[node name="CurrVit" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Vitality"]
 layout_mode = 2
 text = "99"
 
-[node name="IncreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Vitality"]
+[node name="IncreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Vitality"]
 layout_mode = 2
 text = "+"
 
-[node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Vitality"]
+[node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Vitality"]
 layout_mode = 2
 text = "-"
 
-[node name="Intelligence" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer"]
+[node name="Intelligence" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer"]
 layout_mode = 2
 
-[node name="Intelligence Label" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Intelligence"]
+[node name="Intelligence Label" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Intelligence"]
 layout_mode = 2
 text = "Intelligence : "
 
-[node name="CurrInt" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Intelligence"]
+[node name="CurrInt" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Intelligence"]
 layout_mode = 2
 text = "99"
 
-[node name="IncreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Intelligence"]
+[node name="IncreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Intelligence"]
 layout_mode = 2
 text = "+"
 
-[node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Intelligence"]
+[node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Intelligence"]
 layout_mode = 2
 text = "-"
 
-[node name="Dexterity" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer"]
+[node name="Dexterity" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer"]
 layout_mode = 2
 
-[node name="Dexterity Label" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Dexterity"]
+[node name="Dexterity Label" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Dexterity"]
 layout_mode = 2
 text = "Dexterity :"
 
-[node name="CurrDex" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Dexterity"]
+[node name="CurrDex" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Dexterity"]
 layout_mode = 2
 text = "99"
 
-[node name="IncreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Dexterity"]
+[node name="IncreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Dexterity"]
 layout_mode = 2
 text = "+"
 
-[node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Dexterity"]
+[node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Dexterity"]
 layout_mode = 2
 text = "-"
 
-[node name="Luck" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer"]
+[node name="Luck" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer"]
 layout_mode = 2
 
-[node name="Luck Label" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Luck"]
+[node name="Luck Label" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Luck"]
 layout_mode = 2
 text = "Luck :"
 
-[node name="CurrLuk" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Luck"]
+[node name="CurrLuk" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Luck"]
 layout_mode = 2
 text = "99"
 
-[node name="IncreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Luck"]
+[node name="IncreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Luck"]
 layout_mode = 2
 text = "+"
 
-[node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer/Luck"]
+[node name="DecreaseBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer/Luck"]
 layout_mode = 2
 text = "-"
 
-[node name="AssignConfirmedBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/VBoxContainer"]
+[node name="AssignConfirmedBtn" type="Button" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/StatsContainer"]
 layout_mode = 2
 text = "Confirmed"
+
+[node name="InfosContainer" type="VBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("6_iwlat")
+
+[node name="Exp" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/InfosContainer"]
+layout_mode = 2
+
+[node name="ExpLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/InfosContainer/Exp"]
+layout_mode = 2
+text = "CurrExp:"
+
+[node name="CurrExpLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/InfosContainer/Exp"]
+layout_mode = 2
+
+[node name="Money" type="HBoxContainer" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/InfosContainer"]
+layout_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/InfosContainer/Money"]
+layout_mode = 2
+text = "CurrMoney:"
+
+[node name="CurrMoneyLabel" type="Label" parent="Panel/TabContainer/Stats/MarginContainer/HBoxContainer/InfosContainer/Money"]
+layout_mode = 2
 
 [node name="Skills" type="TabBar" parent="Panel/TabContainer"]
 visible = false
