@@ -11,9 +11,14 @@ public partial class GlobalPlayerStats : Node,ISaveable
   public int PlayerVitality;
   public int PlayerIntelligence;
   public int PlayerDexterity;
-  public int PlayerExp;
+  public int PlayerCurrAccumExp;
   public int PlayerMoney;
   public int PlayerUpgradePoints;
+  public float PlayerMaxHp;
+  public float PlayerCurrHp;
+  public float PlayerMaxMp;
+  public float PlayerCurrMp;
+
   //TODO add luck
 
   //TODO load player save scene
@@ -33,9 +38,13 @@ public partial class GlobalPlayerStats : Node,ISaveable
         {"PlayerVitality", PlayerVitality},
         {"PlayerIntelligence", PlayerIntelligence},
         {"PlayerDexterity",PlayerDexterity},
-        {"PlayerExp",PlayerExp},
+        {"PlayerCurrAccumExp",PlayerCurrAccumExp},
         {"PlayerMoney",PlayerMoney},
-        {"PlayerUpgradePoints",PlayerUpgradePoints}
+        {"PlayerUpgradePoints",PlayerUpgradePoints},
+        {"PlayerMaxHp",PlayerMaxHp},
+        {"PlayerMaxMp",PlayerMaxMp},
+        {"PlayerCurrHp",PlayerCurrHp},
+        {"PlayerCurrMp",PlayerCurrMp},
       };
 
       return Json.Stringify(new Dictionary<string, Variant>(){
@@ -53,9 +62,13 @@ public partial class GlobalPlayerStats : Node,ISaveable
         PlayerVitality = (int)data["PlayerVitality"];
         PlayerIntelligence = (int)data["PlayerIntelligence"];
         PlayerDexterity=(int)data["PlayerDexterity"];
-        PlayerExp=(int)data["PlayerExp"];
+        PlayerCurrAccumExp=(int)data["PlayerCurrAccumExp"];
         PlayerMoney=(int)data["PlayerMoney"];
         PlayerUpgradePoints=(int)data["PlayerUpgradePoints"];
+        PlayerMaxHp=(float)data["PlayerMaxHp"];
+        PlayerMaxMp=(float)data["PlayerMaxMp"];
+        PlayerCurrHp=(float)data["PlayerCurrHp"];
+        PlayerCurrMp=(float)data["PlayerCurrMp"];
     }
     public string NewSave()
     {
@@ -65,9 +78,13 @@ public partial class GlobalPlayerStats : Node,ISaveable
         {"PlayerVitality",10},
         {"PlayerIntelligence",10},
         {"PlayerDexterity",10},
-        {"PlayerExp",0},
+        {"PlayerCurrAccumExp",0},
         {"PlayerMoney",0},
-        {"PlayerUpgradePoints",5}
+        {"PlayerUpgradePoints",5},
+        {"PlayerMaxHp",100}, //TODO read all data from data sheet
+        {"PlayerMaxMp",100},
+        {"PlayerCurrHp",100},
+        {"PlayerCurrMp",100},
       };
       return Json.Stringify(new Dictionary<string, Variant>(){
         {this.Name,newSave}

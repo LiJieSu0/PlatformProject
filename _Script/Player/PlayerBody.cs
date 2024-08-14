@@ -113,6 +113,12 @@ public partial class PlayerBody : CharacterBody2D{
 		statusManager.CurrMp+=100*time; //TODO read recover mana per second from status
 	}
 
+	private void RecoverHp(float time){
+		if(statusManager.CurrHp>statusManager.MaxHp)
+			return;
+		statusManager.CurrHp+=100*time; //TODO read recover mana per second from status
+	}
+
 	private void InitializeNode(){
 		_sprite2D=GetNode<Sprite2D>("Sprite2D");
 		_animationTree=GetNode<AnimationTree>("AnimationTree");

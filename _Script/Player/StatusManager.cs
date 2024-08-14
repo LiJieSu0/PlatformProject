@@ -9,10 +9,10 @@ public partial class StatusManager : Node2D
 	[Export]public float MaxMp;
 	[Export]public float CurrHp;
 	[Export]public float CurrMp;
-	[Export]public float AttackPower;
+	[Export]public float AttackPower; //TODO calculate attack power base on equipment and stats
 	public int CurrSkillIdx;
 	public int CurrProjectileIdx;
-	public int CurrExp;
+	public int CurrAccumExp;
 	public int CurrMoney;
 
 	#endregion
@@ -33,21 +33,19 @@ public partial class StatusManager : Node2D
 		ProjectileList.Add((PackedScene)ResourceLoader.Load("res://_Scene/Projectiles/BasicProjectile.tscn"));
 		CurrSkillIdx=0;
 		CurrProjectileIdx=0;
-		CurrExp=0;//TODO Load exp and moeny from save
-		CurrMoney=0;
-		GlobalEventPublisher.Instance.EnemyDeadEvent+=UpdateExpAndMoney;
+		GlobalEventPublisher.Instance.EnemyDeadEvent+=ReceiveExp;
 	}
 
-	public override void _Process(double delta)
-	{
-	}
 	private void InitializeStatus(){
-		MaxHp=100;
-		MaxMp=100;
-
+		MaxHp=GlobalPlayerStats.Instance.PlayerMaxHp;
+		MaxMp=GlobalPlayerStats.Instance.PlayerMaxMp;
+		CurrHp=GlobalPlayerStats.Instance.PlayerCurrHp;
+		CurrMp=GlobalPlayerStats.Instance.PlayerCurrMp;
+		CurrAccumExp=GlobalPlayerStats.Instance.PlayerCurrAccumExp;
+		CurrMoney=GlobalPlayerStats.Instance.PlayerMoney;
 		AttackPower=10;
 	}
-	private void UpdateExpAndMoney(string enemyName){
+	private void ReceiveExp(string enemyName){
 		//TODO load enemy exp sheet through enemy name
 
 	}
