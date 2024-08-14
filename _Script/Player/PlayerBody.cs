@@ -136,9 +136,7 @@ public partial class PlayerBody : CharacterBody2D{
 		_interactableArea.AreaExited+=OnInteractableAreaExit;
 	}
 
-
-
-	#region SignalFuncs
+    #region SignalFuncs
     private void OnAttackHit(Node2D body){
         if(body is BasicEnemy e){
 			e.ReceiveDamage((int)statusManager.AttackPower);
@@ -194,20 +192,17 @@ public partial class PlayerBody : CharacterBody2D{
 
 	private void PauseFunction(){
 		if(Input.IsActionJustPressed("ui_pause")){
-			GlobalEventPublisher.IsPause=!GlobalEventPublisher.IsPause;
 			GlobalEventPublisher.Instance.ShowTabMenuTrigger();
 		}
-		Engine.TimeScale=GlobalEventPublisher.IsPause?0:1;
+		Engine.TimeScale=GlobalEventPublisher.Instance.isShowMenu?0:1;
 	}
 
 	private void PlayerDead(){
 		GD.Print("Play dead animation");
-		GlobalEventPublisher.IsPause=true;// TODO change to disable all player controller
+		// TODO change to disable all player controller
 		GD.Print("Play dead UI and reload");
 	}
 
-	public void GetExpAndMoney(int exp,int money){
 
-	}
 
 }

@@ -4,7 +4,6 @@ using Godot;
 
 public partial class GlobalEventPublisher:Node{
     public static GlobalEventPublisher Instance { get; private set; }
-    public static bool IsPause=false;
     public bool isShowMenu=false;
     public delegate void ShowTabMenu();
     public event ShowTabMenu ShowTabMenuEvent;

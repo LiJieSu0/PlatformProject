@@ -5,15 +5,13 @@ using System.Collections.Generic;
 public partial class StatusManager : Node2D
 {
 	#region PlayerBasicStatus
-	[Export]public float MaxHp;
-	[Export]public float MaxMp;
-	[Export]public float CurrHp;
-	[Export]public float CurrMp;
 	[Export]public float AttackPower; //TODO calculate attack power base on equipment and stats
+	public float MaxHp;
+	public float MaxMp;
+	public float CurrHp;
+	public float CurrMp;
 	public int CurrSkillIdx;
 	public int CurrProjectileIdx;
-	public int CurrAccumExp;
-	public int CurrMoney;
 
 	#endregion
 
@@ -41,13 +39,15 @@ public partial class StatusManager : Node2D
 		MaxMp=GlobalPlayerStats.Instance.PlayerMaxMp;
 		CurrHp=GlobalPlayerStats.Instance.PlayerCurrHp;
 		CurrMp=GlobalPlayerStats.Instance.PlayerCurrMp;
-		CurrAccumExp=GlobalPlayerStats.Instance.PlayerCurrAccumExp;
-		CurrMoney=GlobalPlayerStats.Instance.PlayerMoney;
 		AttackPower=10;
 	}
-	private void ReceiveExp(string enemyName){
-		//TODO load enemy exp sheet through enemy name
 
+	private void InitializeSignal(){
+		GlobalEventPublisher.Instance.EnemyDeadEvent+=ReceiveExp;
 	}
 
+	private void ReceiveExp(string enemyName){
+		GlobalPlayerStats.Instance.PlayerCurrAccumExp+=0; //TODO base on enemy name give exp
+	}
+	
 }

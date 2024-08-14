@@ -181,7 +181,7 @@ public partial class BasicEnemy :CharacterBody2D{
             _hpBar.Value=_currHp;
             if(_currHp<=0){ 
                 isDead=true;
-                GlobalEventPublisher.Instance.EnemyDeadTrigger(this._enemyName); //Through this event Player should gain exp and moeny, ItemDropManager should drop items
+                GlobalEventPublisher.Instance.EnemyDeadTrigger(this._enemyName); //Through this event Player should gain exp, ItemDropManager should drop items
                 GetParent().QueueFree();
             }
         }
