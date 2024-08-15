@@ -39,7 +39,7 @@ public partial class StatusManager : Node2D
 		MaxMp=GlobalPlayerStats.Instance.PlayerMaxMp;
 		CurrHp=GlobalPlayerStats.Instance.PlayerCurrHp;
 		CurrMp=GlobalPlayerStats.Instance.PlayerCurrMp;
-		AttackPower=10;
+		AttackPower=10; //TODO adjust attackpower
 	}
 
 	private void InitializeSignal(){
@@ -49,5 +49,5 @@ public partial class StatusManager : Node2D
 	private void ReceiveExp(string enemyName){
 		GlobalPlayerStats.Instance.PlayerCurrAccumExp+=0; //TODO base on enemy name give exp
 	}
-	
+
 }
