@@ -190,24 +190,20 @@ public partial class BasicEnemy :CharacterBody2D{
     }
     #endregion
 
-
-    public void enableFlash(){
+    public void FlashForDuration(float duration){
         _sprite.Material=shader;
-
-
+        
+        var timer = new Timer();
+        timer.WaitTime = duration;
+        timer.OneShot = true;
+        timer.Timeout += () => {
+            _sprite.Material=null;
+            timer.QueueFree();
+            };
+        AddChild(timer);
+        timer.Start();
     }
-public void FlashForDuration(float duration)
-{
-    _sprite.Material=shader;
-    
-    var timer = new Timer();
-    timer.WaitTime = duration;
-    timer.OneShot = true;
-    timer.Timeout += () => {
-        _sprite.Material=null;
-        timer.QueueFree();
-        };
-    AddChild(timer);
-    timer.Start();
-}
+
+
+
 }

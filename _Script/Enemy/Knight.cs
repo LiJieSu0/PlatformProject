@@ -55,8 +55,7 @@ public partial class Knight : BasicEnemy
 		}
 	}
 
-    public override void Attack()
-    {
+    public override void Attack(){
         base.Attack();
     }
 

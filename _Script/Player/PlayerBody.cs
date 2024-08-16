@@ -22,6 +22,8 @@ public partial class PlayerBody : CharacterBody2D{
 	#region Variables
 	public bool isFaceRight=true;
 	private bool isAttack=false;
+	private bool isDashCD=false;
+	private float dashCD=2;
 	private Area2D areaInteractableRange=null; //TODO change to list
 	#endregion
     
@@ -43,7 +45,10 @@ public partial class PlayerBody : CharacterBody2D{
 		InteractWithEnivronment();
 		ChangeCurrSkill();
 	}
+
+	#region InputFuncs
 	private void PlayerMovement(float delta){ 
+		Dash(delta);
 		AttackFunction();
 		//TODO add cast animation
 		if(isAttack)
@@ -82,17 +87,6 @@ public partial class PlayerBody : CharacterBody2D{
 		MoveAndSlide();
 	}
 
-
-	public void ReceiveDamage(float damage){
-		statusManager.CurrHp-=damage;
-		if(statusManager.CurrHp<=0){
-			PlayerDead();
-		}
-	}
-	public void DecreaseMana(int mana){
-		statusManager.CurrMp-=mana;
-	}
-
 	private void AttackFunction(){
 		if(Input.IsActionJustPressed("ui_cast")){
 			_skillNode.CastSkill();
@@ -107,6 +101,68 @@ public partial class PlayerBody : CharacterBody2D{
 		}
 	}
 
+	private void InteractWithEnivronment(){
+		if(Input.IsActionJustPressed("ui_interact")&&areaInteractableRange!=null){
+			INPC npc=(INPC)areaInteractableRange;
+			npc.InteractReaction();
+		}
+	}
+		private void ChangeCurrSkill(){ 
+		for (int i = 0; i < 3; i++){
+			if (Input.IsActionJustPressed($"ui_skill_{i + 1}")){
+				statusManager.CurrSkillIdx = i;
+				GlobalEventPublisher.Instance.SkillChangeTrigger(i);
+				break;
+			}
+		}
+	}
+
+	private void PauseFunction(){
+		if(Input.IsActionJustPressed("ui_pause")){
+			GlobalEventPublisher.Instance.ShowTabMenuTrigger();
+		}
+		Engine.TimeScale=GlobalEventPublisher.Instance.isShowMenu?0:1;
+	}
+	
+	private void Dash(float delta){
+		if(isDashCD){
+			dashCD-=delta;
+		}
+		if(dashCD<=0){
+			isDashCD=false;
+			dashCD=2; //TODO set const for dash CD
+		}
+		if(Input.IsActionJustPressed("ui_dash")){
+			if(isDashCD)
+				return;
+			_animationState.Travel("Run"); //TODO add dash animation
+			isDashCD=true;
+			if(isFaceRight){
+				Velocity=new Vector2(1,0)*2000;
+			}
+			else{
+				Velocity=new Vector2(-1,0)*2000;
+			}
+		}
+
+	}
+
+	#endregion
+
+
+
+
+	#region StatusUpdate
+	public void ReceiveDamage(float damage){
+		statusManager.CurrHp-=damage;
+		if(statusManager.CurrHp<=0){
+			PlayerDead();
+		}
+	}
+	public void DecreaseMana(int mana){
+		statusManager.CurrMp-=mana;
+	}
+
 	private void RecoverMana(float time){
 		if(statusManager.CurrMp>statusManager.MaxMp)
 			return;
@@ -118,6 +174,7 @@ public partial class PlayerBody : CharacterBody2D{
 			return;
 		statusManager.CurrHp+=100*time; //TODO read recover mana per second from status
 	}
+	#endregion
 
 	private void InitializeNode(){
 		_sprite2D=GetNode<Sprite2D>("Sprite2D");
@@ -171,30 +228,6 @@ public partial class PlayerBody : CharacterBody2D{
 		if(Input.IsActionJustPressed("reduceMana")){
 			DecreaseMana(10);
 		}
-	}
-
-	private void InteractWithEnivronment(){
-		if(Input.IsActionJustPressed("ui_interact")&&areaInteractableRange!=null){
-			INPC npc=(INPC)areaInteractableRange;
-			npc.InteractReaction();
-		}
-	}
-
-	private void ChangeCurrSkill(){ 
-		for (int i = 0; i < 3; i++){
-			if (Input.IsActionJustPressed($"ui_skill_{i + 1}")){
-				statusManager.CurrSkillIdx = i;
-				GlobalEventPublisher.Instance.SkillChangeTrigger(i);
-				break;
-			}
-		}
-	}
-
-	private void PauseFunction(){
-		if(Input.IsActionJustPressed("ui_pause")){
-			GlobalEventPublisher.Instance.ShowTabMenuTrigger();
-		}
-		Engine.TimeScale=GlobalEventPublisher.Instance.isShowMenu?0:1;
 	}
 
 	private void PlayerDead(){
