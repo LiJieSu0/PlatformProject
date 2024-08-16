@@ -2,6 +2,8 @@ using System;
 using Godot;
 public partial class PlayerBody : CharacterBody2D{
 
+	[Export] ShaderMaterial dashShader;
+
 	#region MovementVairables
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
@@ -23,6 +25,8 @@ public partial class PlayerBody : CharacterBody2D{
 	public bool isFaceRight=true;
 	private bool isAttack=false;
 	private bool isDashCD=false;
+	private bool isDashing=false;
+	private float dashingTime=0.5f;
 	private float dashCD=2;
 	private Area2D areaInteractableRange=null; //TODO change to list
 	#endregion
@@ -48,7 +52,8 @@ public partial class PlayerBody : CharacterBody2D{
 
 	#region InputFuncs
 	private void PlayerMovement(float delta){ 
-		Dash(delta);
+		if(Input.IsActionJustPressed("ui_dash")&&!isDashing)
+			Dash();
 		AttackFunction();
 		//TODO add cast animation
 		if(isAttack)
@@ -124,27 +129,55 @@ public partial class PlayerBody : CharacterBody2D{
 		Engine.TimeScale=GlobalEventPublisher.Instance.isShowMenu?0:1;
 	}
 	
-	private void Dash(float delta){
-		if(isDashCD){
-			dashCD-=delta;
-		}
-		if(dashCD<=0){
-			isDashCD=false;
-			dashCD=2; //TODO set const for dash CD
-		}
-		if(Input.IsActionJustPressed("ui_dash")){
-			if(isDashCD)
-				return;
-			_animationState.Travel("Run"); //TODO add dash animation
-			isDashCD=true;
-			if(isFaceRight){
-				Velocity=new Vector2(1,0)*2000;
+	private void Dash(){
+		isDashing=true;
+		Timer dashTimer = new Timer();
+        AddChild(dashTimer);
+        dashTimer.WaitTime = 0.5;
+        dashTimer.OneShot = true;
+		dashTimer.Timeout+=()=>{
+			isDashing=false;
+			dashTimer.QueueFree();
+		};
+		dashTimer.Start();
+		Timer shaderTimer = new Timer();
+		AddChild(shaderTimer);
+		shaderTimer.WaitTime = 0.01;
+		shaderTimer.Autostart = true;
+		shaderTimer.Timeout += () =>
+		{
+			if (isDashing){
+				DashShaderCreate();
 			}
-			else{
-				Velocity=new Vector2(-1,0)*2000;
+			else
+			{
+				shaderTimer.Stop();
+				shaderTimer.QueueFree();
 			}
+		};
+		shaderTimer.Start();
+		if(isFaceRight){
+			Velocity=new Vector2(1,0)*2000;
 		}
+		else{
+			Velocity=new Vector2(-1,0)*2000;
+		}
+	}
 
+	private void DashShaderCreate(){
+		GD.Print("Create duplicate");
+		Sprite2D duplicate=(Sprite2D)_sprite2D.Duplicate(15);
+		duplicate.Material=dashShader;
+		duplicate.GlobalPosition=this.GlobalPosition+new Vector2(0,-0.01f);
+		GetTree().Root.AddChild(duplicate);
+		Timer disappearTimer=new Timer();
+		AddChild(disappearTimer);
+		disappearTimer.WaitTime=0.1;
+		disappearTimer.Timeout+=()=>{
+			duplicate.QueueFree();
+			disappearTimer.QueueFree();
+		};
+		disappearTimer.Start();
 	}
 
 	#endregion

@@ -1,9 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://djhutcvenskq"]
+[gd_scene load_steps=43 format=3 uid="uid://djhutcvenskq"]
 
 [ext_resource type="Script" path="res://_Script/Player/StatusManager.cs" id="1_3b1ie"]
 [ext_resource type="Texture2D" uid="uid://bxpj0osjj0peu" path="res://_Asset/Player/Idle-Sheet.png" id="1_hjll8"]
 [ext_resource type="Script" path="res://_Script/Player/PlayerBody.cs" id="1_thw5p"]
 [ext_resource type="Texture2D" uid="uid://c7vdpo5bm5qnk" path="res://_Asset/Player/Run-Sheet.png" id="1_w7w2m"]
+[ext_resource type="Shader" path="res://_Script/Shader/dash_shader.gdshader" id="3_hqt5l"]
 [ext_resource type="Texture2D" uid="uid://rw5qm151fr0o" path="res://_Asset/Player/Jump-Start-Sheet.png" id="4_cu7w2"]
 [ext_resource type="Texture2D" uid="uid://dho18lkgfpbsv" path="res://_Asset/Player/Jump-End-Sheet.png" id="5_m8rwf"]
 [ext_resource type="Texture2D" uid="uid://ia6i6v1lqve1" path="res://_Asset/Player/Attack-01-Sheet.png" id="6_iqr56"]
@@ -14,8 +15,18 @@
 [ext_resource type="Script" path="res://_Script/Player/OrbitNode.cs" id="12_78wl7"]
 [ext_resource type="Texture2D" uid="uid://cn2arbyguns53" path="res://_Asset/UI/ball_only.png" id="13_0y70c"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqneu"]
+shader = ExtResource("3_hqt5l")
+shader_parameter/opacity = 0.5
+shader_parameter/r = null
+shader_parameter/g = 0.1
+shader_parameter/b = 0.7
+shader_parameter/mix_color = 0.4
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mmqsd"]
 height = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6kqk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2t02n"]
 size = Vector2(20, 46)
@@ -452,12 +463,14 @@ script = ExtResource("1_3b1ie")
 collision_layer = 16
 collision_mask = 13
 script = ExtResource("1_thw5p")
+dashShader = SubResource("ShaderMaterial_gqneu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 visible = false
 shape = SubResource("CapsuleShape2D_mmqsd")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+material = SubResource("ShaderMaterial_g6kqk")
 texture = ExtResource("1_w7w2m")
 hframes = 8
 
