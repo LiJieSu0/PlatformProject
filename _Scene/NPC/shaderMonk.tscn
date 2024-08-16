@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://hj1qldv6x7rd"]
+
+[ext_resource type="Shader" path="res://_Script/Shader/first_shader.gdshader" id="1_8ot7p"]
+[ext_resource type="Script" path="res://_Script/NPC/shaderMonk.cs" id="1_xq8nb"]
+[ext_resource type="Texture2D" uid="uid://csiuyh642yys6" path="res://_Asset/NPC/monkNPC.png" id="2_3vdfo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8b2n"]
+resource_local_to_scene = true
+shader = ExtResource("1_8ot7p")
+shader_parameter/flash_color = Color(0.92549, 0.764706, 0.654902, 1)
+shader_parameter/flash_modifier = 0.6
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_xq8nb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_u8b2n")
+position = Vector2(412, 179)
+scale = Vector2(5, 5)
+texture = ExtResource("2_3vdfo")

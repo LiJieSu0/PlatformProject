@@ -31,6 +31,10 @@ general/uses_dotnet=true
 
 project/assembly_name="Platform Project"
 
+[editor_plugins]
+
+enabled=PackedStringArray()
+
 [input]
 
 ui_attack={

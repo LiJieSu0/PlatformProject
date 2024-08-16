@@ -6,6 +6,7 @@ using System.Reflection.Metadata.Ecma335;
 public partial class BasicEnemy :CharacterBody2D{
     public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
     [Export] public EnemyRes enemyRes;
+    [Export] ShaderMaterial shader;
 	[Export]public float Speed = 100.0f;
 
     
@@ -61,6 +62,7 @@ public partial class BasicEnemy :CharacterBody2D{
         _hpBar=GetNode<TextureProgressBar>("MobHpBar");
         _detectArea=GetNode<Area2D>("DetectArea");
         _damageArea=GetNode<Area2D>("Sprite2D/DamageArea");
+        _sprite.Material=shader; //inital shader
         try{
             _attackRangeArea=GetNode<Area2D>("Sprite2D/AttackRange");
             _attackTimer=GetNode<Timer>("AttackTimer");

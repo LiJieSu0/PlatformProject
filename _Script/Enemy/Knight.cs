@@ -3,7 +3,7 @@ using Godot;
 
 public partial class Knight : BasicEnemy
 {
-
+	
 
     public override void _Ready()
     {
