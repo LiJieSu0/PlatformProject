@@ -9,4 +9,3 @@ void fragment() {
 	color.rgb=mix(color.rgb,flash_color.rgb,0.6 + 0.2 *sin(TIME * 15.0));
 	COLOR=color;
 }
-

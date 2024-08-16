@@ -57,10 +57,12 @@ offset_right = 372.5
 offset_bottom = 267.5
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 0
 metadata/_edit_lock_ = true
 
 [node name="Items" type="TabBar" parent="Panel/TabContainer"]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="EquipSlots" type="TextureRect" parent="Panel/TabContainer/Items"]
 layout_mode = 0
@@ -330,6 +332,7 @@ texture = ExtResource("3_espps")
 [node name="Stats" type="TabBar" parent="Panel/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/Stats"]
 layout_mode = 0
@@ -496,7 +499,9 @@ layout_mode = 2
 [node name="Skills" type="TabBar" parent="Panel/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="Quest" type="TabBar" parent="Panel/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 3

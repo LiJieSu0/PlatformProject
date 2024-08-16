@@ -3,7 +3,7 @@ using Godot;
 
 public partial class Knight : BasicEnemy
 {
-	
+	//TODO animation redo
 
     public override void _Ready()
     {

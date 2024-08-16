@@ -62,7 +62,6 @@ public partial class BasicEnemy :CharacterBody2D{
         _hpBar=GetNode<TextureProgressBar>("MobHpBar");
         _detectArea=GetNode<Area2D>("DetectArea");
         _damageArea=GetNode<Area2D>("Sprite2D/DamageArea");
-        _sprite.Material=shader; //inital shader
         try{
             _attackRangeArea=GetNode<Area2D>("Sprite2D/AttackRange");
             _attackTimer=GetNode<Timer>("AttackTimer");
@@ -179,6 +178,7 @@ public partial class BasicEnemy :CharacterBody2D{
     public void ReceiveDamage(float damage){
         if(!isDead){
             _hpBar.Show();
+            FlashForDuration(0.5f);
             this._currHp-=damage;
             _hpBar.Value=_currHp;
             if(_currHp<=0){ 
@@ -191,4 +191,23 @@ public partial class BasicEnemy :CharacterBody2D{
     #endregion
 
 
+    public void enableFlash(){
+        _sprite.Material=shader;
+
+
+    }
+public void FlashForDuration(float duration)
+{
+    _sprite.Material=shader;
+    
+    var timer = new Timer();
+    timer.WaitTime = duration;
+    timer.OneShot = true;
+    timer.Timeout += () => {
+        _sprite.Material=null;
+        timer.QueueFree();
+        };
+    AddChild(timer);
+    timer.Start();
+}
 }

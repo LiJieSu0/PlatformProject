@@ -1,14 +1,20 @@
-[gd_scene load_steps=26 format=3 uid="uid://ds567o72hasq4"]
+[gd_scene load_steps=28 format=3 uid="uid://ds567o72hasq4"]
 
 [ext_resource type="Script" path="res://_Script/Enemy/Knight.cs" id="1_4gky3"]
 [ext_resource type="Resource" uid="uid://blelmlxfeqqae" path="res://_Resource/Enemies/Knight.tres" id="2_qsqvd"]
 [ext_resource type="Texture2D" uid="uid://cvmt3mxhnqolr" path="res://_Asset/Enemy/FreeKnight_v1 (1)/120x80_PNGSheets/_Attack.png" id="3_fabnc"]
 [ext_resource type="Texture2D" uid="uid://besj4aimfeibr" path="res://_Asset/Enemy/FreeKnight_v1 (1)/120x80_PNGSheets/_Idle.png" id="3_w6a2m"]
+[ext_resource type="Shader" path="res://_Script/Shader/first_shader.gdshader" id="3_wifxh"]
 [ext_resource type="PackedScene" uid="uid://0uwqmoyxcw0u" path="res://_Scene/Enemy/MobHpBar.tscn" id="4_4slh8"]
 [ext_resource type="Script" path="res://_Script/Enemy/ItemDropManager.cs" id="5_iprd0"]
 [ext_resource type="Texture2D" uid="uid://bobf57qt4fxrr" path="res://_Asset/Enemy/FreeKnight_v1 (1)/120x80_PNGSheets/_Death.png" id="5_qi6ya"]
 [ext_resource type="Texture2D" uid="uid://dmdkuok513ihr" path="res://_Asset/Enemy/FreeKnight_v1 (1)/120x80_PNGSheets/_Run.png" id="6_f7aae"]
 [ext_resource type="AudioStream" uid="uid://c5c1ek4t88kkp" path="res://_Asset/Audio/SoundEffect/Slash.mp3" id="7_6v1oc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pcq4t"]
+shader = ExtResource("3_wifxh")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t0cyg"]
 size = Vector2(20, 38)
@@ -25,46 +31,34 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("Sprite2D/DamageArea/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D/DamageArea/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [true, false, false, true]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("3_fabnc")]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:hframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -284,7 +278,7 @@ states/Attack/position = Vector2(503.136, 68)
 states/Death/node = SubResource("AnimationNodeAnimation_7vp4e")
 states/Death/position = Vector2(777, 100)
 states/Idle/node = SubResource("AnimationNodeAnimation_jjvj6")
-states/Idle/position = Vector2(516.136, 188)
+states/Idle/position = Vector2(514.136, 188)
 states/Run/node = SubResource("AnimationNodeAnimation_1epwm")
 states/Run/position = Vector2(335, 145)
 transitions = ["Death", "End", SubResource("AnimationNodeStateMachineTransition_8scil")]
@@ -300,6 +294,7 @@ collision_layer = 8
 collision_mask = 21
 script = ExtResource("1_4gky3")
 enemyRes = ExtResource("2_qsqvd")
+shader = SubResource("ShaderMaterial_pcq4t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(6, -3)
@@ -348,9 +343,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D"]
-libraries = {
-"": SubResource("AnimationLibrary_r5lm4")
-}
 tree_root = SubResource("AnimationNodeStateMachine_0cloy")
 anim_player = NodePath("../AnimationPlayer")
 

@@ -487,9 +487,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D"]
-libraries = {
-"": SubResource("AnimationLibrary_ky0ax")
-}
 tree_root = SubResource("AnimationNodeStateMachine_xfl61")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/isIdle = false
