@@ -22,13 +22,14 @@ public partial class PlayerBody : CharacterBody2D{
 	#endregion
 
 	#region Variables
+	private bool isTalking=false;
 	public bool isFaceRight=true;
 	private bool isAttack=false;
 	private bool isDashCD=false;
 	private bool isDashing=false;
 	private float dashingTime=0.5f;
 	private float dashCD=2;
-	private Area2D areaInteractableRange=null; //TODO change to list
+	private INPC npcInRange=null; //TODO change to list
 	#endregion
     
 	#region Resource
@@ -47,15 +48,17 @@ public partial class PlayerBody : CharacterBody2D{
 		RecoverMana((float)delta);
 		TestFunction();
 		InteractWithEnivronment();
+		TalkToNpc();
 		ChangeCurrSkill();
 	}
 
 	#region InputFuncs
-	private void PlayerMovement(float delta){ 
+	private void PlayerMovement(float delta){
+		if(isTalking)
+			return; 
 		if(Input.IsActionJustPressed("ui_dash")&&!isDashing)
 			Dash();
 		AttackFunction();
-		//TODO add cast animation
 		if(isAttack)
 			return;
 		Vector2 velocity = Velocity;
@@ -107,10 +110,19 @@ public partial class PlayerBody : CharacterBody2D{
 	}
 
 	private void InteractWithEnivronment(){
-		if(Input.IsActionJustPressed("ui_interact")&&areaInteractableRange!=null){
-			INPC npc=(INPC)areaInteractableRange;
-			npc.InteractReaction();
+		if(Input.IsActionJustPressed("ui_interact")){ //TODO interact with enviornment
 		}
+	}
+
+	private void TalkToNpc(){
+		if(Input.IsActionJustPressed("ui_talk")&&npcInRange!=null&&!isTalking){
+			npcInRange.InteractReaction();
+			isTalking=true;
+		}
+		if(Input.IsActionJustPressed("ui_accept")&&isTalking){
+			GlobalDialogManager.Instance.NextDialogueTrigger();
+		}
+
 	}
 		private void ChangeCurrSkill(){ 
 		for (int i = 0; i < 3; i++){
@@ -129,7 +141,7 @@ public partial class PlayerBody : CharacterBody2D{
 		Engine.TimeScale=GlobalEventPublisher.Instance.isShowMenu?0:1;
 	}
 	
-	private void Dash(){
+	private void Dash(){ //TODO improve dash function
 		isDashing=true;
 		Timer dashTimer = new Timer();
         AddChild(dashTimer);
@@ -165,20 +177,20 @@ public partial class PlayerBody : CharacterBody2D{
 	}
 
 	private void DashShaderCreate(){
-		GD.Print("Create duplicate");
 		Sprite2D duplicate=(Sprite2D)_sprite2D.Duplicate(15);
 		duplicate.Material=dashShader;
 		duplicate.GlobalPosition=this.GlobalPosition+new Vector2(0,-0.01f);
 		GetTree().Root.AddChild(duplicate);
 		Timer disappearTimer=new Timer();
 		AddChild(disappearTimer);
-		disappearTimer.WaitTime=0.1;
+		disappearTimer.WaitTime=0.05;
 		disappearTimer.Timeout+=()=>{
 			duplicate.QueueFree();
 			disappearTimer.QueueFree();
 		};
 		disappearTimer.Start();
 	}
+
 
 	#endregion
 
@@ -224,6 +236,7 @@ public partial class PlayerBody : CharacterBody2D{
 		_attackArea.BodyEntered+=OnAttackHit;
 		_interactableArea.AreaEntered+=OnInteractableAreaEnter;
 		_interactableArea.AreaExited+=OnInteractableAreaExit;
+		GlobalDialogManager.Instance.EndDialogueEvent+=OnDialogueEnd;
 	}
 
     #region SignalFuncs
@@ -247,11 +260,15 @@ public partial class PlayerBody : CharacterBody2D{
 	
 	private void OnInteractableAreaEnter(Area2D area){
 		if(area is INPC)
-		areaInteractableRange=area;
+			npcInRange=area as INPC;
 	}
 	private void OnInteractableAreaExit(Area2D area){
-		areaInteractableRange=null;
+		npcInRange=null;
 	}
+	private void OnDialogueEnd(string key){
+		isTalking=false;
+	}
+
 	#endregion
 
 	public void TestFunction(){
