@@ -11,7 +11,7 @@ public partial class GlobalDialogManager : Node
 	public delegate void EndDialogue(string key);
 	public event EndDialogue EndDialogueEvent;
 
-	public delegate void SelectOption(int idx);
+	public delegate void SelectOption(string key);
 	public event SelectOption SelectOptionEvent;
 
 	public override void _Ready(){
@@ -29,8 +29,8 @@ public partial class GlobalDialogManager : Node
 		EndDialogueEvent?.Invoke(key);
 	}
 
-	public void SelectOptionTrigger(int idx){
-		SelectOptionEvent?.Invoke(idx);
+	public void SelectOptionTrigger(string key){
+		SelectOptionEvent?.Invoke(key);
 	}
 
 }

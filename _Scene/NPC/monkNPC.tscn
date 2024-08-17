@@ -20,6 +20,7 @@ script = ExtResource("2_qedpl")
 shape = SubResource("CapsuleShape2D_frat4")
 
 [node name="DialogBallon" type="Sprite2D" parent="InteractablNPC"]
+visible = false
 modulate = Color(1, 1, 1, 0.67451)
 position = Vector2(-60, -56)
 scale = Vector2(0.3, 0.3)

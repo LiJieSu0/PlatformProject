@@ -1,0 +1,24 @@
+{
+    "H1": {
+        "Lines": [
+            "Hello",
+            "Greeting"
+        ],
+        "Options": [
+            "Good bye",
+            "Good night"
+        ],
+        "Results": [
+            "H2",
+            "H3"
+        ]
+    },
+    "H2": {
+        "Lines": [
+            "Hi",
+            "Good day"
+        ],
+        "Options": [],
+        "Results": []
+    }
+}
