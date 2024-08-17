@@ -122,7 +122,7 @@ public partial class PlayerBody : CharacterBody2D{
 		if(Input.IsActionJustPressed("ui_accept")&&isTalking){
 			GlobalDialogManager.Instance.NextDialogueTrigger();
 		}
-
+		
 	}
 		private void ChangeCurrSkill(){ 
 		for (int i = 0; i < 3; i++){
