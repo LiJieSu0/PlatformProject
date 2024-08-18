@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://brh1wuod5y5am"]
+
+[ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TradingMenu.cs" id="1_rsr4s"]
+[ext_resource type="PackedScene" uid="uid://duvcyyth5cty7" path="res://_Scene/MenuUI/UIFrameWithCloseBtn.tscn" id="1_xnf7i"]
+[ext_resource type="Texture2D" uid="uid://5sbn2xu4v2kj" path="res://_Asset/NPC/Icon/PortraitPack2/Andrew.png" id="2_t2nm3"]
+
+[node name="UI_TradingMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_rsr4s")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -423.0
+offset_top = -283.5
+offset_right = 423.0
+offset_bottom = 283.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIFrameWithCloseBtn" parent="Panel" instance=ExtResource("1_xnf7i")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 255.0
+offset_top = 23.5
+offset_right = -253.0
+offset_bottom = -481.5
+grow_vertical = 1
+MenuTitle = "Trade"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel"]
+position = Vector2(125, 75.5)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_t2nm3")

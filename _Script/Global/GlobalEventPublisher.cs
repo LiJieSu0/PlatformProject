@@ -12,6 +12,8 @@ public partial class GlobalEventPublisher:Node{
 
     public delegate void EnemyDead(string enemyName);
     public event EnemyDead EnemyDeadEvent;
+    public delegate void ShowTradingMenu();
+    public event ShowTradingMenu ShowTradingMenuEvent;
     public override void _Ready(){
 		Instance=this;
     }
@@ -26,6 +28,10 @@ public partial class GlobalEventPublisher:Node{
 
     public void ShowTabMenuTrigger(){
         ShowTabMenuEvent?.Invoke();
+    }
+
+    public void ShowTradingMenuTrigger(){
+        ShowTradingMenuEvent?.Invoke();
     }
 
 }

@@ -6,6 +6,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
 {
 	public static GlobalPlayerStats Instance;
 
+  #region Stats
   public int PlayerLevel;
   public int PlayerStrength;
   public int PlayerVitality;
@@ -19,8 +20,7 @@ public partial class GlobalPlayerStats : Node,ISaveable
   public float PlayerCurrHp;
   public float PlayerMaxMp;
   public float PlayerCurrMp;
-
-  //TODO add luck
+  #endregion
 
   //TODO load player save scene
   //TODO load player stats from global

@@ -1,9 +1,13 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Collections;
 
 public partial class InteractableNPC : Area2D,INPC
 {
+	[Export] string[] SpecialOptions;
+	[Export] string[] SpecialResults;
+
 	#region Node
 	Control _interactableMark;
 	Control _optionsBtnContainer;
@@ -17,7 +21,7 @@ public partial class InteractableNPC : Area2D,INPC
 	private bool isWaitingForOptions=false;
 	private bool isOptionShowing=false;
 	private int currDailogIdx=0;
-	string[] _lines; 
+	Array<string> _lines; 
 	Dictionary<string, string[]> dialogueOptions;
 
 	#endregion
@@ -52,8 +56,8 @@ public partial class InteractableNPC : Area2D,INPC
 
     private void StartDialogue(string key){
 		_dialogLoader.SetLinesKey(key);
-		_lines=_dialogLoader.GetLines(); //TODO handle key error
-		if(_lines.Length==0){
+		_lines=new Array<string>(_dialogLoader.GetLines()); //TODO handle key error
+		if(_lines.Count==0){
 			GD.Print("No lines for this key");
 			return;
 		}
@@ -62,36 +66,43 @@ public partial class InteractableNPC : Area2D,INPC
 		GD.Print("start new Dialog "+_dialogLoader.currKey) ;
     }
 
-	private void OnNextDialogue(){ //TODO refactor change to options
+	private void OnNextDialogue(){
 		if(isWaitingForOptions)
 			return;
 		currDailogIdx++;
 		//TODO refactor the conditional
-		GD.Print(" curr IDX "+currDailogIdx);
-		GD.Print("options "+_dialogLoader.GetOptions().Length);
-		if(currDailogIdx>=_lines.Length&&_dialogLoader.GetOptions().Length==0){ //The last line and no options
+		if(currDailogIdx>=_lines.Count&&_dialogLoader.GetOptions().Length==0){ //The last line and no options
 			GlobalDialogManager.Instance.EndDialogueTrigger(""); //Dialogue ends here
 			_dialogBallon.Hide();
 			return;
 		}
 		_dialogContentLabel.Text=_lines[currDailogIdx];
-		if(currDailogIdx==_lines.Length-1&&_dialogLoader.GetOptions().Length!=0){
+		if(currDailogIdx==_lines.Count-1&&_dialogLoader.GetOptions().Length!=0){
 			isWaitingForOptions=true;
-			ShowingOptions(_dialogLoader.GetOptions());
+			Array<string> options=new Array<string>(_dialogLoader.GetOptions());
+			Array<string> results=new Array<string>(_dialogLoader.GetResults());
+			ShowingOptions(options,results);
 		}
     }
 
-    private void ShowingOptions(string[] options){
+    private void ShowingOptions(Array<string> options,Array<string> results){
+		//TODO add special options and results here
+		// CreateSpecialOptions("special order",ShowShop);
+		options.Add("Show shop");
 		int optIdx=0;
 		foreach(string option in options){
 			Button tmp=new Button();
 			tmp.Text=option;
 			int tmpIdx=optIdx;
-			tmp.Pressed+=()=>{
+			tmp.Pressed+=()=>{ //TODO refactor
+				if(option=="Show shop"){
+					ShowShop();
+					return;
+				}
 				isWaitingForOptions=false;
 				int selectedIdx=tmpIdx;
 				GlobalDialogManager.Instance.SelectOptionTrigger(selectedIdx.ToString());
-				StartDialogue(_dialogLoader.GetResults()[selectedIdx]); //TODO start a new dialogue stream through options
+				StartDialogue(results[selectedIdx]);
 				FreeAllOptions();
 			};
 			_optionsBtnContainer.AddChild(tmp);
@@ -123,4 +134,17 @@ public partial class InteractableNPC : Area2D,INPC
 		_dialogLoader.LoadAllDialog();
 	}
 
+	private void CreateSpecialOptions(string option,Action results){
+		GD.Print("some special options "+option);
+		results();
+	}
+
+	private void ShowShop(){
+		GD.Print("Shop showing");
+		//TODO create shop interface
+		GlobalEventPublisher.Instance.ShowTradingMenuTrigger();
+		GlobalDialogManager.Instance.EndDialogueTrigger("");
+		_dialogBallon.Hide();
+		
+	}
 }
