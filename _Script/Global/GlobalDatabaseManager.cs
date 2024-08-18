@@ -37,7 +37,8 @@ public partial class GlobalDatabaseManager:Node{
                                                     (string)tmp["ItemTexturePath"],
                                                     (int)tmp["BasicPrice"],
                                                     (string)tmp["ItemDescription"],
-                                                    (int)tmp["ItemTypes"]);
+                                                    (int)tmp["ItemTypes"],
+                                                    (int)tmp["StackLimit"]);
             GD.Print((ItemType)tmpItemModel.ItemTypes);
             ItemListDB[(int)tmp["ItemNo"]]=tmpItemModel;
             ItemModel tmpModel=(ItemModel)ItemListDB[(int)tmp["ItemNo"]];

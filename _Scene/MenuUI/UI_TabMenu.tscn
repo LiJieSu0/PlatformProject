@@ -177,6 +177,14 @@ offset_right = 34.0
 offset_bottom = 34.0
 expand_mode = 1
 
+[node name="ItemAmountLabel" type="Label" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager/ItemInSlot1/ItemTextureRect"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 32.0
+offset_bottom = 35.0
+horizontal_alignment = 2
+
 [node name="ItemInSlot2" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager"]
 layout_mode = 2
 texture = ExtResource("3_espps")
@@ -189,6 +197,15 @@ offset_top = 3.0
 offset_right = 34.0
 offset_bottom = 34.0
 expand_mode = 1
+
+[node name="ItemAmountLabel" type="Label" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager/ItemInSlot2/ItemTextureRect"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 32.0
+offset_bottom = 35.0
+text = "
+"
 
 [node name="Stats" type="TabBar" parent="Panel/TabContainer"]
 visible = false

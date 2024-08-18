@@ -34,6 +34,10 @@ public partial class UI_InventoryManager : GridContainer{
 
     public override void _Process(double delta){
 		MovingItem(_currTextureRect);
+		if(Input.IsActionJustPressed("ui_talk")){
+			AddItem(1);
+
+		}
 	}
 
     private void InitializeNode(){ //TODO add item info to every slot
@@ -61,6 +65,7 @@ public partial class UI_InventoryManager : GridContainer{
 		if(@event is InputEventMouseButton mouseEvent &&mouseEvent.ButtonIndex==MouseButton.Left&&mouseEvent.Pressed){
 			_originalSlot=itemTextureRect.GetParent<UI_ItemInSlot>();
 			var tmp=itemTextureRect.Duplicate();
+			_originalSlot.ClearAmountLabel();
 			GetTree().Root.AddChild(tmp);
 			_currTextureRect=(TextureRect)tmp;
 			itemTextureRect.Texture=null;
@@ -94,6 +99,7 @@ public partial class UI_InventoryManager : GridContainer{
 		if(Input.IsActionJustReleased("ui_mouse_left")){
 			if(_currSlot==null){
 				_originalSlot.GetChild<TextureRect>(0).Texture=item.Texture; //TODO move item data
+				//TODO update label
 			}
 			else{
 				_currSlot.GetChild<TextureRect>(0).Texture=item.Texture;
@@ -111,9 +117,12 @@ public partial class UI_InventoryManager : GridContainer{
 				firstEmptySlot=slot;
 				continue;
 			}
-			if(slot._currItem==item){
+			if(slot._currItem==item&&slot._itemAmount<item.StackLimit){
 				slot._itemAmount++;
+				slot.UpdateAmountLabel();
+				return;
 			}
+
 		}
 		if(firstEmptySlot==null){
 			GD.Print("Inventory is full");
@@ -123,7 +132,6 @@ public partial class UI_InventoryManager : GridContainer{
 			firstEmptySlot._itemAmount=1;
 			firstEmptySlot.GetChild<TextureRect>(0).Texture=GD.Load<Texture2D>(item.ItemTexturePath);
 		}
-
 	}
 
 }

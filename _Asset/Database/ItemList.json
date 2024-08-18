@@ -7,7 +7,8 @@
   "ItemTexturePath": "res:\/\/_Asset\/Item\/potions\/pt1.png",
   "BasicPrice": 10,
   "ItemDescription": "Recover Hp",
-  "ItemTypes": 2
+  "ItemTypes": 2,
+  "StackLimit": 2
  },
  {
   "ItemNo": 2,
@@ -16,7 +17,8 @@
   "ItemTexturePath": "res:\/\/_Asset\/Item\/potions\/pt2.png",
   "BasicPrice": 10,
   "ItemDescription": "Recover Mp",
-  "ItemTypes": 2
+  "ItemTypes": 2,
+  "StackLimit": 2
  }
 ],
 "EnemyList":[
