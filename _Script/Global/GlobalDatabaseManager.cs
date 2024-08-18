@@ -35,8 +35,10 @@ public partial class GlobalDatabaseManager:Node{
                                                     (string)tmp["ItemName"],
                                                     (float)tmp["Odds"],
                                                     (string)tmp["ItemTexturePath"],
-                                                    (int)tmp["BasicPrice"]);
-
+                                                    (int)tmp["BasicPrice"],
+                                                    (string)tmp["ItemDescription"],
+                                                    (int)tmp["ItemTypes"]);
+            GD.Print((ItemType)tmpItemModel.ItemTypes);
             ItemListDB[(int)tmp["ItemNo"]]=tmpItemModel;
             ItemModel tmpModel=(ItemModel)ItemListDB[(int)tmp["ItemNo"]];
         }

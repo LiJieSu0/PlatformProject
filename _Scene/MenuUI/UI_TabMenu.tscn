@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuimjj1sf7jpp"]
+[gd_scene load_steps=10 format=3 uid="uid://cuimjj1sf7jpp"]
 
 [ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabMenu.cs" id="1_3cdsm"]
 [ext_resource type="PackedScene" uid="uid://duvcyyth5cty7" path="res://_Scene/MenuUI/UIFrameWithCloseBtn.tscn" id="1_o1jk8"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bulike7wfiry4" path="res://_Asset/UI/InventorySlot.png" id="3_espps"]
 [ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabStats.cs" id="5_6fqij"]
 [ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_InventoryManager.cs" id="5_muve6"]
-[ext_resource type="Texture2D" uid="uid://84bc20m3riyl" path="res://_Asset/Item/potions/pt1.png" id="6_fwlhg"]
 [ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabInfos.cs" id="6_iwlat"]
 
 [sub_resource type="Theme" id="Theme_481jp"]
@@ -174,7 +173,6 @@ offset_left = 2.0
 offset_top = 3.0
 offset_right = 34.0
 offset_bottom = 34.0
-texture = ExtResource("6_fwlhg")
 expand_mode = 1
 
 [node name="SlotTextureRect2" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager"]

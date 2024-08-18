@@ -5,14 +5,18 @@
   "ItemName": "RedPotion",
   "Odds": 0.2,
   "ItemTexturePath": "res:\/\/_Asset\/Item\/potions\/pt1.png",
-  "BasicPrice": 10
+  "BasicPrice": 10,
+  "ItemDescription": "Recover Hp",
+  "ItemTypes": 2
  },
  {
   "ItemNo": 2,
   "ItemName": "BluePotion",
   "Odds": 0.2,
   "ItemTexturePath": "res:\/\/_Asset\/Item\/potions\/pt2.png",
-  "BasicPrice": 10
+  "BasicPrice": 10,
+  "ItemDescription": "Recover Mp",
+  "ItemTypes": 2
  }
 ],
 "EnemyList":[
