@@ -7,29 +7,29 @@ using Godot.Collections;
 public partial class UI_InventoryManager : GridContainer{
 
 	#region Node
-	public  Dictionary<Control,ItemModel> _slotItemDict;
-
+	private TextureRect _currTextureRect;
+	private UI_ItemInSlot _currSlot=null;
+	private UI_ItemInSlot _originalSlot;
 	#endregion
 
 	#region Variables
 	private Dictionary <int,Variant> _itemDB;
-	private TextureRect _currTextureRect;
-	private Control _currSlot=null;
+
 	private bool isItemHolding=false;
-	private TextureRect _originalSlot;
 
 	#endregion
 
 	public override void _Ready(){
 		InitializeNode();
-		InitializeSignal();
 		InitializeVariables();
+		InitializeSignal();
 		AddItem(1);
 
 	}
 
     private void InitializeVariables(){
 		_itemDB=GlobalDatabaseManager.Instance.ItemListDB;
+
     }
 
     public override void _Process(double delta){
@@ -37,8 +37,7 @@ public partial class UI_InventoryManager : GridContainer{
 	}
 
     private void InitializeNode(){ //TODO add item info to every slot
-		_slotItemDict=new Dictionary<Control,ItemModel>();
-		foreach(Control n in GetChildren()){
+		foreach(UI_ItemInSlot n in GetChildren()){
 			n.MouseEntered+=()=>{
 				Callable callable=Callable.From(()=>OnMouseEntered(n));
 				callable.Call();
@@ -50,7 +49,7 @@ public partial class UI_InventoryManager : GridContainer{
 			//TODO load inventory state from save manager
 
 			n.GetChild<TextureRect>(0).GuiInput+=(InputEvent @event)=>{
-				Callable callable=Callable.From(()=>OnMouseClick(@event,n.GetChild<TextureRect>(0))); //Get the signal emitter
+				Callable callable=Callable.From(()=>OnMouseHold(@event,n.GetChild<TextureRect>(0))); //Get the signal emitter
 				callable.Call();
 			};
 		}
@@ -58,9 +57,9 @@ public partial class UI_InventoryManager : GridContainer{
 	}
 
 	#region SignalFuncs
-    private void OnMouseClick(InputEvent @event,TextureRect itemTextureRect){
+    private void OnMouseHold(InputEvent @event,TextureRect itemTextureRect){
 		if(@event is InputEventMouseButton mouseEvent &&mouseEvent.ButtonIndex==MouseButton.Left&&mouseEvent.Pressed){
-			_originalSlot=itemTextureRect;
+			_originalSlot=itemTextureRect.GetParent<UI_ItemInSlot>();
 			var tmp=itemTextureRect.Duplicate();
 			GetTree().Root.AddChild(tmp);
 			_currTextureRect=(TextureRect)tmp;
@@ -70,10 +69,10 @@ public partial class UI_InventoryManager : GridContainer{
 
     }
 
-	private void OnMouseEntered(Control node){
-		_currSlot=node;
+	private void OnMouseEntered(UI_ItemInSlot slot){
+		_currSlot=slot;
 	}
-	private void OnMouseExited(Control node){
+	private void OnMouseExited(UI_ItemInSlot slot){
 		_currSlot=null;
 	}
 
@@ -94,7 +93,7 @@ public partial class UI_InventoryManager : GridContainer{
 		
 		if(Input.IsActionJustReleased("ui_mouse_left")){
 			if(_currSlot==null){
-				_originalSlot.Texture=item.Texture;
+				_originalSlot.GetChild<TextureRect>(0).Texture=item.Texture; //TODO move item data
 			}
 			else{
 				_currSlot.GetChild<TextureRect>(0).Texture=item.Texture;
@@ -105,14 +104,26 @@ public partial class UI_InventoryManager : GridContainer{
     }
 
 	public void AddItem(int itemNo){
-		foreach(Control slot in GetChildren()){
-			ItemModel item=(ItemModel)_itemDB[itemNo];
-			if(!_slotItemDict.ContainsKey(slot)){ //TODO check if the inventory is null
-				_slotItemDict[slot]=item;
-				slot.GetChild<TextureRect>(0).Texture=GD.Load<Texture2D>(item.ItemTexturePath);
-				break;
+		ItemModel item=(ItemModel)_itemDB[itemNo];
+		UI_ItemInSlot firstEmptySlot=null;
+		foreach(UI_ItemInSlot slot in GetChildren()){
+			if(slot._currItem==null&&firstEmptySlot==null){
+				firstEmptySlot=slot;
+				continue;
+			}
+			if(slot._currItem==item){
+				slot._itemAmount++;
 			}
 		}
+		if(firstEmptySlot==null){
+			GD.Print("Inventory is full");
+		}
+		else{
+			firstEmptySlot._currItem=item;
+			firstEmptySlot._itemAmount=1;
+			firstEmptySlot.GetChild<TextureRect>(0).Texture=GD.Load<Texture2D>(item.ItemTexturePath);
+		}
+
 	}
 
 }

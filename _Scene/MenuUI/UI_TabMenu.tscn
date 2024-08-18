@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuimjj1sf7jpp"]
+[gd_scene load_steps=11 format=3 uid="uid://cuimjj1sf7jpp"]
 
 [ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabMenu.cs" id="1_3cdsm"]
 [ext_resource type="PackedScene" uid="uid://duvcyyth5cty7" path="res://_Scene/MenuUI/UIFrameWithCloseBtn.tscn" id="1_o1jk8"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabStats.cs" id="5_6fqij"]
 [ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_InventoryManager.cs" id="5_muve6"]
 [ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_TabInfos.cs" id="6_iwlat"]
+[ext_resource type="Script" path="res://_Script/UI/UI_InGame/UI_ItemInSlot.cs" id="6_r3ovg"]
 
 [sub_resource type="Theme" id="Theme_481jp"]
 
@@ -163,11 +164,12 @@ theme_override_constants/v_separation = 20
 columns = 5
 script = ExtResource("5_muve6")
 
-[node name="SlotTextureRect1" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager"]
+[node name="ItemInSlot1" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager"]
 layout_mode = 2
 texture = ExtResource("3_espps")
+script = ExtResource("6_r3ovg")
 
-[node name="ItemTextureRect" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager/SlotTextureRect1"]
+[node name="ItemTextureRect" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager/ItemInSlot1"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 3.0
@@ -175,11 +177,12 @@ offset_right = 34.0
 offset_bottom = 34.0
 expand_mode = 1
 
-[node name="SlotTextureRect2" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager"]
+[node name="ItemInSlot2" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager"]
 layout_mode = 2
 texture = ExtResource("3_espps")
+script = ExtResource("6_r3ovg")
 
-[node name="ItemTextureRect" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager/SlotTextureRect2"]
+[node name="ItemTextureRect" type="TextureRect" parent="Panel/TabContainer/Items/Inventory/ScrollContainer/UI_InventoryManager/ItemInSlot2"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 3.0
