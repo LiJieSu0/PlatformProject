@@ -206,6 +206,7 @@ offset_right = 32.0
 offset_bottom = 35.0
 text = "
 "
+horizontal_alignment = 2
 
 [node name="Stats" type="TabBar" parent="Panel/TabContainer"]
 visible = false

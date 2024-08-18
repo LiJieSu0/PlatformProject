@@ -9,7 +9,7 @@ public partial class UI_InventoryManager : GridContainer{
 	#region Node
 	private TextureRect _currTextureRect;
 	private UI_ItemInSlot _currSlot=null;
-	private UI_ItemInSlot _originalSlot;
+	private UI_ItemInSlot _originalSlot=null;
 	#endregion
 
 	#region Variables
@@ -35,12 +35,12 @@ public partial class UI_InventoryManager : GridContainer{
     public override void _Process(double delta){
 		MovingItem(_currTextureRect);
 		if(Input.IsActionJustPressed("ui_talk")){
-			AddItem(1);
+			AddItem(2);
 
 		}
 	}
 
-    private void InitializeNode(){ //TODO add item info to every slot
+    private void InitializeNode(){ 
 		foreach(UI_ItemInSlot n in GetChildren()){
 			n.MouseEntered+=()=>{
 				Callable callable=Callable.From(()=>OnMouseEntered(n));
@@ -53,7 +53,7 @@ public partial class UI_InventoryManager : GridContainer{
 			//TODO load inventory state from save manager
 
 			n.GetChild<TextureRect>(0).GuiInput+=(InputEvent @event)=>{
-				Callable callable=Callable.From(()=>OnMouseHold(@event,n.GetChild<TextureRect>(0))); //Get the signal emitter
+				Callable callable=Callable.From(()=>OnMouseHold(@event,n.GetChild<TextureRect>(0))); //Get the signal emitter here
 				callable.Call();
 			};
 		}
@@ -98,11 +98,18 @@ public partial class UI_InventoryManager : GridContainer{
 		
 		if(Input.IsActionJustReleased("ui_mouse_left")){
 			if(_currSlot==null){
-				_originalSlot.GetChild<TextureRect>(0).Texture=item.Texture; //TODO move item data
-				//TODO update label
+				_originalSlot.GetChild<TextureRect>(0).Texture=item.Texture; 
+				_originalSlot.UpdateAmountLabel();
 			}
-			else{
-				_currSlot.GetChild<TextureRect>(0).Texture=item.Texture;
+			else{ //Mouse hover to other slot
+				if(_originalSlot._currItem==_currSlot._currItem||_currSlot._currItem==null){
+					_currSlot.GetChild<TextureRect>(0).Texture=item.Texture; //TODO check is combinable or not
+					_currSlot.MoveItem(_originalSlot);
+				}
+				else{
+					_originalSlot.GetChild<TextureRect>(0).Texture=item.Texture; //Different Item go back to original slot
+					_originalSlot.UpdateAmountLabel();
+				}
 			}
 			_currTextureRect=null;
 			item.QueueFree();
@@ -131,6 +138,7 @@ public partial class UI_InventoryManager : GridContainer{
 			firstEmptySlot._currItem=item;
 			firstEmptySlot._itemAmount=1;
 			firstEmptySlot.GetChild<TextureRect>(0).Texture=GD.Load<Texture2D>(item.ItemTexturePath);
+			firstEmptySlot.UpdateAmountLabel();
 		}
 	}
 
