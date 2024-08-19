@@ -23,6 +23,9 @@ public partial class UI_InventoryManager : GridContainer{
 		InitializeNode();
 		InitializeVariables();
 		InitializeSignal();
+		AddItem(2);
+		AddItem(2);
+		AddItem(1);
 		AddItem(1);
 
 	}
@@ -34,10 +37,6 @@ public partial class UI_InventoryManager : GridContainer{
 
     public override void _Process(double delta){
 		MovingItem(_currTextureRect);
-		if(Input.IsActionJustPressed("ui_talk")){
-			AddItem(2);
-
-		}
 	}
 
     private void InitializeNode(){ 
@@ -84,7 +83,7 @@ public partial class UI_InventoryManager : GridContainer{
 	#endregion
 	
 	private void InitializeSignal(){
-
+		GlobalEventPublisher.Instance.ItemPickEvent+=AddItem;
 	}
 
 
@@ -116,7 +115,7 @@ public partial class UI_InventoryManager : GridContainer{
 		}
     }
 
-	public void AddItem(int itemNo){
+	public bool AddItem(int itemNo){
 		ItemModel item=(ItemModel)_itemDB[itemNo];
 		UI_ItemInSlot firstEmptySlot=null;
 		foreach(UI_ItemInSlot slot in GetChildren()){
@@ -127,18 +126,20 @@ public partial class UI_InventoryManager : GridContainer{
 			if(slot._currItem==item&&slot._itemAmount<item.StackLimit){
 				slot._itemAmount++;
 				slot.UpdateAmountLabel();
-				return;
+				return true;
 			}
 
 		}
 		if(firstEmptySlot==null){
 			GD.Print("Inventory is full");
+			return false;
 		}
 		else{
 			firstEmptySlot._currItem=item;
 			firstEmptySlot._itemAmount=1;
 			firstEmptySlot.GetChild<TextureRect>(0).Texture=GD.Load<Texture2D>(item.ItemTexturePath);
 			firstEmptySlot.UpdateAmountLabel();
+			return true;
 		}
 	}
 

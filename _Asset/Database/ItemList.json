@@ -3,7 +3,7 @@
  {
   "ItemNo": 1,
   "ItemName": "RedPotion",
-  "Odds": 0.2,
+  "Odds": 0.9,
   "ItemTexturePath": "res:\/\/_Asset\/Item\/potions\/pt1.png",
   "BasicPrice": 10,
   "ItemDescription": "Recover Hp",

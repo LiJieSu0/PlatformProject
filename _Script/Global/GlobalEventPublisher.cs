@@ -14,6 +14,8 @@ public partial class GlobalEventPublisher:Node{
     public event EnemyDead EnemyDeadEvent;
     public delegate void ShowTradingMenu();
     public event ShowTradingMenu ShowTradingMenuEvent;
+    public delegate bool ItemPick(int itemNo);
+    public event ItemPick ItemPickEvent;
     public override void _Ready(){
 		Instance=this;
     }
@@ -33,5 +35,7 @@ public partial class GlobalEventPublisher:Node{
     public void ShowTradingMenuTrigger(){
         ShowTradingMenuEvent?.Invoke();
     }
-
+    public bool ItemPickTrigger(int itemNo){
+        return ItemPickEvent.Invoke(itemNo);
+    }
 }

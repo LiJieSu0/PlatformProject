@@ -26,7 +26,7 @@ public partial class ItemDropManager : Node2D{
 			GetTree().CurrentScene.GetNode("ItemManager").CallDeferred("add_child",item);
 			item.GlobalPosition=this.GlobalPosition;
 			BasicDropItem droppedItem=(BasicDropItem)item;
-			droppedItem.LoadDropItemTexture(currItem.ItemTexturePath);
+			droppedItem.LoadDropItemTexture(currItem);
 		}
 	}
 

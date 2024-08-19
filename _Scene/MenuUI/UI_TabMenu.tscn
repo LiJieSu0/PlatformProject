@@ -14,6 +14,7 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i4d5m"]
 
 [node name="UI_TabMenu" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

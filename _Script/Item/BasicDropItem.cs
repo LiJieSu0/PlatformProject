@@ -31,25 +31,30 @@ public partial class BasicDropItem : RigidBody2D{
 		disappearTimer=GetNode<Timer>("DisappearTimer");
 	}
 
-	public void InitializeVariables(){
-		disappearTimer.WaitTime=disappearTime;
-	}
+
 
 	public void InitialSignal(){
 		pickUpArea.BodyEntered+=OnPlayerInPickUpArea;
 		pickUpArea.BodyExited+=OnPlayerExitPickUpArea;
 	}
 
-	public void LoadDropItemTexture(string texturePath){
+	public void LoadDropItemTexture(ItemModel item){
 		InitializeNode();
-		InitializeVariables();
+		disappearTimer.WaitTime=disappearTime;
+		_itemNo=item.ItemNo;
 		InitialSignal();
-		sprite2D.Texture=(Texture2D)ResourceLoader.Load<Texture2D>(texturePath);
+		sprite2D.Texture=(Texture2D)ResourceLoader.Load<Texture2D>(item.ItemTexturePath);
 		sprite2D.Scale=UtilsFunc.DesiredSpriteScale(sprite2D.Texture.GetSize(),_itemSpriteSize);
 	}
 
     private void OnPlayerInPickUpArea(Node2D body){
-		isPlayerInPickUpArea=true;
+		isPlayerInPickUpArea=true;//TODO add funciton to pick up
+		bool isPickedUp=GlobalEventPublisher.Instance.ItemPickTrigger(_itemNo); //auto pick up 
+		if(isPickedUp){
+			this.QueueFree();
+		}
+
+
     }
 	private void OnPlayerExitPickUpArea(Node2D body){
 		isPlayerInPickUpArea=false;
