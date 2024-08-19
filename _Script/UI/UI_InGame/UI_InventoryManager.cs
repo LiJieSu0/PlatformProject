@@ -1,5 +1,4 @@
-using System;
-using System.ComponentModel;
+
 using Godot;
 using Godot.Collections;
 
@@ -19,16 +18,17 @@ public partial class UI_InventoryManager : GridContainer{
 
 	#endregion
 
-	public override void _Ready(){
+	public override void _Ready(){ //TODO add slots dynamically
 		InitializeNode();
 		InitializeVariables();
 		InitializeSignal();
-		AddItem(2);
-		AddItem(2);
-		AddItem(1);
-		AddItem(1);
+		LoadInventoryFromSave();
+		GlobalSaveManager.Instance.WriteSave(); //TEST function
 
 	}
+
+
+
 
     private void InitializeVariables(){
 		_itemDB=GlobalDatabaseManager.Instance.ItemListDB;
@@ -83,8 +83,10 @@ public partial class UI_InventoryManager : GridContainer{
 	#endregion
 	
 	private void InitializeSignal(){
-		GlobalEventPublisher.Instance.ItemPickEvent+=AddItem;
+		GlobalEventPublisher.Instance.ItemPickEvent+=AddItemToInventory;
+		GlobalPlayerInventory.Instance.SaveInventoryEvent+=SaveInventory;
 	}
+
 
 
     private void MovingItem(TextureRect item){
@@ -103,7 +105,7 @@ public partial class UI_InventoryManager : GridContainer{
 			else{ //Mouse hover to other slot
 				if(_originalSlot._currItem==_currSlot._currItem||_currSlot._currItem==null){
 					_currSlot.GetChild<TextureRect>(0).Texture=item.Texture; //TODO check is combinable or not
-					_currSlot.MoveItem(_originalSlot);
+					_currSlot.MoveItemToSlot(_originalSlot);
 				}
 				else{
 					_originalSlot.GetChild<TextureRect>(0).Texture=item.Texture; //Different Item go back to original slot
@@ -115,7 +117,7 @@ public partial class UI_InventoryManager : GridContainer{
 		}
     }
 
-	public bool AddItem(int itemNo){
+	public bool AddItemToInventory(int itemNo){
 		ItemModel item=(ItemModel)_itemDB[itemNo];
 		UI_ItemInSlot firstEmptySlot=null;
 		foreach(UI_ItemInSlot slot in GetChildren()){
@@ -135,12 +137,36 @@ public partial class UI_InventoryManager : GridContainer{
 			return false;
 		}
 		else{
-			firstEmptySlot._currItem=item;
-			firstEmptySlot._itemAmount=1;
-			firstEmptySlot.GetChild<TextureRect>(0).Texture=GD.Load<Texture2D>(item.ItemTexturePath);
-			firstEmptySlot.UpdateAmountLabel();
+			firstEmptySlot.AddItemToSlot(item);
 			return true;
 		}
 	}
 
+    public Variant SaveInventory(){
+		var saveData=new Dictionary<string, Dictionary<int,int>>();
+		foreach(UI_ItemInSlot slot in GetChildren()){
+			if(slot._currItem!=null){
+				saveData[slot.Name]=new Dictionary<int, int>{{slot._itemNo,slot._itemAmount}};
+			}else{
+				saveData[slot.Name]=null;
+			}
+		}
+		return saveData;
+    }
+    private void LoadInventoryFromSave(){
+		Variant loadedData=GlobalPlayerInventory.Instance.LoadedInventoryData;
+		if(loadedData.VariantType==Variant.Type.Nil){
+			GD.Print("Inventory save data broken");
+			return;
+		}
+		var data=new Dictionary<string, Dictionary<int,int>>((Dictionary)loadedData);
+		foreach(UI_ItemInSlot slot in GetChildren()){
+			if(data.ContainsKey(slot.Name)){
+				foreach(var kvp in data[slot.Name]){
+					slot.AddItemToSlot((ItemModel)_itemDB[(int)kvp.Key], kvp.Value);
+				}
+			}
+		}
+
+    }
 }

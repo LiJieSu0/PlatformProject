@@ -29,10 +29,12 @@ public partial class GlobalSceneManager : Node,ISaveable
 			{this.Name,currentScene}
 		};
 		string jsonString = Json.Stringify(data);
-		return jsonString;
-    }
+		// return jsonString; //TODO load corrrect scene
+		return "";
+	}
 
     public void Load(Variant variant){
+		return; //TODO fix load scene
 		//TODO error handle
 		string scenePath=ScenePathDict.SCENE_DICT[(string)variant];
 		//TODO change to correct scene path;
