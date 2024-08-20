@@ -1,4 +1,5 @@
 
+using System;
 using Godot;
 using Godot.Collections;
 
@@ -24,7 +25,6 @@ public partial class UI_InventoryManager : GridContainer{
 		InitializeSignal();
 		LoadInventoryFromSave();
 		GlobalSaveManager.Instance.WriteSave(); //TEST function
-
 	}
 
 
@@ -96,7 +96,6 @@ public partial class UI_InventoryManager : GridContainer{
 		item.MouseFilter=MouseFilterEnum.Ignore;
 		item.GlobalPosition=GetGlobalMousePosition()+offset;
 		
-		
 		if(Input.IsActionJustReleased("ui_mouse_left")){
 			if(_currSlot==null){
 				_originalSlot.GetChild<TextureRect>(0).Texture=item.Texture; 
@@ -143,10 +142,11 @@ public partial class UI_InventoryManager : GridContainer{
 	}
 
     public Variant SaveInventory(){
-		var saveData=new Dictionary<string, Dictionary<int,int>>();
+		var saveData=new Dictionary<string, string>();
 		foreach(UI_ItemInSlot slot in GetChildren()){
 			if(slot._currItem!=null){
-				saveData[slot.Name]=new Dictionary<int, int>{{slot._itemNo,slot._itemAmount}};
+				saveData[slot.Name]=slot.ToString();
+				GD.Print(slot.ToString());
 			}else{
 				saveData[slot.Name]=null;
 			}
@@ -159,14 +159,19 @@ public partial class UI_InventoryManager : GridContainer{
 			GD.Print("Inventory save data broken");
 			return;
 		}
-		var data=new Dictionary<string, Dictionary<int,int>>((Dictionary)loadedData);
-		foreach(UI_ItemInSlot slot in GetChildren()){
-			if(data.ContainsKey(slot.Name)){
-				foreach(var kvp in data[slot.Name]){
-					slot.AddItemToSlot((ItemModel)_itemDB[(int)kvp.Key], kvp.Value);
-				}
+		var data=new Dictionary<string, string>((Dictionary)loadedData);
+		for(int i=0;i<GetChildCount()-1;i++){
+			UI_ItemInSlot currSlot=GetChild<UI_ItemInSlot>(i);
+			if(data.ContainsKey(currSlot.Name)){
+				var parts = data[currSlot.Name].Split(',');
+				if (parts.Length != 2)
+            		throw new FormatException("Input string is not in the correct format");
+				int loadedItemNo=int.Parse(parts[0]);
+				int loadedItemAmount=int.Parse(parts[1]);
+				ItemModel item=(ItemModel)_itemDB[loadedItemNo];
+				currSlot.AddItemToSlot(item,loadedItemAmount);
+
 			}
 		}
-
     }
 }

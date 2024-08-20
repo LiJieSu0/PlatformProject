@@ -20,6 +20,7 @@ public partial class GlobalPlayerInventory:Node,ISaveable{
 
     public void Load(Variant variant){
         LoadedInventoryData=variant;
+        GD.Print(variant);
     }
 
     public string NewSave(){

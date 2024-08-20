@@ -42,4 +42,9 @@ public partial class UI_ItemInSlot : TextureRect{
 		_itemAmountLabel.Text="";
 	}
 
+
+    public override string ToString(){
+        return $"{_itemNo},{_itemAmount}";
+    }
+
 }
