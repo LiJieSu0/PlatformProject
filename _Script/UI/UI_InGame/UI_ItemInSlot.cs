@@ -7,9 +7,12 @@ public partial class UI_ItemInSlot : TextureRect{
 	public int _itemNo;
 	public int _itemAmount=0;
 	private bool isMouseEntered=false;
+	private bool isMouseInSecondLevel=false;
 	private Label _itemAmountLabel;
+	private Panel _secondLevelMenu;
 	public override void _Ready(){
 		_itemAmountLabel=GetNode<Label>("ItemTextureRect/ItemAmountLabel");
+		_secondLevelMenu=GetNode<Panel>("SecondMenu");
 		InitializeSignal();
 		// GetChild<TextureRect>(0).MouseFilter=MouseFilterEnum.Ignore;
 
@@ -18,6 +21,7 @@ public partial class UI_ItemInSlot : TextureRect{
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta){
 		ShowSlotMenu();
+		HideSecondLevelMenu();
 	}
 	public void MoveItemToSlot(UI_ItemInSlot prevSlot){
 		//TODO check prev slot
@@ -51,34 +55,38 @@ public partial class UI_ItemInSlot : TextureRect{
     }
 
 	private void ShowSlotMenu(){
-		if(Input.IsActionJustPressed("ui_mouse_right")&&isMouseEntered){
+		if(Input.IsActionJustPressed("ui_mouse_right")&&isMouseEntered&&_currItem!=null){
 			GD.Print("right click "+this.Name);
 			GetNode<Panel>("SecondMenu").Show();
 			//TODO add second menu
 		}
 	}
-	public override void _UnhandledInput(InputEvent @event)
-{
-    if (@event is InputEventMouseButton mouseEvent){
-		GD.Print("unhandled");
-        if (mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.Pressed)
-        {
-            GD.Print("Right-click detected in the unhandled input");
-        }
-    }
-}
+
 	private void InitializeSignal(){
 		this.MouseEntered+=OnMouseEntered;
 		this.MouseExited+=OnMouseExited;
+		_secondLevelMenu.MouseEntered+=()=>{
+			isMouseInSecondLevel=true;
+		};
+		_secondLevelMenu.MouseExited+=()=>{
+			isMouseInSecondLevel=false;
+		};
+	}
+
+	private void HideSecondLevelMenu(){
+		if(!isMouseInSecondLevel&&_secondLevelMenu.Visible&&Input.IsActionJustPressed("ui_mouse_left")){
+			_secondLevelMenu.Hide();
+		}
+
 	}
 
     private void OnMouseExited(){
 		isMouseEntered=false;
     }
-
-
     private void OnMouseEntered(){
 		isMouseEntered=true;
     }
+
+	
 
 }
