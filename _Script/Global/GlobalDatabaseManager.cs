@@ -47,7 +47,6 @@ public partial class GlobalDatabaseManager:Node{
     private void LoadEnemyList(Godot.Collections.Array enemyList){
         foreach(var enemy in enemyList){
             var tmp=new Dictionary<string, Variant>((Dictionary)enemy);
-            GD.Print(tmp);
             //TODO create enemy model
         }
     }

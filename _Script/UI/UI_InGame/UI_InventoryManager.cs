@@ -97,7 +97,7 @@ public partial class UI_InventoryManager : GridContainer{
 		item.GlobalPosition=GetGlobalMousePosition()+offset;
 		
 		if(Input.IsActionJustReleased("ui_mouse_left")){
-			if(_currSlot==null){
+			if(_currSlot==null||_currSlot==_originalSlot){
 				_originalSlot.GetChild<TextureRect>(0).Texture=item.Texture; 
 				_originalSlot.UpdateAmountLabel();
 			}
