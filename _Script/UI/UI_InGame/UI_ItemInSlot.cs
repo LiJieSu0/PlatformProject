@@ -58,7 +58,7 @@ public partial class UI_ItemInSlot : TextureRect{
 		if(Input.IsActionJustPressed("ui_mouse_right")&&isMouseEntered&&_currItem!=null){
 			GD.Print("right click "+this.Name);
 			GetNode<Panel>("SecondMenu").Show();
-			//TODO add second menu
+			//TODO add second menu button
 		}
 	}
 

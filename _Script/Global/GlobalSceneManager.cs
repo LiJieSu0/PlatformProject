@@ -36,7 +36,7 @@ public partial class GlobalSceneManager : Node,ISaveable
     public void Load(Variant variant){
 		return; //TODO fix load scene
 		//TODO error handle
-		string scenePath=ScenePathDict.SCENE_DICT[(string)variant];
+		// string scenePath=ScenePathDict.SCENE_DICT[(string)variant];
 		//TODO change to correct scene path;
 		// PackedScene packedScene = (PackedScene)ResourceLoader.Load(scenePath);
         // if (packedScene != null){
