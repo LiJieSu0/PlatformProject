@@ -11,7 +11,7 @@ public partial class PlayerBody : CharacterBody2D{
 	#endregion
 
 	#region Nodes
-	private StatusManager statusManager;
+	public StatusManager statusManager;
 	private AnimationTree _animationTree;
 	private AnimationNodeStateMachinePlayback _animationState;
 	private Sprite2D _sprite2D;
@@ -221,7 +221,7 @@ public partial class PlayerBody : CharacterBody2D{
 	}
 	#endregion
 
-	private void InitializeNode(){
+	private void InitializeNode(){ 
 		_sprite2D=GetNode<Sprite2D>("Sprite2D");
 		_animationTree=GetNode<AnimationTree>("AnimationTree");
 		_animationState = (AnimationNodeStateMachinePlayback)_animationTree.Get("parameters/playback");
