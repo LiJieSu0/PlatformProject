@@ -89,6 +89,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="UI_InGameMenu" parent="." instance=ExtResource("8_tr7jg")]
+visible = false
 
 [node name="UI_TradingMenu" parent="." instance=ExtResource("9_ctoog")]
 visible = false

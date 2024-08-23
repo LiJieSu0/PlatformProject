@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://dq3bn1tjtwuop"]
+[gd_scene load_steps=8 format=4 uid="uid://dq3bn1tjtwuop"]
 
 [ext_resource type="Texture2D" uid="uid://c2j3wb4rim45b" path="res://_Asset/World/Tiles.png" id="1_c4psc"]
 [ext_resource type="Texture2D" uid="uid://cldug1m4qttkr" path="res://_Asset/World/Background.png" id="1_ox6g5"]
@@ -711,6 +711,9 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_hugp0")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pirr1"]
+size = Vector2(20, 166.5)
+
 [node name="BasicMap" type="Node2D"]
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
@@ -730,4 +733,11 @@ tile_set = SubResource("TileSet_j3jfb")
 position = Vector2(72, 584)
 
 [node name="NPC" parent="." instance=ExtResource("4_fxvuc")]
-position = Vector2(160, 608)
+position = Vector2(147, 361)
+
+[node name="Sprite2D" type="StaticBody2D" parent="."]
+position = Vector2(121, 555)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D"]
+position = Vector2(0, -35.75)
+shape = SubResource("RectangleShape2D_pirr1")

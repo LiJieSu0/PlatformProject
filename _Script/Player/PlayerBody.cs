@@ -50,6 +50,9 @@ public partial class PlayerBody : CharacterBody2D{
 		InteractWithEnivronment();
 		TalkToNpc();
 		ChangeCurrSkill();
+		if(IsOnWallOnly()){
+			GD.Print("Player is on wall");
+		}
 	}
 
 	#region InputFuncs
@@ -62,22 +65,38 @@ public partial class PlayerBody : CharacterBody2D{
 		if(isAttack)
 			return;
 		Vector2 velocity = Velocity;
-		if (!IsOnFloor()){
+		if (!IsOnFloor()&&!IsOnWall()){ //TODO refactor movent, and fix sliding function
 			velocity.Y += gravity * delta;
 			_animationState.Travel("JumpFall");
 		}
 
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor()){
-			velocity.Y = JumpVelocity;
-			_animationState.Travel("JumpStart");
+		if(Input.IsActionJustPressed("ui_accept")){
+			if(IsOnFloor()){
+				velocity.Y = JumpVelocity;
+				_animationState.Travel("JumpStart");
+			}
+			if(IsOnWall()&& Input.IsActionPressed("move_left")){
+				velocity.Y = JumpVelocity;
+				velocity.X=JumpVelocity*2;
+			}
+			if(IsOnWall()&& Input.IsActionPressed("move_right")){
+				velocity.Y = JumpVelocity;
+				velocity.X=-JumpVelocity*2;
+				
+			}
 		}
+
+		if(IsOnWallOnly()&&(Input.IsActionPressed("move_right")||Input.IsActionPressed("move_left"))){
+			GD.Print("sliding");
+			velocity.Y+=10*delta;
+		}
+
 		if(Input.IsActionPressed("move_left")||Input.IsActionPressed("move_right")){
 			_animationState.Travel("Run");
 		}
 		if(Input.IsActionJustReleased("move_left")||Input.IsActionJustReleased("move_right")&&IsOnFloor()){
 			_animationState.Travel("Idle");
 		}
-
 		Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 		if (direction != Vector2.Zero){
 			velocity.X = direction.X * Speed;
@@ -85,7 +104,7 @@ public partial class PlayerBody : CharacterBody2D{
 		else{
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 		}
-
+		GD.Print(velocity.Y);
 		Velocity = velocity;
 		Vector2 faceDir=(GetGlobalMousePosition()-this.GlobalPosition).Normalized();
 		if((faceDir.X>0&&!isFaceRight)||(faceDir.X<0&&isFaceRight)){ 
