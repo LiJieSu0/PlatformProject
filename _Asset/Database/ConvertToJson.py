@@ -11,6 +11,7 @@ json_data = {}
 # Iterate over the rows of the DataFrame
 for index, row in df.iterrows():
     header = row['Key']  # Assuming the column for the header is named 'Header'
+    charName=row['CharNames']
     lines = row['Lines']
     option1 =row['Option1']
     option2=row['Option2']
@@ -22,11 +23,12 @@ for index, row in df.iterrows():
     result4=row['Result4']
     if(header not in json_data):
         json_data[header]={
+            "CharNames":[],
             "Lines":[],
             "Options":[],
             "Results":[]
         }
-
+    json_data[header]["CharNames"].append(charName)
     json_data[header]["Lines"].append(lines)
     if(not pd.isna(option1)):
         json_data[header]["Options"].append(option1)

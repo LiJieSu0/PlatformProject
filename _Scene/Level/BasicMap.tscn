@@ -730,10 +730,10 @@ tile_map_data = PackedByteArray("AAA7ACcAAAABAAEAAAA6ACcAAAADAAEAAAA5ACcAAAACAAE
 tile_set = SubResource("TileSet_j3jfb")
 
 [node name="Player" parent="." instance=ExtResource("3_5h0ep")]
-position = Vector2(72, 584)
+position = Vector2(31, 592)
 
 [node name="NPC" parent="." instance=ExtResource("4_fxvuc")]
-position = Vector2(147, 361)
+position = Vector2(97, 601)
 
 [node name="Sprite2D" type="StaticBody2D" parent="."]
 position = Vector2(121, 555)

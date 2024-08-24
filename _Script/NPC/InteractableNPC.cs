@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 
 public partial class InteractableNPC : Area2D,INPC
 {
@@ -12,6 +13,7 @@ public partial class InteractableNPC : Area2D,INPC
 	Control _interactableMark;
 	Control _optionsBtnContainer;
 	Sprite2D _dialogBallon;
+	Label _charNameLabel;
 	Label _dialogContentLabel;
 	#endregion
 
@@ -21,10 +23,13 @@ public partial class InteractableNPC : Area2D,INPC
 	private bool isWaitingForOptions=false;
 	private bool isOptionShowing=false;
 	private int currDailogIdx=0;
-	Array<string> _lines; 
+	Array<string> _lines;
+	Array<string> _charNames; 
 	Dictionary<string, string[]> dialogueOptions;
 
 	#endregion
+	
+
 	public override void _Ready(){
 		InitializeNode();
 		InitializeSignal();
@@ -48,7 +53,7 @@ public partial class InteractableNPC : Area2D,INPC
 
     public void InteractReaction(){
 		string tmpKey="H1";
-		CreateDialogLoader();
+		_dialogLoader=new DialogLoader(tmpKey);
 		GlobalDialogManager.Instance.StartDailogueTrigger(tmpKey); //TODO check is therea any other listen funcs
 		_dialogBallon.Show();
 		StartDialogue(tmpKey);
@@ -56,14 +61,15 @@ public partial class InteractableNPC : Area2D,INPC
 
     private void StartDialogue(string key){
 		_dialogLoader.SetLinesKey(key);
+		_charNames=new Array<string>(_dialogLoader.GetCharNames());
 		_lines=new Array<string>(_dialogLoader.GetLines()); //TODO handle key error
 		if(_lines.Count==0){
 			GD.Print("No lines for this key");
 			return;
 		}
 		currDailogIdx=0;
+		_charNameLabel.Text=_charNames[currDailogIdx];
 		_dialogContentLabel.Text=_lines[currDailogIdx];
-		GD.Print("start new Dialog "+_dialogLoader.currKey) ;
     }
 
 	private void OnNextDialogue(){
@@ -76,6 +82,7 @@ public partial class InteractableNPC : Area2D,INPC
 			_dialogBallon.Hide();
 			return;
 		}
+		_charNameLabel.Text=_charNames[currDailogIdx];
 		_dialogContentLabel.Text=_lines[currDailogIdx];
 		if(currDailogIdx==_lines.Count-1&&_dialogLoader.GetOptions().Length!=0){
 			isWaitingForOptions=true;
@@ -110,10 +117,10 @@ public partial class InteractableNPC : Area2D,INPC
 		}
     }
 
-
     private void InitializeNode(){
 		_interactableMark=GetNode<Control>("InteractableMark");
 		_dialogBallon=GetNode<Sprite2D>("DialogBallon");
+		_charNameLabel=GetNode<Label>("DialogBallon/CharNameLabel");
 		_dialogContentLabel=GetNode<Label>("DialogBallon/DialogContentLabel");
 		_optionsBtnContainer=GetNode<VBoxContainer>("DialogBallon/OptionsBtnContainer");
 	}
@@ -129,10 +136,7 @@ public partial class InteractableNPC : Area2D,INPC
 		}
 	}
 
-	private void CreateDialogLoader(){
-		_dialogLoader=new DialogLoader();
-		_dialogLoader.LoadAllDialog();
-	}
+
 
 	private void CreateSpecialOptions(string option,Action results){
 		GD.Print("some special options "+option);

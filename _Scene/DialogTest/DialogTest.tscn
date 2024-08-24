@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://q1ve1iogguc7"]
+
+[ext_resource type="Script" path="res://_Script/DialogTest/DialogTest.cs" id="1_151k8"]
+[ext_resource type="Texture2D" uid="uid://c65ynevi7tt7p" path="res://_Asset/NPC/Mutsuki.png" id="2_xj6qp"]
+[ext_resource type="Texture2D" uid="uid://b7rocsdtt74h" path="res://_Asset/NPC/Haruka.png" id="3_oa4xy"]
+[ext_resource type="Texture2D" uid="uid://b1kyopcvmu80y" path="res://_Asset/World/Background/ramenya.jpg" id="4_c1na1"]
+[ext_resource type="Script" path="res://_Script/DialogTest/DialogContentLabel.cs" id="5_7a31x"]
+
+[sub_resource type="Theme" id="Theme_ky2lt"]
+
+[node name="DialogTest" type="CanvasLayer"]
+script = ExtResource("1_151k8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(294, 373)
+texture = ExtResource("2_xj6qp")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(802, 382)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_oa4xy")
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(602, 297)
+texture = ExtResource("4_c1na1")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="."]
+z_index = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -462.0
+offset_top = -224.0
+offset_right = 462.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_lock_ = true
+
+[node name="CharNameLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 17.0
+offset_right = 111.0
+offset_bottom = 40.0
+text = "CharName
+"
+
+[node name="DialogContentLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 53.0
+offset_right = 902.0
+offset_bottom = 205.0
+text = "Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test Dialog test "
+autowrap_mode = 3
+script = ExtResource("5_7a31x")
+WORD_DELAY_TIME = 1.0
+SKIPPABLE_TIME = 0.2
+
+[node name="OptionContainer" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -381.0
+offset_top = -166.0
+offset_right = 382.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ky2lt")
+theme_override_constants/separation = 30
+
+[node name="Camera2D" type="Camera2D" parent="."]

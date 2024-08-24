@@ -50,9 +50,7 @@ public partial class PlayerBody : CharacterBody2D{
 		InteractWithEnivronment();
 		TalkToNpc();
 		ChangeCurrSkill();
-		if(IsOnWallOnly()){
-			GD.Print("Player is on wall");
-		}
+
 	}
 
 	#region InputFuncs
@@ -87,7 +85,6 @@ public partial class PlayerBody : CharacterBody2D{
 		}
 
 		if(IsOnWallOnly()&&(Input.IsActionPressed("move_right")||Input.IsActionPressed("move_left"))){
-			GD.Print("sliding");
 			velocity.Y+=10*delta;
 		}
 
@@ -104,7 +101,6 @@ public partial class PlayerBody : CharacterBody2D{
 		else{
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 		}
-		GD.Print(velocity.Y);
 		Velocity = velocity;
 		Vector2 faceDir=(GetGlobalMousePosition()-this.GlobalPosition).Normalized();
 		if((faceDir.X>0&&!isFaceRight)||(faceDir.X<0&&isFaceRight)){ 
