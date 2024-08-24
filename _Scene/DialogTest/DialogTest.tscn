@@ -20,6 +20,17 @@ shader_parameter/NotSpeakingColor = Color(0.0470588, 0.0117647, 0.00784314, 0.80
 script = ExtResource("1_151k8")
 NotSpeakingShader = SubResource("ShaderMaterial_kambt")
 
+[node name="AutoToggleBtn" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = 32.0
+offset_right = -40.0
+offset_bottom = 63.0
+grow_horizontal = 0
+text = "Auto Toggle"
+
 [node name="CharManager" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="CharManager"]

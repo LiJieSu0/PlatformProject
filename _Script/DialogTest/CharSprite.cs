@@ -46,6 +46,8 @@ public partial class CharSprite : Sprite2D{
     private void ResetCharPosition(Vector2 originalPos, Tween tween){
         this.Position = originalPos;
         _dialogtest._currDialogState = DialogState.WaitForNextSentence;
+		if(_dialogtest.isAutoOn)
+			_dialogtest.AutoPlaying();
         tween.Kill();
     }
 	public void LeftMoveToScene(params Variant[] variables){

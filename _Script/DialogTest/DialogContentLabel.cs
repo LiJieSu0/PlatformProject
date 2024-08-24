@@ -25,7 +25,7 @@ public partial class DialogContentLabel : Label
 		_dialogTest._currDialogState=DialogState.SentenceShowing;
 		CreateSkippableTimer();
 		tween.TweenProperty(this,"visible_ratio",1,line.Length*WORD_DELAY_TIME);
-		tween.Finished+=OnTweenFinished;
+		tween.Finished+=OnSentenceFinsihed;
 
 	}
 
@@ -36,13 +36,15 @@ public partial class DialogContentLabel : Label
 		}
 		tween=CreateTween();
 		tween.TweenProperty(this,"visible_ratio",1,0.1);
-		tween.Finished+=OnTweenFinished;
+		tween.Finished+=OnSentenceFinsihed;
 	}
 	
-	private void OnTweenFinished(){
+	private void OnSentenceFinsihed(){
 		_dialogTest._currDialogState=DialogState.WaitForNextSentence;
 		OptionsCheck();
 		LastLineCheck();
+		if(_dialogTest.isAutoOn&&_dialogTest._currDialogState==DialogState.WaitForNextSentence)
+			_dialogTest.AutoPlaying();
 		tween.Kill();
 	}
 
@@ -53,7 +55,7 @@ public partial class DialogContentLabel : Label
 		}
 	}
     private void LastLineCheck(){
-		if(_dialogTest._currDialogIdx==_dialogTest._lines.Count-1){
+		if(_dialogTest._currDialogIdx==_dialogTest._lines.Count-1&&_dialogTest._options[_dialogTest._currDialogIdx].Count==0){
 			_dialogTest._currDialogState=DialogState.DialogEnd;
 			GD.Print("End dialog here");
 		}
@@ -68,5 +70,6 @@ public partial class DialogContentLabel : Label
 		};
 		timer.Start();
 	}
+
 
 }

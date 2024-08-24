@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 
@@ -13,9 +14,11 @@ public enum DialogState{
 public partial class DialogTest : CanvasLayer{
 
 	[Export] ShaderMaterial NotSpeakingShader;
+	[Export] float AUTO_PLAY_INTERVAL_TIME=0.5f;
 	private Dictionary<string,CharSprite> _charSpriteDict=new Dictionary<string,CharSprite>(); //TODO load this dynamically
 	public DialogState _currDialogState;
 	public DialogLoader _dialogLoader;
+	public bool isAutoOn=false;
 	public int _currDialogIdx;
 	public Array<string> _lines;
 	private Array<string> _charNames;
@@ -30,6 +33,7 @@ public partial class DialogTest : CanvasLayer{
 
 	#region Node
 	private Label _charNameLabel;
+	private Button _autoToggleBtn;
 	private DialogContentLabel _dialogContentLabel;
 	private CharSprite FirstChar;
 	private CharSprite SecondChar;
@@ -40,19 +44,27 @@ public partial class DialogTest : CanvasLayer{
 		_dialogLoader=new DialogLoader();
 		_currDialogIdx=0;
 		InitializeNode();
+		_autoToggleBtn.Pressed+=()=>{
+			isAutoOn=!isAutoOn;
+			GD.Print("Curren auto is :"+ isAutoOn);
+			if(_currDialogState==DialogState.WaitForNextSentence){
+				AutoPlaying();
+			}
+		};
+
 		SetLinesWithKey("B1");
 		_currDialogState=DialogState.WaitForStart;
 		StartDialog(_currDialogIdx);
 		_dialogLoader.GetFinalResults();
 		var tmp=new Variant[3]{"LeftPoint","RightPoint",false};
-		FirstChar.LeftMoveToScene(tmp);
+		// FirstChar.LeftMoveToScene(tmp);
 	}
 
     public override void _Process(double delta){
 
     }
 
-	private void StartDialog(int idx){
+	public void StartDialog(int idx){
 		GD.Print(idx);
 		_charNameLabel.Text=_charNames[idx];
 		if(_charNames[idx]!=_currCharName){
@@ -131,16 +143,28 @@ public partial class DialogTest : CanvasLayer{
 		}
 
     }
+
+
+	public void AutoPlaying(){
+		Timer timer=new Timer();
+		this.AddChild(timer);
+		timer.WaitTime=AUTO_PLAY_INTERVAL_TIME;
+		timer.Timeout+=()=>{
+			_currDialogIdx++;
+			StartDialog(_currDialogIdx);
+			timer.QueueFree();
+		};
+		timer.Start();
+	}
+
     private void InitializeNode(){
 		FirstChar=GetNode<CharSprite>("CharManager/Sprite2D");
 		SecondChar=GetNode<CharSprite>("CharManager/Sprite2D2");
 		_charNameLabel=GetNode<Label>("Panel/CharNameLabel");
 		_dialogContentLabel=GetNode<DialogContentLabel>("Panel/DialogContentLabel");
 		_optionContainer=GetNode<Control>("OptionContainer");
+		_autoToggleBtn=GetNode<Button>("AutoToggleBtn");
 		_charSpriteDict["無月"]=FirstChar;
 		_charSpriteDict["遙香"]=SecondChar;
 	}
-
-
-
 }
