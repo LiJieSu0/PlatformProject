@@ -1,21 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://q1ve1iogguc7"]
+[gd_scene load_steps=9 format=3 uid="uid://q1ve1iogguc7"]
 
 [ext_resource type="Script" path="res://_Script/DialogTest/DialogTest.cs" id="1_151k8"]
 [ext_resource type="Texture2D" uid="uid://c65ynevi7tt7p" path="res://_Asset/NPC/Mutsuki.png" id="2_xj6qp"]
+[ext_resource type="Shader" path="res://_Script/Shader/NotSpeaking.gdshader" id="3_6nysq"]
 [ext_resource type="Texture2D" uid="uid://b7rocsdtt74h" path="res://_Asset/NPC/Haruka.png" id="3_oa4xy"]
 [ext_resource type="Texture2D" uid="uid://b1kyopcvmu80y" path="res://_Asset/World/Background/ramenya.jpg" id="4_c1na1"]
 [ext_resource type="Script" path="res://_Script/DialogTest/DialogContentLabel.cs" id="5_7a31x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kambt"]
+resource_local_to_scene = true
+shader = ExtResource("3_6nysq")
+shader_parameter/NotSpeakingColor = Color(0.0470588, 0.0117647, 0.00784314, 0.807843)
 
 [sub_resource type="Theme" id="Theme_ky2lt"]
 
 [node name="DialogTest" type="CanvasLayer"]
 script = ExtResource("1_151k8")
+NotSpeakingShader = SubResource("ShaderMaterial_kambt")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CharManager" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CharManager"]
 position = Vector2(294, 373)
 texture = ExtResource("2_xj6qp")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D2" type="Sprite2D" parent="CharManager"]
 position = Vector2(802, 382)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_oa4xy")

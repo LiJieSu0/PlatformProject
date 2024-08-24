@@ -1,6 +1,6 @@
 using Godot;
 using Godot.Collections;
-using System;
+
 public enum DialogState{
 		WaitForStart,
 		SentenceShowing,
@@ -12,12 +12,14 @@ public enum DialogState{
 }
 public partial class DialogTest : CanvasLayer{
 
+	[Export] ShaderMaterial NotSpeakingShader;
+	private Dictionary<string,Sprite2D> _charSpriteDict=new Dictionary<string,Sprite2D>(); //TODO load this dynamically
 	public DialogState _currDialogState;
 	public DialogLoader _dialogLoader;
 	public int _currDialogIdx;
 	public Array<string> _lines;
 	private Array<string> _charNames;
-	private string _currCharName;
+	public string _currCharName;
 	public bool isSkippable=false;
 
 
@@ -35,22 +37,25 @@ public partial class DialogTest : CanvasLayer{
 		InitializeNode();
 		SetLinesWithKey();
 		_currDialogState=DialogState.WaitForStart;
-		GD.Print(_charNames.ToString());
 		StartDialog(_currDialogIdx);
 	}
 
     public override void _Process(double delta){
-		
+
     }
 
 	private void StartDialog(int idx){
 		_charNameLabel.Text=_charNames[idx];
+		if(_charNames[idx]!=_currCharName){
+			ChangeCharSpeaking(_charNames[idx]);
+		}
 		_dialogContentLabel.ReceiveLine(_lines[idx]);
 		//If it is the last sentence, option buttons are handled by DialogContentLabel
 	}
 
-	public void ShowOptions(){
-		GD.Print("Showing options");
+
+
+    public void ShowOptions(){
 		Array<string> options=new Array<string>(_dialogLoader.GetOptions()); //TODO test array is null or not
 		Array<string> results=new Array<string>(_dialogLoader.GetResults());
 		for(int i=0;i<options.Count;i++){
@@ -100,13 +105,26 @@ public partial class DialogTest : CanvasLayer{
 		_lines=new Array<string>(_dialogLoader.GetLines());
 	}
 
+    private void ChangeCharSpeaking(string speakingCharName){
+		_currCharName=speakingCharName;
+		foreach(var (name,sprite) in _charSpriteDict){
+			if(name==speakingCharName){
+				sprite.Material=null;
+			}
+			else{
+				sprite.Material=NotSpeakingShader;
+			}
+		}
 
+    }
     private void InitializeNode(){
-		FirstChar=GetNode<Sprite2D>("Sprite2D");
-		SecondChar=GetNode<Sprite2D>("Sprite2D2");
+		FirstChar=GetNode<Sprite2D>("CharManager/Sprite2D");
+		SecondChar=GetNode<Sprite2D>("CharManager/Sprite2D2");
 		_charNameLabel=GetNode<Label>("Panel/CharNameLabel");
 		_dialogContentLabel=GetNode<DialogContentLabel>("Panel/DialogContentLabel");
 		_optionContainer=GetNode<Control>("OptionContainer");
+		_charSpriteDict["無月"]=FirstChar;
+		_charSpriteDict["遙香"]=SecondChar;
 	}
 
 }
