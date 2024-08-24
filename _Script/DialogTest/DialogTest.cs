@@ -26,8 +26,8 @@ public partial class DialogTest : CanvasLayer{
 	#region Node
 	private Label _charNameLabel;
 	private DialogContentLabel _dialogContentLabel;
-	private Sprite2D FirstChar;
-	private Sprite2D SecondChar;
+	private CharSprite FirstChar;
+	private CharSprite SecondChar;
 	private Control _optionContainer;
 	#endregion
 	
@@ -45,6 +45,7 @@ public partial class DialogTest : CanvasLayer{
     }
 
 	private void StartDialog(int idx){
+		FirstChar.Shake();
 		_charNameLabel.Text=_charNames[idx];
 		if(_charNames[idx]!=_currCharName){
 			ChangeCharSpeaking(_charNames[idx]);
@@ -118,13 +119,15 @@ public partial class DialogTest : CanvasLayer{
 
     }
     private void InitializeNode(){
-		FirstChar=GetNode<Sprite2D>("CharManager/Sprite2D");
-		SecondChar=GetNode<Sprite2D>("CharManager/Sprite2D2");
+		FirstChar=GetNode<CharSprite>("CharManager/Sprite2D");
+		SecondChar=GetNode<CharSprite>("CharManager/Sprite2D2");
 		_charNameLabel=GetNode<Label>("Panel/CharNameLabel");
 		_dialogContentLabel=GetNode<DialogContentLabel>("Panel/DialogContentLabel");
 		_optionContainer=GetNode<Control>("OptionContainer");
 		_charSpriteDict["無月"]=FirstChar;
 		_charSpriteDict["遙香"]=SecondChar;
 	}
+
+
 
 }
