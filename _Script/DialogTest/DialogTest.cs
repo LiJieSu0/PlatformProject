@@ -19,6 +19,11 @@ public partial class DialogTest : CanvasLayer{
 	public int _currDialogIdx;
 	public Array<string> _lines;
 	private Array<string> _charNames;
+	public Array<Array<string>> _options;
+	public Array<Array<string>> _results;
+	private Array<string> _finalResults;
+
+
 	public string _currCharName;
 	public bool isSkippable=false;
 
@@ -32,12 +37,15 @@ public partial class DialogTest : CanvasLayer{
 	#endregion
 	
 	public override void _Ready(){
-		_dialogLoader=new DialogLoader("B1");
+		_dialogLoader=new DialogLoader();
 		_currDialogIdx=0;
 		InitializeNode();
-		SetLinesWithKey();
+		SetLinesWithKey("B1");
 		_currDialogState=DialogState.WaitForStart;
 		StartDialog(_currDialogIdx);
+		_dialogLoader.GetFinalResults();
+		var tmp=new Variant[3]{"LeftPoint","RightPoint",false};
+		FirstChar.LeftMoveToScene(tmp);
 	}
 
     public override void _Process(double delta){
@@ -62,10 +70,11 @@ public partial class DialogTest : CanvasLayer{
 
 
     public void ShowOptions(){
-		Array<string> options=new Array<string>(_dialogLoader.GetOptions()); //TODO test array is null or not
-		Array<string> results=new Array<string>(_dialogLoader.GetResults());
-		for(int i=0;i<options.Count;i++){
-			AddOptionBtn(i,options[i],results[i]);
+		Array<string> currOptions=_options[_currDialogIdx];
+		Array<string> currResults=_results[_currDialogIdx];
+
+		for(int i=0;i<currOptions.Count;i++){
+			AddOptionBtn(i,currOptions[i],currResults[i]);
 		}
 		_optionContainer.Show();
 		_currDialogState=DialogState.WaitForSelect;
@@ -77,6 +86,7 @@ public partial class DialogTest : CanvasLayer{
 			int tmpIdx=i;
 			tmpBtn.Pressed+=()=>{
 				_currDialogState=DialogState.SelectFinsihed;
+				GD.Print("option selected "+result);
 				foreach(Node node in _optionContainer.GetChildren()){
 					node.QueueFree();
 				}
@@ -100,15 +110,13 @@ public partial class DialogTest : CanvasLayer{
 
     }
 
-	private void SetLinesWithKey(string key=""){
-		if(_dialogLoader.currKey==""||_dialogLoader.currKey==null){ //check is there any currkey when class created.
-			GD.Print("There is no scene key to load");
-			return;
-		}
+	private void SetLinesWithKey(string key){
 		if(key!="")
-			_dialogLoader.currKey=key;
-		_charNames=new Array<string>(_dialogLoader.GetCharNames());
-		_lines=new Array<string>(_dialogLoader.GetLines());
+			_dialogLoader.SetLinesKey(key);
+		_charNames=_dialogLoader.GetCharNames();
+		_lines=_dialogLoader.GetLines();
+		_options=_dialogLoader.GetOptions();
+		_results=_dialogLoader.GetResults();
 	}
 
     private void ChangeCharSpeaking(string speakingCharName){

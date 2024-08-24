@@ -21,32 +21,44 @@ for index, row in df.iterrows():
     result2=row['Result2']
     result3=row['Result3']
     result4=row['Result4']
+    finalResult=row['FinalResults']
     if(header not in json_data):
         json_data[header]={
             "CharNames":[],
             "Lines":[],
             "Options":[],
-            "Results":[]
+            "Results":[],
+            "FinalResults":[]
         }
     json_data[header]["CharNames"].append(charName)
     json_data[header]["Lines"].append(lines)
+    optionArr=[]
     if(not pd.isna(option1)):
-        json_data[header]["Options"].append(option1)
+        optionArr.append(option1)
     if(not pd.isna(option2)):
-        json_data[header]["Options"].append(option2)
+        optionArr.append(option2)
     if(not pd.isna(option3)):
-        json_data[header]["Options"].append(option3)
+        optionArr.append(option3)
     if(not pd.isna(option4)):
-        json_data[header]["Options"].append(option4)
+        optionArr.append(option4)
+    json_data[header]["Options"].append(optionArr)
 
+    resArr=[]
     if(not pd.isna(result1)):
-        json_data[header]["Results"].append(result1)
+        resArr.append(result1)
     if(not pd.isna(result2)):
-        json_data[header]["Results"].append(result2)
+        resArr.append(result2)
     if(not pd.isna(result3)):
-        json_data[header]["Results"].append(result3)
+        resArr.append(result3)
     if(not pd.isna(result4)):
-        json_data[header]["Results"].append(result4)
+        resArr.append(result4)
+    json_data[header]["Results"].append(resArr)
+    if(not pd.isna(finalResult)):
+        json_data[header]["FinalResults"].append(finalResult)
+    else:
+        json_data[header]["FinalResults"].append("")
+
+    
 
 
 

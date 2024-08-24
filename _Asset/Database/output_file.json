@@ -9,12 +9,22 @@
             "There should be something you need to finsihed!"
         ],
         "Options": [
-            "Good bye",
-            "Good night"
+            [],
+            [
+                "Good bye",
+                "Good night"
+            ]
         ],
         "Results": [
-            "H2",
-            "H3"
+            [],
+            [
+                "H2",
+                "H3"
+            ]
+        ],
+        "FinalResults": [
+            "",
+            ""
         ]
     },
     "H2": {
@@ -26,8 +36,18 @@
             "Hi",
             "Good day"
         ],
-        "Options": [],
-        "Results": []
+        "Options": [
+            [],
+            []
+        ],
+        "Results": [
+            [],
+            []
+        ],
+        "FinalResults": [
+            "",
+            ""
+        ]
     },
     "H3": {
         "CharNames": [
@@ -36,8 +56,15 @@
         "Lines": [
             "Yeah! Its too late for now!"
         ],
-        "Options": [],
-        "Results": []
+        "Options": [
+            []
+        ],
+        "Results": [
+            []
+        ],
+        "FinalResults": [
+            ""
+        ]
     },
     "B1": {
         "CharNames": [
@@ -63,12 +90,46 @@
             "\u8001\u5e2b?! \u4f60\u600e\u9ebc\u6703\u5728\u9019?"
         ],
         "Options": [
-            "\u54c8\u56c9\uff0c\u9059\u9999\uff0c\u7121\u6708",
-            "\u6211\u9806\u8def\u4f86\u5403\u500b\u6d88\u591c"
+            [],
+            [],
+            [],
+            [],
+            [
+                "Jump1",
+                "Jump2"
+            ],
+            [],
+            [],
+            [],
+            [
+                "\u54c8\u56c9\uff0c\u9059\u9999\uff0c\u7121\u6708",
+                "\u6211\u9806\u8def\u4f86\u5403\u500b\u6d88\u591c"
+            ]
         ],
         "Results": [
-            "B2",
-            "B2"
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [
+                "B2",
+                "B2"
+            ]
+        ],
+        "FinalResults": [
+            "",
+            "",
+            "",
+            "",
+            "H2",
+            "",
+            "",
+            "",
+            ""
         ]
     },
     "B2": {
@@ -80,7 +141,17 @@
             "\u6211\u9019\u7a2e\u4eba...\u600e\u9ebc\u53ef\u4ee5\u5728\u8001\u5e2b\u9762\u524d\u51fa\u73fe....",
             "\u8001\u5e2b\uff0c\u963f\u9b6f\u91ac\u8aaa\u6709\u4e8b\u60c5\u8981\u8655\u7406\uff0c\u8981\u4e00\u8d77\u4f86\u55ce? "
         ],
-        "Options": [],
-        "Results": []
+        "Options": [
+            [],
+            []
+        ],
+        "Results": [
+            [],
+            []
+        ],
+        "FinalResults": [
+            "",
+            ""
+        ]
     }
 }

@@ -1,18 +1,17 @@
 
 using Godot;
 using Godot.Collections;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 
 
 public partial class DialogLoader:Node{
     private string sceneName;
-    public string currKey;
+    private string currKey;
     private Dictionary<string, Variant> CharDialogs;
+    private Dictionary<string, Variant> _currSectionDict;    
     private string filePath="res://_Asset/Database/output_file.json"; //TODO change file path dynamically
-
-    public DialogLoader(string initKey){
+    public DialogLoader(){
         LoadAllDialog();
-        SetLinesKey(initKey);
     }
 
     public void LoadAllDialog(){
@@ -23,30 +22,30 @@ public partial class DialogLoader:Node{
         using var dataLoader = FileAccess.Open(filePath, FileAccess.ModeFlags.Read); 
         var jsonData=Json.ParseString(dataLoader.GetAsText());
         CharDialogs=new Dictionary<string, Variant>((Dictionary)jsonData); //Load whole data from sheet
-
     } 
-    public string[] GetCharNames(){
-        var tmp=(Dictionary<string,string[]>)CharDialogs[currKey];
-        var charNames=tmp["CharNames"];
+    public Array<string> GetCharNames(){
+        var charNames=new Array<string>((string[])_currSectionDict["CharNames"]);
         return charNames;
     }
-    public string[] GetLines(){
-        var tmp=(Dictionary<string,string[]>)CharDialogs[currKey];
-        var lines=tmp["Lines"];
+    public Array<string> GetLines(){
+        var lines=new Array<string>((string[])_currSectionDict["Lines"]);
         return lines;
     }
-    public string[] GetOptions(){
-        var tmp=(Dictionary<string,string[]>)CharDialogs[currKey];
-        var options=tmp["Options"];
-        return options;
+    public Array<Array<string>> GetOptions(){
+        Array<Array<string>> res= (Array<Array<string>>)_currSectionDict["Options"];
+        return res;
     }
-    public string[] GetResults(){
-        var tmp=(Dictionary<string,string[]>)CharDialogs[currKey];
-        var res=tmp["Results"];
+    public Array<Array<string>> GetResults(){
+        Array<Array<string>> res= (Array<Array<string>>)_currSectionDict["Results"];
+        return res;
+    }
+    public Array<string> GetFinalResults(){
+        Array<string>res= (Array<string>)_currSectionDict["FinalResults"];
         return res;
     }
     public void SetLinesKey(string key){
         this.currKey=key;
+        _currSectionDict=(Dictionary<string,Variant>)CharDialogs[currKey];
     } 
 
 }

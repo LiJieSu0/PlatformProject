@@ -42,21 +42,22 @@ public partial class DialogContentLabel : Label
 	private void OnTweenFinished(){
 		_dialogTest._currDialogState=DialogState.WaitForNextSentence;
 		OptionsCheck();
+		LastLineCheck();
 		tween.Kill();
 	}
 
-	private void OptionsCheck(){
-		if(_dialogTest._currDialogIdx==_dialogTest._lines.Count-1){
-			if(_dialogTest._dialogLoader.GetOptions().Length!=0){  //there are some options
-				_dialogTest.ShowOptions();
-			}
-			else{
-				GD.Print("end dialog here");
-				_dialogTest._currDialogState=DialogState.DialogEnd;
-			}
+    private void OptionsCheck(){
+		if(_dialogTest._currDialogState==DialogState.WaitForNextSentence&&_dialogTest._options[_dialogTest._currDialogIdx].Count!=0){
+			_dialogTest._currDialogState=DialogState.WaitForSelect;
+			_dialogTest.ShowOptions();
 		}
 	}
-
+    private void LastLineCheck(){
+		if(_dialogTest._currDialogIdx==_dialogTest._lines.Count-1){
+			_dialogTest._currDialogState=DialogState.DialogEnd;
+			GD.Print("End dialog here");
+		}
+    }
 	private void CreateSkippableTimer(){
 		Timer timer=new Timer();
 		this.AddChild(timer);
