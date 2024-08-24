@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://q1ve1iogguc7"]
+[gd_scene load_steps=11 format=3 uid="uid://q1ve1iogguc7"]
 
 [ext_resource type="Script" path="res://_Script/DialogTest/DialogTest.cs" id="1_151k8"]
 [ext_resource type="Texture2D" uid="uid://c65ynevi7tt7p" path="res://_Asset/NPC/Mutsuki.png" id="2_xj6qp"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b1kyopcvmu80y" path="res://_Asset/World/Background/ramenya.jpg" id="4_c1na1"]
 [ext_resource type="Script" path="res://_Script/DialogTest/CharSprite.cs" id="4_stna7"]
 [ext_resource type="Script" path="res://_Script/DialogTest/DialogContentLabel.cs" id="5_7a31x"]
+[ext_resource type="AudioStream" uid="uid://r5tqloseh3ui" path="res://_Asset/Audio/SceneBgm/DialogTestBGM.mp3" id="8_3l58s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kambt"]
 resource_local_to_scene = true
@@ -90,3 +91,8 @@ theme = SubResource("Theme_ky2lt")
 theme_override_constants/separation = 30
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_3l58s")
+volume_db = -10.0
+autoplay = true

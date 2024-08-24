@@ -45,12 +45,16 @@ public partial class DialogTest : CanvasLayer{
     }
 
 	private void StartDialog(int idx){
-		FirstChar.Shake();
 		_charNameLabel.Text=_charNames[idx];
 		if(_charNames[idx]!=_currCharName){
 			ChangeCharSpeaking(_charNames[idx]);
 		}
-		_dialogContentLabel.ReceiveLine(_lines[idx]);
+		if(_lines[idx].StartsWith("@")){
+			string funcName=_lines[idx].Substring(1);
+			FirstChar.Call(funcName);
+		}else{
+			_dialogContentLabel.ReceiveLine(_lines[idx]);
+		}
 		//If it is the last sentence, option buttons are handled by DialogContentLabel
 	}
 
