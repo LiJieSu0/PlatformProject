@@ -13,7 +13,7 @@ public enum DialogState{
 public partial class DialogTest : CanvasLayer{
 
 	[Export] ShaderMaterial NotSpeakingShader;
-	private Dictionary<string,Sprite2D> _charSpriteDict=new Dictionary<string,Sprite2D>(); //TODO load this dynamically
+	private Dictionary<string,CharSprite> _charSpriteDict=new Dictionary<string,CharSprite>(); //TODO load this dynamically
 	public DialogState _currDialogState;
 	public DialogLoader _dialogLoader;
 	public int _currDialogIdx;
@@ -45,13 +45,14 @@ public partial class DialogTest : CanvasLayer{
     }
 
 	private void StartDialog(int idx){
+		GD.Print(idx);
 		_charNameLabel.Text=_charNames[idx];
 		if(_charNames[idx]!=_currCharName){
 			ChangeCharSpeaking(_charNames[idx]);
 		}
 		if(_lines[idx].StartsWith("@")){
 			string funcName=_lines[idx].Substring(1);
-			FirstChar.Call(funcName);
+			_charSpriteDict[_charNames[idx]].Call(funcName);
 		}else{
 			_dialogContentLabel.ReceiveLine(_lines[idx]);
 		}

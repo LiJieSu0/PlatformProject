@@ -28,4 +28,18 @@ public partial class CharSprite : Sprite2D
 		};
 	}
 
+	public void Jump(){
+		Vector2 jumpPos=new Vector2(this.Position.X,this.Position.Y-20);
+		Vector2 OriginalPos=this.Position;
+		Tween tween=CreateTween();
+		tween.SetLoops(2);
+		tween.TweenProperty(this,"position",jumpPos,0.2);
+		tween.TweenProperty(this,"position",OriginalPos,0.2);
+		tween.Finished+=()=>{
+			GD.Print("Shake finished");
+			this.Position=OriginalPos;
+			tween.Kill();
+		};
+	}
+
 }
