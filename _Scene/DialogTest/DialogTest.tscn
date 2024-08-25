@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://q1ve1iogguc7"]
+[gd_scene load_steps=12 format=3 uid="uid://q1ve1iogguc7"]
 
 [ext_resource type="Script" path="res://_Script/DialogTest/DialogTest.cs" id="1_151k8"]
 [ext_resource type="Texture2D" uid="uid://c65ynevi7tt7p" path="res://_Asset/NPC/Mutsuki.png" id="2_xj6qp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://_Script/DialogTest/CharSprite.cs" id="4_stna7"]
 [ext_resource type="Script" path="res://_Script/DialogTest/DialogContentLabel.cs" id="5_7a31x"]
 [ext_resource type="AudioStream" uid="uid://r5tqloseh3ui" path="res://_Asset/Audio/SceneBgm/DialogTestBGM.mp3" id="8_3l58s"]
+[ext_resource type="Script" path="res://_Script/DialogTest/DialogTestCamera.cs" id="8_h7573"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kambt"]
 resource_local_to_scene = true
@@ -16,9 +17,15 @@ shader_parameter/NotSpeakingColor = Color(0.0470588, 0.0117647, 0.00784314, 0.80
 
 [sub_resource type="Theme" id="Theme_ky2lt"]
 
-[node name="DialogTest" type="CanvasLayer"]
+[node name="DialogTest" type="Node"]
 script = ExtResource("1_151k8")
 NotSpeakingShader = SubResource("ShaderMaterial_kambt")
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(602, 297)
+texture = ExtResource("4_c1na1")
+metadata/_edit_lock_ = true
 
 [node name="AutoToggleBtn" type="Button" parent="."]
 anchors_preset = 1
@@ -44,12 +51,6 @@ scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_oa4xy")
 script = ExtResource("4_stna7")
 
-[node name="BackgroundSprite" type="Sprite2D" parent="."]
-z_index = -2
-position = Vector2(602, 297)
-texture = ExtResource("4_c1na1")
-metadata/_edit_lock_ = true
-
 [node name="MovingPoints" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -65,7 +66,7 @@ position = Vector2(1500, 373)
 [node name="InSceneLeftPoint" type="Node2D" parent="MovingPoints"]
 position = Vector2(296, 373)
 
-[node name="Panel" type="Panel" parent="."]
+[node name="DialogPanel" type="Panel" parent="."]
 z_index = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -79,7 +80,7 @@ grow_horizontal = 2
 grow_vertical = 0
 metadata/_edit_lock_ = true
 
-[node name="CharNameLabel" type="Label" parent="Panel"]
+[node name="CharNameLabel" type="Label" parent="DialogPanel"]
 layout_mode = 0
 offset_left = 28.0
 offset_top = 17.0
@@ -89,7 +90,7 @@ text = "CharName
 "
 metadata/_edit_lock_ = true
 
-[node name="DialogContentLabel" type="Label" parent="Panel"]
+[node name="DialogContentLabel" type="Label" parent="DialogPanel"]
 layout_mode = 0
 offset_left = 37.0
 offset_top = 53.0
@@ -119,9 +120,44 @@ theme = SubResource("Theme_ky2lt")
 theme_override_constants/separation = 30
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
+position = Vector2(577, 324)
+script = ExtResource("8_h7573")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_3l58s")
 volume_db = -10.0
 autoplay = true
+
+[node name="DialogHistoryPanel" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -417.0
+offset_top = -236.0
+offset_right = 418.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DialogHistoryPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -398.0
+offset_top = -182.5
+offset_right = 398.0
+offset_bottom = 182.5
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="GridContainer" type="GridContainer" parent="DialogHistoryPanel/ScrollContainer"]
+layout_mode = 2

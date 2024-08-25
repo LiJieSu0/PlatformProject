@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cetpwm7ra0c26"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0os3"]
+bg_color = Color(0.373417, 0.624578, 0.840244, 1)
+
+[node name="HistoryDialog" type="Panel"]
+offset_right = 694.0
+offset_bottom = 134.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_h0os3")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 715.0
+offset_bottom = 115.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "some text some textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome text"
+autowrap_mode = 2

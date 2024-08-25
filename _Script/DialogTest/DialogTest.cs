@@ -11,25 +11,25 @@ public enum DialogState{
 		DialogEnd,
 		AnimationPlaying,
 }
-public partial class DialogTest : CanvasLayer{
+public partial class DialogTest : Node{
 
 	[Export] ShaderMaterial NotSpeakingShader;
 	[Export] float AUTO_PLAY_INTERVAL_TIME=0.5f;
+
+	#region Variables
 	private Dictionary<string,CharSprite> _charSpriteDict=new Dictionary<string,CharSprite>(); //TODO load this dynamically
 	public DialogState _currDialogState;
 	public DialogLoader _dialogLoader;
 	public bool isAutoOn=false;
+	public bool isSkippable=false;
 	public int _currDialogIdx;
 	public Array<string> _lines;
 	private Array<string> _charNames;
 	public Array<Array<string>> _options;
 	public Array<Array<string>> _results;
 	private Array<string> _finalResults;
-
-
 	public string _currCharName;
-	public bool isSkippable=false;
-
+	#endregion
 
 	#region Node
 	private Label _charNameLabel;
@@ -38,6 +38,7 @@ public partial class DialogTest : CanvasLayer{
 	private CharSprite FirstChar;
 	private CharSprite SecondChar;
 	private Control _optionContainer;
+	public DialogTestCamera _camera2D;
 	#endregion
 	
 	public override void _Ready(){
@@ -57,12 +58,12 @@ public partial class DialogTest : CanvasLayer{
 		StartDialog(_currDialogIdx);
 		_dialogLoader.GetFinalResults();
 		var tmp=new Variant[3]{"LeftPoint","RightPoint",false};
-		// FirstChar.LeftMoveToScene(tmp);
+		_camera2D.ShakeCamera();
 	}
 
-    public override void _Process(double delta){
-
-    }
+	public override void _Process(double delta){
+		GD.Print(_camera2D.Position);
+	}
 
 	public void StartDialog(int idx){
 		GD.Print(idx);
@@ -72,7 +73,12 @@ public partial class DialogTest : CanvasLayer{
 		}
 		if(_lines[idx].StartsWith("@")){
 			string funcName=_lines[idx].Substring(1);
-			_charSpriteDict[_charNames[idx]].Call(funcName);
+			if(_options[idx].Count==0)
+				_charSpriteDict[_charNames[idx]].Call(funcName); //Call the current sprite do animation without variables 
+			else{
+				_charSpriteDict[_charNames[idx]].Call(funcName,_options[idx]); //Call the current sprite do animation with variables 
+				//TODO convert variables in the function
+			}
 		}else{
 			_dialogContentLabel.ReceiveLine(_lines[idx]);
 		}
@@ -81,7 +87,7 @@ public partial class DialogTest : CanvasLayer{
 
 
 
-    public void ShowOptions(){
+	public void ShowOptions(){
 		Array<string> currOptions=_options[_currDialogIdx];
 		Array<string> currResults=_results[_currDialogIdx];
 
@@ -109,9 +115,10 @@ public partial class DialogTest : CanvasLayer{
 			};
 			_optionContainer.AddChild(tmpBtn);
 	}
-    public override void _UnhandledInput(InputEvent @event){
+	public override void _UnhandledInput(InputEvent @event){
 		if(@event is InputEventMouseButton mouseButton){
-			if(mouseButton.ButtonIndex==MouseButton.Left&&mouseButton.IsReleased()&&_currDialogState==DialogState.WaitForNextSentence){
+			if(mouseButton.ButtonIndex==MouseButton.Left&&mouseButton.IsReleased()&&_currDialogState==DialogState.WaitForNextSentence&&!isAutoOn){
+				GD.Print("Next sentence");
 				_currDialogIdx++;
 				StartDialog(_currDialogIdx);
 			}
@@ -120,7 +127,7 @@ public partial class DialogTest : CanvasLayer{
 			}
 		}
 
-    }
+	}
 
 	private void SetLinesWithKey(string key){
 		if(key!="")
@@ -131,7 +138,7 @@ public partial class DialogTest : CanvasLayer{
 		_results=_dialogLoader.GetResults();
 	}
 
-    private void ChangeCharSpeaking(string speakingCharName){
+	private void ChangeCharSpeaking(string speakingCharName){
 		_currCharName=speakingCharName;
 		foreach(var (name,sprite) in _charSpriteDict){
 			if(name==speakingCharName){
@@ -142,7 +149,7 @@ public partial class DialogTest : CanvasLayer{
 			}
 		}
 
-    }
+	}
 
 
 	public void AutoPlaying(){
@@ -157,13 +164,15 @@ public partial class DialogTest : CanvasLayer{
 		timer.Start();
 	}
 
-    private void InitializeNode(){
+
+	private void InitializeNode(){
 		FirstChar=GetNode<CharSprite>("CharManager/Sprite2D");
 		SecondChar=GetNode<CharSprite>("CharManager/Sprite2D2");
-		_charNameLabel=GetNode<Label>("Panel/CharNameLabel");
-		_dialogContentLabel=GetNode<DialogContentLabel>("Panel/DialogContentLabel");
+		_charNameLabel=GetNode<Label>("DialogPanel/CharNameLabel");
+		_dialogContentLabel=GetNode<DialogContentLabel>("DialogPanel/DialogContentLabel");
 		_optionContainer=GetNode<Control>("OptionContainer");
 		_autoToggleBtn=GetNode<Button>("AutoToggleBtn");
+		_camera2D=GetNode<DialogTestCamera>("Camera2D");
 		_charSpriteDict["無月"]=FirstChar;
 		_charSpriteDict["遙香"]=SecondChar;
 	}
