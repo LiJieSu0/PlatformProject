@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class CharSprite : Sprite2D{
@@ -15,8 +16,22 @@ public partial class CharSprite : Sprite2D{
 	{
 	}
 
-	public void Shake(){
-		Vector2 leftPos=new Vector2(this.Position.X-50,this.Position.Y);
+	public void FallDown(){
+		Vector2 originalPos=this.Position;
+		Tween tween=CreateTween();
+		tween.TweenProperty(this,"rotation_degrees",5,0.5);
+		tween.TweenProperty(this,"rotation_degrees",-5,1);
+		tween.TweenProperty(this,"rotation_degrees",0,0.5);
+		tween.TweenProperty(this,"position",new Vector2(this.Position.X,this.Position.Y+600),3);
+		tween.Finished+=()=>{
+			GD.Print("Fall down finished");
+			tween.Kill();
+		};
+
+	}
+
+	public void Shake(){ //Shake Large 
+		Vector2 leftPos=new Vector2(this.Position.X-50,this.Position.Y); //TODO change shake magnitude
 		Vector2 rightPos=new Vector2(this.Position.X+50,this.Position.Y);
 		Vector2 originalPos=this.Position;
 		Tween tween=CreateTween();
@@ -28,8 +43,6 @@ public partial class CharSprite : Sprite2D{
             ResetCharPosition(originalPos, tween);
         };
 	}
-
-
 
     public void Jump(){
 		Vector2 jumpPos=new Vector2(this.Position.X,this.Position.Y-20);
@@ -50,7 +63,8 @@ public partial class CharSprite : Sprite2D{
 			_dialogtest.AutoPlaying();
         tween.Kill();
     }
-	public void LeftMoveToScene(params Variant[] variables){
+
+	public void CharMoving(params Variant[] variables){
 		string startPointName=(string)variables[0];
 		string endPointName=(string)variables[1];
 		bool backToOriginalPos=(bool)variables[2];
@@ -65,4 +79,10 @@ public partial class CharSprite : Sprite2D{
 			tween.Kill();
 		};
 	}
+	public void ChangeExpressionSprite(string _expressionName){
+		//TODO change expression sprite
+	}
+
+
+
 }

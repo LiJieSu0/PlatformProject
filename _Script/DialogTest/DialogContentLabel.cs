@@ -26,7 +26,6 @@ public partial class DialogContentLabel : Label
 		CreateSkippableTimer();
 		tween.TweenProperty(this,"visible_ratio",1,line.Length*WORD_DELAY_TIME);
 		tween.Finished+=OnSentenceFinsihed;
-
 	}
 
 	public void ClickToFinish(){

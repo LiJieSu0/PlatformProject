@@ -39,26 +39,34 @@ public partial class DialogTest : Node{
 	private CharSprite SecondChar;
 	private Control _optionContainer;
 	public DialogTestCamera _camera2D;
-	#endregion
-	
-	public override void _Ready(){
+    private Button _historyBtn;
+    private Panel _dialogHistoryPanel;
+    #endregion
+
+
+    public override void _Ready(){
 		_dialogLoader=new DialogLoader();
 		_currDialogIdx=0;
 		InitializeNode();
 		_autoToggleBtn.Pressed+=()=>{
 			isAutoOn=!isAutoOn;
-			GD.Print("Curren auto is :"+ isAutoOn);
 			if(_currDialogState==DialogState.WaitForNextSentence){
 				AutoPlaying();
 			}
 		};
-
+		_historyBtn.Pressed+=()=>{
+			_dialogHistoryPanel.Visible=!_dialogHistoryPanel.Visible;
+			if(_dialogHistoryPanel.Visible){
+				isAutoOn=false;
+			}
+		};
 		SetLinesWithKey("B1");
 		_currDialogState=DialogState.WaitForStart;
 		StartDialog(_currDialogIdx);
 		_dialogLoader.GetFinalResults();
 		var tmp=new Variant[3]{"LeftPoint","RightPoint",false};
-		_camera2D.ShakeCamera();
+		// FirstChar.FallDown();
+
 	}
 
 	public override void _Process(double delta){
@@ -73,8 +81,9 @@ public partial class DialogTest : Node{
 		}
 		if(_lines[idx].StartsWith("@")){
 			string funcName=_lines[idx].Substring(1);
-			if(_options[idx].Count==0)
+			if(_options[idx].Count==0){
 				_charSpriteDict[_charNames[idx]].Call(funcName); //Call the current sprite do animation without variables 
+			}
 			else{
 				_charSpriteDict[_charNames[idx]].Call(funcName,_options[idx]); //Call the current sprite do animation with variables 
 				//TODO convert variables in the function
@@ -117,7 +126,11 @@ public partial class DialogTest : Node{
 	}
 	public override void _UnhandledInput(InputEvent @event){
 		if(@event is InputEventMouseButton mouseButton){
-			if(mouseButton.ButtonIndex==MouseButton.Left&&mouseButton.IsReleased()&&_currDialogState==DialogState.WaitForNextSentence&&!isAutoOn){
+			if(mouseButton.ButtonIndex==MouseButton.Left&&
+			mouseButton.IsReleased()&&
+			_currDialogState==DialogState.WaitForNextSentence&&
+			!isAutoOn&&
+			!_dialogHistoryPanel.Visible){
 				GD.Print("Next sentence");
 				_currDialogIdx++;
 				StartDialog(_currDialogIdx);
@@ -173,6 +186,8 @@ public partial class DialogTest : Node{
 		_optionContainer=GetNode<Control>("OptionContainer");
 		_autoToggleBtn=GetNode<Button>("AutoToggleBtn");
 		_camera2D=GetNode<DialogTestCamera>("Camera2D");
+		_historyBtn=GetNode<Button>("HistoryBtn");
+		_dialogHistoryPanel=GetNode<Panel>("DialogHistoryPanel");
 		_charSpriteDict["無月"]=FirstChar;
 		_charSpriteDict["遙香"]=SecondChar;
 	}

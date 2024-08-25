@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://q1ve1iogguc7"]
+[gd_scene load_steps=13 format=3 uid="uid://q1ve1iogguc7"]
 
 [ext_resource type="Script" path="res://_Script/DialogTest/DialogTest.cs" id="1_151k8"]
 [ext_resource type="Texture2D" uid="uid://c65ynevi7tt7p" path="res://_Asset/NPC/Mutsuki.png" id="2_xj6qp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://_Script/DialogTest/DialogContentLabel.cs" id="5_7a31x"]
 [ext_resource type="AudioStream" uid="uid://r5tqloseh3ui" path="res://_Asset/Audio/SceneBgm/DialogTestBGM.mp3" id="8_3l58s"]
 [ext_resource type="Script" path="res://_Script/DialogTest/DialogTestCamera.cs" id="8_h7573"]
+[ext_resource type="PackedScene" uid="uid://cetpwm7ra0c26" path="res://_Scene/DialogTest/HistoryDialog.tscn" id="10_e5go7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kambt"]
 resource_local_to_scene = true
@@ -37,6 +38,13 @@ offset_right = -40.0
 offset_bottom = 63.0
 grow_horizontal = 0
 text = "Auto Toggle"
+
+[node name="HistoryBtn" type="Button" parent="."]
+offset_left = 1006.0
+offset_top = 79.0
+offset_right = 1070.0
+offset_bottom = 110.0
+text = "History"
 
 [node name="CharManager" type="Node2D" parent="."]
 
@@ -120,6 +128,7 @@ theme = SubResource("Theme_ky2lt")
 theme_override_constants/separation = 30
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2(577, 324)
 script = ExtResource("8_h7573")
 
@@ -129,7 +138,7 @@ volume_db = -10.0
 autoplay = true
 
 [node name="DialogHistoryPanel" type="Panel" parent="."]
-visible = false
+z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -141,6 +150,7 @@ offset_right = 418.0
 offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
 metadata/_edit_lock_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="DialogHistoryPanel"]
@@ -150,14 +160,28 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -398.0
-offset_top = -182.5
-offset_right = 398.0
-offset_bottom = 182.5
+offset_left = -383.5
+offset_top = -185.5
+offset_right = 383.5
+offset_bottom = 185.5
 grow_horizontal = 2
 grow_vertical = 2
-horizontal_scroll_mode = 0
-metadata/_edit_lock_ = true
 
-[node name="GridContainer" type="GridContainer" parent="DialogHistoryPanel/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogHistoryPanel/ScrollContainer"]
+layout_mode = 2
+
+[node name="HistoryDialog" parent="DialogHistoryPanel/ScrollContainer/VBoxContainer" instance=ExtResource("10_e5go7")]
+custom_minimum_size = Vector2(680, 140)
+layout_mode = 2
+
+[node name="HistoryDialog2" parent="DialogHistoryPanel/ScrollContainer/VBoxContainer" instance=ExtResource("10_e5go7")]
+custom_minimum_size = Vector2(680, 140)
+layout_mode = 2
+
+[node name="HistoryDialog3" parent="DialogHistoryPanel/ScrollContainer/VBoxContainer" instance=ExtResource("10_e5go7")]
+custom_minimum_size = Vector2(680, 140)
+layout_mode = 2
+
+[node name="HistoryDialog4" parent="DialogHistoryPanel/ScrollContainer/VBoxContainer" instance=ExtResource("10_e5go7")]
+custom_minimum_size = Vector2(680, 140)
 layout_mode = 2
