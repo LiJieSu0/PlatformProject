@@ -189,10 +189,10 @@ public partial class DialogTest : Node{
 		SecondChar=GetNode<CharSprite>("CharManager/Sprite2D2");
 		_charNameLabel=GetNode<Label>("DialogPanel/CharNameLabel");
 		_dialogContentLabel=GetNode<DialogContentLabel>("DialogPanel/DialogContentLabel");
-		_optionContainer=GetNode<Control>("OptionContainer");
-		_autoToggleBtn=GetNode<Button>("AutoToggleBtn");
+		_optionContainer=GetNode<Control>("DialogPanel/OptionContainer");
+		_autoToggleBtn=GetNode<Button>("MenuBtns/AutoToggleBtn");
+		_historyBtn=GetNode<Button>("MenuBtns/HistoryBtn");
 		_camera2D=GetNode<DialogTestCamera>("Camera2D");
-		_historyBtn=GetNode<Button>("HistoryBtn");
 		_dialogHistoryPanel=GetNode<Panel>("DialogHistoryPanel");
 		_curtainColorRect=GetNode<ColorRect>("Camera2D/CurtainColorRect");
 		_charSpriteDict["無月"]=FirstChar;
