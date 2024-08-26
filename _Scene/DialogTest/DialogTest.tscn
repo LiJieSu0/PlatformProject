@@ -128,16 +128,26 @@ theme = SubResource("Theme_ky2lt")
 theme_override_constants/separation = 30
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 position = Vector2(577, 324)
 script = ExtResource("8_h7573")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="CurtainColorRect" type="ColorRect" parent="Camera2D"]
+visible = false
+z_index = 4096
+offset_left = -652.0
+offset_top = -412.0
+offset_right = 664.0
+offset_bottom = 396.0
+color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+metadata/_edit_lock_ = true
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_3l58s")
 volume_db = -10.0
 autoplay = true
 
 [node name="DialogHistoryPanel" type="Panel" parent="."]
+visible = false
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5

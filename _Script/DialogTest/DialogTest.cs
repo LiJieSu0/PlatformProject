@@ -41,7 +41,11 @@ public partial class DialogTest : Node{
 	public DialogTestCamera _camera2D;
     private Button _historyBtn;
     private Panel _dialogHistoryPanel;
+    private ColorRect _curtainColorRect;
+    private AudioStreamPlayer _bgmPlayer;
     #endregion
+
+
 
 
     public override void _Ready(){
@@ -67,10 +71,11 @@ public partial class DialogTest : Node{
 		var tmp=new Variant[3]{"LeftPoint","RightPoint",false};
 		// FirstChar.FallDown();
 
+
+
 	}
 
 	public override void _Process(double delta){
-		GD.Print(_camera2D.Position);
 	}
 
 	public void StartDialog(int idx){
@@ -81,6 +86,8 @@ public partial class DialogTest : Node{
 		}
 		if(_lines[idx].StartsWith("@")){
 			string funcName=_lines[idx].Substring(1);
+			// _currDialogIdx++;
+			// StartDialog(_currDialogIdx);
 			if(_options[idx].Count==0){
 				_charSpriteDict[_charNames[idx]].Call(funcName); //Call the current sprite do animation without variables 
 			}
@@ -131,7 +138,6 @@ public partial class DialogTest : Node{
 			_currDialogState==DialogState.WaitForNextSentence&&
 			!isAutoOn&&
 			!_dialogHistoryPanel.Visible){
-				GD.Print("Next sentence");
 				_currDialogIdx++;
 				StartDialog(_currDialogIdx);
 			}
@@ -188,7 +194,27 @@ public partial class DialogTest : Node{
 		_camera2D=GetNode<DialogTestCamera>("Camera2D");
 		_historyBtn=GetNode<Button>("HistoryBtn");
 		_dialogHistoryPanel=GetNode<Panel>("DialogHistoryPanel");
+		_curtainColorRect=GetNode<ColorRect>("Camera2D/CurtainColorRect");
 		_charSpriteDict["無月"]=FirstChar;
 		_charSpriteDict["遙香"]=SecondChar;
+		_bgmPlayer=GetNode<AudioStreamPlayer>("BGMPlayer");
 	}
+
+	private void EaseInScene(){
+		Color endColor=new Color(Colors.Black,0);
+		Tween tween=CreateTween();
+		tween.TweenProperty(_curtainColorRect,"color",endColor,1);
+		tween.Finished+=()=>{
+			tween.Kill();
+		};
+	}
+	private void EaseOutScene(){
+		Color endColor=new Color(Colors.Black,1);
+		Tween tween=CreateTween();
+		tween.TweenProperty(_curtainColorRect,"color",endColor,1);
+		tween.Finished+=()=>{
+			tween.Kill();
+		};
+	}
+
 }

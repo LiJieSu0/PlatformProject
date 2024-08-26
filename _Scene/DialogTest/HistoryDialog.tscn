@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cetpwm7ra0c26"]
+[gd_scene load_steps=2 format=3 uid="uid://cetpwm7ra0c26"]
 
 [ext_resource type="Texture2D" uid="uid://bulike7wfiry4" path="res://_Asset/UI/InventorySlot.png" id="1_3r8p8"]
-[ext_resource type="Script" path="res://_Script/DialogTest/ColorRect.cs" id="2_wogsl"]
 
 [node name="HistoryDialog" type="NinePatchRect"]
 anchors_preset = -1
@@ -21,13 +20,3 @@ offset_bottom = 133.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "some text some textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome text"
 autowrap_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 117.0
-offset_top = 277.0
-offset_right = 199.0
-offset_bottom = 569.0
-scale = Vector2(20.0868, 2.83134)
-color = Color(0.0431373, 0.0431373, 0.0431373, 1)
-script = ExtResource("2_wogsl")
