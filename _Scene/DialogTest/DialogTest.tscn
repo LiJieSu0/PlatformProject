@@ -169,6 +169,7 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DialogHistoryPanel/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HistoryDialog" parent="DialogHistoryPanel/ScrollContainer/VBoxContainer" instance=ExtResource("10_e5go7")]
 custom_minimum_size = Vector2(680, 140)
