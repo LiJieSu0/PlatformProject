@@ -47,6 +47,7 @@ grow_horizontal = 0
 text = "Auto Toggle"
 
 [node name="HistoryBtn" type="Button" parent="MenuBtns"]
+layout_mode = 0
 offset_left = 1006.0
 offset_top = 79.0
 offset_right = 1070.0
@@ -199,4 +200,7 @@ layout_mode = 2
 
 [node name="HistoryDialog4" parent="DialogHistoryPanel/ScrollContainer/VBoxContainer" instance=ExtResource("10_e5go7")]
 custom_minimum_size = Vector2(680, 140)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="DialogHistoryPanel/ScrollContainer"]
 layout_mode = 2

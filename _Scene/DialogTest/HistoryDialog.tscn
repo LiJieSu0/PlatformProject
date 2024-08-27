@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cetpwm7ra0c26"]
+[gd_scene load_steps=4 format=3 uid="uid://cetpwm7ra0c26"]
 
 [ext_resource type="Texture2D" uid="uid://bulike7wfiry4" path="res://_Asset/UI/InventorySlot.png" id="1_3r8p8"]
+[ext_resource type="Script" path="res://_Script/DialogTest/HistoryDialog.cs" id="2_jw3i0"]
+[ext_resource type="Texture2D" uid="uid://0qcpkussbwvr" path="res://icon.svg" id="3_gbb8l"]
 
 [node name="HistoryDialog" type="NinePatchRect"]
 anchors_preset = -1
@@ -10,6 +12,7 @@ offset_right = 839.632
 offset_bottom = 130.576
 texture = ExtResource("1_3r8p8")
 region_rect = Rect2(12, 12, 12, 12)
+script = ExtResource("2_jw3i0")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(200, 0)
@@ -20,3 +23,8 @@ offset_bottom = 133.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "some text some textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome text"
 autowrap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(71, 70)
+scale = Vector2(0.789063, 0.78125)
+texture = ExtResource("3_gbb8l")
