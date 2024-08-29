@@ -5,26 +5,27 @@
 [ext_resource type="Texture2D" uid="uid://0qcpkussbwvr" path="res://icon.svg" id="3_gbb8l"]
 
 [node name="HistoryDialog" type="NinePatchRect"]
+custom_minimum_size = Vector2(765, 150)
 anchors_preset = -1
 anchor_right = 0.009
 anchor_bottom = 0.013
-offset_right = 839.632
-offset_bottom = 130.576
+offset_right = 754.632
+offset_bottom = 140.576
 texture = ExtResource("1_3r8p8")
 region_rect = Rect2(12, 12, 12, 12)
 script = ExtResource("2_jw3i0")
 
-[node name="Label" type="Label" parent="."]
+[node name="HistoryDialogLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(200, 0)
-offset_left = 144.0
-offset_top = 6.0
-offset_right = 838.0
-offset_bottom = 133.0
+offset_left = 140.0
+offset_top = 11.0
+offset_right = 790.0
+offset_bottom = 138.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "some text some textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome textsome text"
 autowrap_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CharIconSprite" type="Sprite2D" parent="."]
 position = Vector2(71, 70)
 scale = Vector2(0.789063, 0.78125)
 texture = ExtResource("3_gbb8l")

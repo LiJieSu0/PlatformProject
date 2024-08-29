@@ -40,15 +40,20 @@ public partial class DialogTest : Node{
 	private Control _optionContainer;
 	public DialogTestCamera _camera2D;
     private Button _historyBtn;
-    private Panel _dialogHistoryPanel;
+    private DialogHistoryPanel _dialogHistoryPanel;
     private ColorRect _curtainColorRect;
     private AudioStreamPlayer _bgmPlayer;
+			//tmp dictonary
+		Dictionary<string,string> CharIconDict=new Dictionary<string, string>(); 
     #endregion
 
 
-
-
     public override void _Ready(){
+		//tmp dictionary
+		CharIconDict["無月"]="res://_Asset/NPC/Mutsuki_Icon.png";
+		CharIconDict["遙香"]="res://_Asset/NPC/Haruka_Icon.png";
+		//tmp dictionary
+
 		_dialogLoader=new DialogLoader();
 		_currDialogIdx=0;
 		InitializeNode();
@@ -84,10 +89,10 @@ public partial class DialogTest : Node{
 		if(_charNames[idx]!=_currCharName){
 			ChangeCharSpeaking(_charNames[idx]);
 		}
-		if(_lines[idx].StartsWith("@")){
+		if(_lines[idx].StartsWith("@")){ //Action function should set before the line to act together
 			string funcName=_lines[idx].Substring(1);
-			// _currDialogIdx++;
-			// StartDialog(_currDialogIdx);
+			_currDialogIdx++; 
+			StartDialog(_currDialogIdx);
 			if(_options[idx].Count==0){
 				_charSpriteDict[_charNames[idx]].Call(funcName); //Call the current sprite do animation without variables 
 			}
@@ -97,6 +102,7 @@ public partial class DialogTest : Node{
 			}
 		}else{
 			_dialogContentLabel.ReceiveLine(_lines[idx]);
+			_dialogHistoryPanel.AddHistoryDialog(CharIconDict[_charNames[idx]],_lines[idx]);
 		}
 		//If it is the last sentence, option buttons are handled by DialogContentLabel
 	}
@@ -193,7 +199,7 @@ public partial class DialogTest : Node{
 		_autoToggleBtn=GetNode<Button>("MenuBtns/AutoToggleBtn");
 		_historyBtn=GetNode<Button>("MenuBtns/HistoryBtn");
 		_camera2D=GetNode<DialogTestCamera>("Camera2D");
-		_dialogHistoryPanel=GetNode<Panel>("DialogHistoryPanel");
+		_dialogHistoryPanel=GetNode<DialogHistoryPanel>("DialogHistoryPanel");
 		_curtainColorRect=GetNode<ColorRect>("Camera2D/CurtainColorRect");
 		_charSpriteDict["無月"]=FirstChar;
 		_charSpriteDict["遙香"]=SecondChar;
