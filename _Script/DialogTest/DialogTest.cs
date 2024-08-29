@@ -52,6 +52,7 @@ public partial class DialogTest : Node{
 		//tmp dictionary
 		CharIconDict["無月"]="res://_Asset/NPC/Mutsuki_Icon.png";
 		CharIconDict["遙香"]="res://_Asset/NPC/Haruka_Icon.png";
+		//TODO add char icon data
 		//tmp dictionary
 
 		_dialogLoader=new DialogLoader();
@@ -102,7 +103,7 @@ public partial class DialogTest : Node{
 			}
 		}else{
 			_dialogContentLabel.ReceiveLine(_lines[idx]);
-			_dialogHistoryPanel.AddHistoryDialog(CharIconDict[_charNames[idx]],_lines[idx]);
+			GlobalEventPublisher.Instance.DialogHistoryEventTrigger(CharIconDict[_charNames[idx]],_lines[idx]);
 		}
 		//If it is the last sentence, option buttons are handled by DialogContentLabel
 	}
@@ -126,6 +127,7 @@ public partial class DialogTest : Node{
 			int tmpIdx=i;
 			tmpBtn.Pressed+=()=>{
 				_currDialogState=DialogState.SelectFinsihed;
+				GlobalEventPublisher.Instance.DialogHistoryEventTrigger(CharIconDict["無月"],option);
 				GD.Print("option selected "+result);
 				foreach(Node node in _optionContainer.GetChildren()){
 					node.QueueFree();

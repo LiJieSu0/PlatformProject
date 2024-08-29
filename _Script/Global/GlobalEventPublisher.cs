@@ -16,6 +16,9 @@ public partial class GlobalEventPublisher:Node{
     public event ShowTradingMenu ShowTradingMenuEvent;
     public delegate bool ItemPick(int itemNo);
     public event ItemPick ItemPickEvent;
+    public delegate void DialogHistory(string charIconPath,string dialog);
+	public event DialogHistory DialogHistoryEvent;
+
     public override void _Ready(){
 		Instance=this;
     }
@@ -38,4 +41,9 @@ public partial class GlobalEventPublisher:Node{
     public bool ItemPickTrigger(int itemNo){
         return ItemPickEvent.Invoke(itemNo);
     }
+
+    public void DialogHistoryEventTrigger(string charIconPath,string dialog){
+        DialogHistoryEvent?.Invoke(charIconPath,dialog);
+    }
+    
 }

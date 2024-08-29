@@ -1,11 +1,11 @@
 using Godot;
 using System;
 
-public partial class DialogHistoryPanel : Panel
-{
-	private VBoxContainer _dialogHistoryContainer;
-	public override void _Ready(){
+public partial class DialogHistoryPanel : Panel{
+
+	private VBoxContainer _dialogHistoryContainer;	public override void _Ready(){
 		InitializeNode();
+		GlobalEventPublisher.Instance.DialogHistoryEvent+=AddHistoryDialog;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,6 +26,6 @@ public partial class DialogHistoryPanel : Panel
 	public void ClearHistoryDialog(){
 
 	}
-
+	
 
 }
